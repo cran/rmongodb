@@ -1,4 +1,4 @@
-943821b68d9fcfff1d41d8bacba37241 *DESCRIPTION
+72139cdf53db73030d5bb67fde0330c3 *DESCRIPTION
 e5cf4daaf4641f5183c74b6922a4fca8 *NAMESPACE
 4357fa2846213d8f72e09c29c580d826 *R/bson.R
 bbda394393f1cb4a4f07d4d4e791675a *R/gridfs.R
@@ -6,7 +6,7 @@ dfb54eb57bcf3f4accee5e02ff98f7b7 *R/mongo.R
 c1ceb0b95d25182ef4f1dc0286b1f831 *R/shorthand.R
 79915f81d816b8f218b00b6f9131cf3a *R/zzz.R
 2884cb96ab791d5e2203bec833764d07 *demo/00Index
-d6add178568d1b1ba71833a5a0a9aff4 *demo/teachers_aid.R
+6f38c0fd46ca56bb0d099067c67b51f2 *demo/teachers_aid.R
 c1d7dad9698724ba4f283c4bfed39373 *man/as.character.mongo.oid.Rd
 e0e905b82b6e95b625ab3e9ee7d47e89 *man/mongo.Rd
 d003670fd499c2b8b6887c4bbb7c9375 *man/mongo.add.user.Rd
@@ -177,12 +177,12 @@ e5069171e36bd15fd58f3d5014adb213 *man/mongo.update.multi.Rd
 d92a6cb0b3e8e17675ec7e1ca81d9df1 *man/mongo.update.upsert.Rd
 f3c1c8873bc4ec696f953206f2cb436d *man/print.mongo.bson.Rd
 e1731108eb29aaf2efb313265eb34e11 *man/print.mongo.oid.Rd
-7ae674ec2c59746a1211dde4e133794d *man/rmongodb-package.Rd
+b505726520244cafe1b9b84d32537f0b *man/rmongodb-package.Rd
 8d4158b8eb92153e2d3f581682b2a3c1 *src/Makevars.win
 66b7e06dae8f86cbb9c322756e95fe63 *src/api.c
-3bc12225d6c1ab632131d7ab68e4ea03 *src/api_bson.c
+2abc25153f19166d72dbc845a5cbb82e *src/api_bson.c
 154b2cf76ed85e40622c4751c2df54d1 *src/api_bson.h
-f8a78e8bc3bc251a131c8cf12cc87bd1 *src/api_gridfs.c
+be10c5ce63c2d6c608208748a534d137 *src/api_gridfs.c
 91440b189cc7f99739110670ce38464c *src/api_gridfs.h
 2ce1d55caa0d27f9a04930fd502321a2 *src/api_mongo.c
 45b8f10438dd8254bcf986333ea5cef3 *src/api_mongo.h
@@ -205,5 +205,5 @@ c530d1956e845d6ddfddee87c85ac5b7 *src/mongo.c
 ad54f574db576b47e352395f41fec7b8 *src/sock_init.c
 c9728649312bca9108c3dd0499b8e1a5 *src/symbols.c
 59e2417ea129f2e83f817c70912976d0 *src/symbols.h
-b8f4073a7f98690db0365fe03c7d8033 *src/utility.c
-17fb145a4a97917b76d3a8821ff4f6fe *src/utility.h
+0a6adf05cd87f68a49607a00c06f4b5c *src/utility.c
+fa1a83d2ab8a830c7657e3d5816ddea5 *src/utility.h
