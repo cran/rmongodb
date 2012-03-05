@@ -16,16 +16,21 @@
  */
 
 /* Header for generic net.h */
-#ifndef _MONGO_NET_H_
-#define _MONGO_NET_H_
+#ifndef MONGO_NET_H_
+#define MONGO_NET_H_
 
 #include "mongo.h"
 
 #ifdef _WIN32
+#ifdef _MSC_VER
+#include <ws2tcpip.h>  // send,recv,socklen_t etc
+#include <wspiapi.h>   // addrinfo
+#else
 #include <windows.h>
 #include <winsock.h>
-#define mongo_close_socket(sock) ( closesocket(sock) )
 typedef int socklen_t;
+#endif
+#define mongo_close_socket(sock) ( closesocket(sock) )
 #else
 #include <arpa/inet.h>
 #include <sys/types.h>
@@ -53,5 +58,7 @@ int mongo_read_socket( mongo *conn, void *buf, int len );
 int mongo_write_socket( mongo *conn, const void *buf, int len );
 int mongo_socket_connect( mongo *conn, const char *host, int port );
 
+/* Initialize the socket services */
+MONGO_EXPORT int mongo_sock_init();
 MONGO_EXTERN_C_END
 #endif

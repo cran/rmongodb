@@ -1,3 +1,17 @@
+/* Copyright (C) 2008-2011 10gen Inc.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 #include <R.h>
 #include "api_gridfs.h"
 #include "symbols.h"
@@ -46,7 +60,7 @@ SEXP mongo_gridfs_create(SEXP mongo_conn, SEXP db, SEXP prefix) {
     SEXP ret, ptr, cls;
     PROTECT(ret = allocVector(INTSXP, 1));
     INTEGER(ret)[0] = 0;
- /* prevent GC on connection object while gfs alive */
+    /* prevent GC on connection object while gfs alive */
     setAttrib(ret, sym_mongo, mongo_conn);
     ptr = R_MakeExternalPtr(gfs, sym_mongo_gridfs, R_NilValue);
     PROTECT(ptr);
@@ -100,7 +114,7 @@ SEXP _mongo_gridfile_create(SEXP gfs, gridfile* gfile) {
     SEXP ret, ptr, cls;
     PROTECT(ret = allocVector(INTSXP, 1));
     INTEGER(ret)[0] = 0;
- /* prevent GC on gridfs object while gridfile alive */
+    /* prevent GC on gridfs object while gridfile alive */
     setAttrib(ret, sym_mongo_gridfs, gfs);
     ptr = R_MakeExternalPtr(gfile, sym_mongo_gridfile, R_NilValue);
     PROTECT(ptr);
@@ -123,7 +137,7 @@ SEXP mongo_gridfile_writer_create(SEXP gfs, SEXP remotename, SEXP contenttype) {
     SEXP ret, ptr, cls;
     PROTECT(ret = allocVector(INTSXP, 1));
     INTEGER(ret)[0] = 0;
- /* prevent GC on gridfs object while gridfile alive */
+    /* prevent GC on gridfs object while gridfile alive */
     setAttrib(ret, sym_mongo_gridfs, gfs);
     ptr = R_MakeExternalPtr(gfile, sym_mongo_gridfile, R_NilValue);
     PROTECT(ptr);
@@ -181,7 +195,7 @@ SEXP mongo_gridfs_store(SEXP gfs, SEXP raw, SEXP remotename, SEXP contenttype) {
     return ret;
 }
 
-    
+
 SEXP mongo_gridfile_destroy(SEXP gfile) {
     gridfile* _gfile = _checkGridfile(gfile);
     gridfile_destroy(_gfile);
@@ -197,7 +211,8 @@ SEXP mongo_gridfs_find(SEXP gfs, SEXP query) {
     if (_isBSON(query)) {
         bson* _query = _checkBSON(query);
         result = gridfs_find_query(_gfs, _query, gfile);
-    } else
+    }
+    else
         result = gridfs_find_filename(_gfs, CHAR(STRING_ELT(query, 0)), gfile);
     if (result != MONGO_OK)
         return R_NilValue;
@@ -289,7 +304,8 @@ SEXP mongo_gridfile_get_descriptor(SEXP gfile) {
 
 SEXP mongo_gridfile_get_metadata(SEXP gfile) {
     gridfile* _gfile = _checkGridfile(gfile);
-    bson meta = gridfile_get_metadata(_gfile);
+    bson meta;
+    gridfile_get_metadata(_gfile, &meta);
     if (bson_size(&meta) <= 5)
         return R_NilValue;
     SEXP ret = _mongo_bson_create(&meta);
@@ -301,7 +317,8 @@ SEXP mongo_gridfile_get_metadata(SEXP gfile) {
 SEXP mongo_gridfile_get_chunk(SEXP gfile, SEXP i) {
     gridfile* _gfile = _checkGridfile(gfile);
     int _i = asInteger(i);
-    bson chunk = gridfile_get_chunk(_gfile, _i);
+    bson chunk;
+    gridfile_get_chunk(_gfile, _i, &chunk);
     if (bson_size(&chunk) <= 5)
         return R_NilValue;
     SEXP ret = _mongo_bson_create(&chunk);

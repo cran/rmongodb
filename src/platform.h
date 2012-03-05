@@ -18,14 +18,23 @@
 
 /* all platform-specific ifdefs should go here */
 
-#ifndef _PLATFORM_HACKS_H_
-#define _PLATFORM_HACKS_H_
+#ifndef MONGO_PLATFORM_H_
+#define MONGO_PLATFORM_H_
 
 #ifdef __GNUC__
 #define MONGO_INLINE static __inline__
+#define MONGO_EXPORT
 #else
 #define MONGO_INLINE static
+#ifdef MONGO_STATIC_BUILD
+#define MONGO_EXPORT
+#elif defined(MONGO_DLL_BUILD)
+#define MONGO_EXPORT __declspec(dllexport)
+#else
+#define MONGO_EXPORT __declspec(dllimport)
 #endif
+#endif
+
 
 #ifdef __cplusplus
 #define MONGO_EXTERN_C_START extern "C" {
@@ -79,6 +88,7 @@ MONGO_INLINE void bson_swap_endian64( void *outp, const void *inp ) {
     out[7] = in[0];
 
 }
+
 MONGO_INLINE void bson_swap_endian32( void *outp, const void *inp ) {
     const char *in = ( const char * )inp;
     char *out = ( char * )outp;

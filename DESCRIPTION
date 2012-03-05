@@ -1,13 +1,13 @@
 Package: rmongodb
 Type: Package
 Title: R-MongoDB driver
-Version: 1.0.2
-Date: 2011-11-25
+Version: 1.0.3
+Date: 2012-3-5
 Author: Gerald Lindsly & 10gen, Inc. (mongo-c-driver)
 Maintainer: Gerald Lindsly <gerald.lindsly@gmail.com>
 Description: Provides an interface to MongoDB for R
-License: GPL (>= 2)
+License: Apache License 2.0
 LazyLoad: yes
-Packaged: 2011-11-26 01:58:57 UTC; Gerald
+Packaged: 2012-03-07 08:09:36 UTC; Gerald
 Repository: CRAN
-Date/Publication: 2011-11-26 07:42:04
+Date/Publication: 2012-03-07 09:52:52
