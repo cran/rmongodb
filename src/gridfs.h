@@ -4,7 +4,7 @@
  *
  * */
 
-/*    Copyright 2009-2011 10gen Inc.
+/*    Copyright 2009-2012 10gen Inc.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -51,9 +51,9 @@ typedef struct {
     int pending_len;    /**> Length of pending_data buffer */
 } gridfile;
 
-MONGO_EXPORT gridfs* gridfs_create();
+MONGO_EXPORT gridfs* gridfs_create( void );
 MONGO_EXPORT void gridfs_dispose(gridfs* gfs);
-MONGO_EXPORT gridfile* gridfile_create();
+MONGO_EXPORT gridfile* gridfile_create( void );
 MONGO_EXPORT void gridfile_dispose(gridfile* gf);
 MONGO_EXPORT void gridfile_get_descriptor(gridfile* gf, bson* out);
 
@@ -158,7 +158,7 @@ MONGO_EXPORT int gridfs_find_query( gridfs *gfs, bson *query, gridfile *gfile );
  *
  *  @return MONGO_OK or MONGO_ERROR.
  */
-int gridfs_find_filename( gridfs *gfs, const char *filename, gridfile *gfile );
+MONGO_EXPORT int gridfs_find_filename( gridfs *gfs, const char *filename, gridfile *gfile );
 
 /**
  *  Initializes a GridFile containing the GridFS and file bson
@@ -168,7 +168,7 @@ int gridfs_find_filename( gridfs *gfs, const char *filename, gridfile *gfile );
  *
  *  @return - MONGO_OK or MONGO_ERROR.
  */
-int gridfile_init( gridfs *gfs, bson *meta, gridfile *gfile );
+MONGO_EXPORT int gridfile_init( gridfs *gfs, bson *meta, gridfile *gfile );
 
 /**
  *  Destroys the GridFile
@@ -181,7 +181,7 @@ MONGO_EXPORT void gridfile_destroy( gridfile *gfile );
  *  Returns whether or not the GridFile exists
  *  @param gfile - the GridFile being examined
  */
-bson_bool_t gridfile_exists( gridfile *gfile );
+MONGO_EXPORT bson_bool_t gridfile_exists( gridfile *gfile );
 
 /**
  *  Returns the filename of GridFile
@@ -301,7 +301,7 @@ MONGO_EXPORT mongo_cursor *gridfile_get_chunks( gridfile *gfile, int start, int 
  *  @param gfile - the working GridFile
  *  @param stream - the file stream to write to
  */
-gridfs_offset gridfile_write_file( gridfile *gfile, FILE *stream );
+MONGO_EXPORT gridfs_offset gridfile_write_file( gridfile *gfile, FILE *stream );
 
 /**
  *  Reads length bytes from the GridFile to a buffer
