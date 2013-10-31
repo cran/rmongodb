@@ -1,0 +1,19 @@
+rmongodb NEWS
+========================================================
+
+October 31, 2013 - v1.1.3
+* bcon.c / bcon.h removed -> no more build warnings
+* NEWS file fixed for CRAN style
+
+October 30, 2013 - v1.1.2
+* zips example data added
+* all build errors removed
+* submission to CRAN :-)
+
+October 25, 2013 - v1.1.1
+* **mongo.find.all** function added
+* most build errors removed
+
+October 24, 2013 - v1.1.0
+* MongoSoup and Markus Schmidberger <markus@mongosoup.de> is overtaking the development and maintenance
+* github fork created, repo cleaning and first bug fixes

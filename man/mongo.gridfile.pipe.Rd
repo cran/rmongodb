@@ -21,14 +21,16 @@ NULL
 mongo <- mongo.create()
 if (mongo.is.connected(mongo)) {
     gridfs <- mongo.gridfs.create(mongo, "grid")
+    mongo.gridfs.store.file(gridfs, "tests/test.R", "test.R")
 
-    gf <- mongo.gridfs.find(gridfs, "rmongodb.pdf")
+    gf <- mongo.gridfs.find(gridfs, "test.R")
     if (!is.null(gf)) {
         f <- file("mongodb_copy.pdf")
         mongo.gridfile.pipe(gf, f)
+        
+        mongo.gridfile.destroy(gf)
     }
 
-    mongo.gridfile.destroy(gf)
     mongo.gridfs.destroy(gridfs)
 }
 }

@@ -30,6 +30,7 @@ export(mongo.update.basic)
 export(mongo.update)
 export(mongo.remove)
 export(mongo.find.one)
+export(mongo.find.all)
 
 export(mongo.find.cursor.tailable)
 export(mongo.find.slave.ok)

@@ -24,17 +24,21 @@ See \url{http://www.mongodb.org/display/DOCS/GridFS+Specification}.
 mongo <- mongo.create()
 if (mongo.is.connected(mongo)) {
     gridfs <- mongo.gridfs.create(mongo, "grid")
+    mongo.gridfs.store.file(gridfs, "tests/test.R", "test.R")
 
     gf <- mongo.gridfs.find(gridfs, "test.R")
-    chunk <- mongo.gridfile.get.chunk(gf, 0)
-    iter <- mongo.bson.find(chunk, "data")
+    if( !is.null(gf)){
+      chunk <- mongo.gridfile.get.chunk(gf, 0)
+      iter <- mongo.bson.find(chunk, "data")
+    
 
-    f <- file("testChunk0.R", "wb")
-    # write the binary (raw) data to a file
-    writeBin(mongo.bson.iterator.value(iter), f)
-    close(f)
+      f <- file("testChunk0.R", "wb")
+      # write the binary (raw) data to a file
+      writeBin(mongo.bson.iterator.value(iter), f)
+      close(f)
 
-    mongo.gridfile.destroy(gf)
+      mongo.gridfile.destroy(gf)
+    }
     mongo.gridfs.destroy(gridfs)
 }
 }

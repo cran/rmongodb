@@ -26,7 +26,7 @@ mongo <- mongo.create()
 if (mongo.is.connected(mongo)) {
     gridfs <- mongo.gridfs.create(mongo, "grid")
     # Copy a local file to the server as a gridfs file
-    mongo.gridfs.store.file(gridfs, "../test.R", "test.R")
+    mongo.gridfs.store.file(gridfs, "tests/test.R", "test.R")
     mongo.gridfs.destroy(gridfs)
 }
 }

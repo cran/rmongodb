@@ -131,6 +131,15 @@ mongo.find <- function(mongo, ns, query=mongo.bson.empty(), sort=mongo.bson.empt
     .Call(".mongo.find", mongo, ns, query, sort, fields, limit, skip, options)
 }
 
+mongo.find.all <- function(mongo, ns, query=mongo.bson.empty(), sort=mongo.bson.empty(), fields=mongo.bson.empty(), limit=0L, skip=0L, options=0L) {
+  cursor <- mongo.find(mongo, ns, query=query, sort=sort, fields=fields, limit=limit, skip=skip, options=options)
+  res <- NULL
+  while ( mongo.cursor.next(cursor) ){
+    res <- rbind(res, mongo.bson.to.list(mongo.cursor.value(cursor)))
+  }
+  return(res)
+}
+
 mongo.cursor.next <- function(cursor)
     .Call(".mongo.cursor.next", cursor)
 

@@ -20,9 +20,11 @@ if (mongo.is.connected(mongo)) {
     gridfs <- mongo.gridfs.create(mongo, "grid")
 
     gf <- mongo.gridfs.find(gridfs, "test.R")
-    print(mongo.gridfile.get.chunk.size(gf))
+    if( !is.null(gf)){
+      print(mongo.gridfile.get.chunk.size(gf))
 
-    mongo.gridfile.destroy(gf)
+      mongo.gridfile.destroy(gf)
+    }
     mongo.gridfs.destroy(gridfs)
 }
 }

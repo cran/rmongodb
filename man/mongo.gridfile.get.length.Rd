@@ -18,11 +18,14 @@ mongo.gridfile.get.length(gridfile)
 mongo <- mongo.create()
 if (mongo.is.connected(mongo)) {
     gridfs <- mongo.gridfs.create(mongo, "grid")
+    mongo.gridfs.store.file(gridfs, "tests/test.R", "test.R")
 
     gf <- mongo.gridfs.find(gridfs, "test.R")
-    print(mongo.gridfile.get.length(gf))
+    if( !is.null(gf) ){
+      print(mongo.gridfile.get.length(gf))
 
-    mongo.gridfile.destroy(gf)
+      mongo.gridfile.destroy(gf)
+    }
     mongo.gridfs.destroy(gridfs)
 }
 }
