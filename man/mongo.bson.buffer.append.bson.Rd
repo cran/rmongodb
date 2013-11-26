@@ -1,23 +1,30 @@
-% File rmongodb/man/mongo.bson.buffer.append.bson.Rd
 \name{mongo.bson.buffer.append.bson}
 \alias{mongo.bson.buffer.append.bson}
 \title{Append a mongo.bson object into a mongo.bson.buffer}
-\description{
-Append a \link{mongo.bson} object into a \link{mongo.bson.buffer} as a subobject.
-
-Note that \code{\link{mongo.bson.buffer.append}()} will detect if its value parameter is a mongo.bson object and
-perform the same action as this function.
-}
 \usage{
-mongo.bson.buffer.append.bson(buf, name, value)
+  mongo.bson.buffer.append.bson(buf, name, value)
 }
 \arguments{
-\item{buf}{(\link{mongo.bson.buffer}) The buffer object to which to append.}
-\item{name}{(string) The name (key) of the subobject field appended to the buffer.}
-\item{value}{(\link{mongo.bson}) a mongo.bson object.}
+  \item{buf}{(\link{mongo.bson.buffer}) The buffer object
+  to which to append.}
+
+  \item{name}{(string) The name (key) of the subobject
+  field appended to the buffer.}
+
+  \item{value}{(\link{mongo.bson}) a mongo.bson object.}
 }
 \value{
-TRUE if successful; otherwise, FALSE if an error occured appending the data.
+  TRUE if successful; otherwise, FALSE if an error occured
+  appending the data.
+}
+\description{
+  Append a \link{mongo.bson} object into a
+  \link{mongo.bson.buffer} as a subobject.
+}
+\details{
+  Note that \code{\link{mongo.bson.buffer.append}()} will
+  detect if its value parameter is a mongo.bson object and
+  perform the same action as this function.
 }
 \examples{
 name <- mongo.bson.from.list(list(first="Joe", last="Smith"))
@@ -30,8 +37,8 @@ b <- mongo.bson.from.buffer(buf)
 # { "name" : { "first" : "Joe", "last" : "Smith" }, "city" : "New York" }
 }
 \seealso{
-\link{mongo.bson},\cr
-\link{mongo.bson.buffer},\cr
-\code{\link{mongo.bson.from.list}},\cr
-\code{\link{mongo.bson.buffer.append}}.
+  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+  \code{\link{mongo.bson.from.list}},\cr
+  \code{\link{mongo.bson.buffer.append}}.
 }
+

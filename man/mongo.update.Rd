@@ -1,33 +1,50 @@
-% File rmongodb/man/mongo.update.Rd
 \name{mongo.update}
 \alias{mongo.update}
 \title{Perform an update on a collection}
-\description{
-Perform an update on a collection.
-
-See \url{http://www.mongodb.org/display/DOCS/Updating}.
-}
 \usage{
-mongo.update(mongo, ns, criteria, objNew, flags=0L)
+  mongo.update(mongo, ns, criteria, objNew, flags = 0L)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
-\item{ns}{(string) namespace of the collection to which to update.}
-\item{criteria}{(\link{mongo.bson}) The criteria with which to match records that are to be updated.
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
 
-Alternately, \code{criteria} may be a list which will be converted to a mongo.bson object
-by \code{\link{mongo.bson.from.list}()}.}
-\item{objNew}{(\link{mongo.bson}) The replacement object.
+  \item{ns}{(string) namespace of the collection to which
+  to update.}
 
-Alternately, \code{objNew} may be a list which will be converted to a mongo.bson object
-by \code{\link{mongo.bson.from.list}()}.}
-\item{flags}{(integer vector) A list of optional flags governing the operation:
-    \itemize{
-        \item{\code{\link{mongo.update.upsert}}: insert ObjNew into the database if no record matching criteria is found.}
-        \item{\code{\link{mongo.update.multi}}: update multiple records rather than just the first one matched by criteria.}
-        \item{\code{\link{mongo.update.basic}}: Perform a basic update.}
-    }
+  \item{criteria}{(\link{mongo.bson}) The criteria with
+  which to match records that are to be updated.
+
+  Alternately, \code{criteria} may be a list which will be
+  converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.
+
+  Alternately, \code{criteria} may be a valid JSON
+  character string which will be converted to a mongo.bson
+  object by \code{\link{mongo.bson.from.JSON}()}.}
+
+  \item{objNew}{(\link{mongo.bson}) The replacement object.
+
+  Alternately, \code{objNew} may be a list which will be
+  converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.
+
+  Alternately, \code{objNew} may be a valid JSON character
+  string which will be converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.JSON}()}.}
+
+  \item{flags}{(integer vector) A list of optional flags
+  governing the operation: \itemize{
+  \item\code{\link{mongo.update.upsert}}: insert ObjNew
+  into the database if no record matching criteria is
+  found. \item\code{\link{mongo.update.multi}}: update
+  multiple records rather than just the first one matched
+  by criteria. \item\code{\link{mongo.update.basic}}:
+  Perform a basic update.  }}
 }
+\description{
+  Perform an update on a collection.
+}
+\details{
+  See \url{http://www.mongodb.org/display/DOCS/Updating}.
 }
 \examples{
 mongo <- mongo.create()
@@ -67,10 +84,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo},\cr
-\link{mongo.bson},\cr
-\code{\link{mongo.insert}},\cr
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.find.one}},\cr
-\code{\link{mongo.remove}}.
+  \link{mongo},\cr \link{mongo.bson},\cr
+  \code{\link{mongo.insert}},\cr
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.find.one}},\cr
+  \code{\link{mongo.remove}}.
 }
+

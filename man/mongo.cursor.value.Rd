@@ -1,19 +1,20 @@
-% File rmongodb/man/mongo.cursor.value.Rd
 \name{mongo.cursor.value}
 \alias{mongo.cursor.value}
 \title{Fetch the current value of a cursor}
-\description{
-\code{\link{mongo.cursor.value}(cursor)} is used to fetch the current record belonging to a\cr
-\code{\link{mongo.find}()} query.
-}
 \usage{
-mongo.cursor.value(cursor)
+  mongo.cursor.value(cursor)
 }
 \arguments{
-\item{cursor}{(\link{mongo.cursor}) A mongo.cursor object returned from \code{\link{mongo.find}()}.}
+  \item{cursor}{(\link{mongo.cursor}) A mongo.cursor object
+  returned from \code{\link{mongo.find}()}.}
 }
 \value{
-(\link{mongo.bson}) The current record of the result set.
+  (\link{mongo.bson}) The current record of the result set.
+}
+\description{
+  \code{\link{mongo.cursor.value}(cursor)} is used to fetch
+  the current record belonging to a\cr
+  \code{\link{mongo.find}()} query.
 }
 \examples{
 mongo <- mongo.create()
@@ -32,10 +33,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.cursor}},\cr
-\code{\link{mongo.cursor.next}},\cr
-\code{\link{mongo.cursor.value}},\cr
-\code{\link{mongo.cursor.destroy}},\cr
-\link{mongo.bson}.
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.cursor}},\cr
+  \code{\link{mongo.cursor.next}},\cr
+  \code{\link{mongo.cursor.value}},\cr
+  \code{\link{mongo.cursor.destroy}},\cr \link{mongo.bson}.
 }
+

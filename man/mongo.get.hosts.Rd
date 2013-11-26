@@ -1,19 +1,20 @@
-% File rmongodb/man/mongo.get.hosts.Rd
 \name{mongo.get.hosts}
 \alias{mongo.get.hosts}
-\title{Get a lists of hosts & ports as reported by a replica set master upon connection creation.}
-\description{
-Get a lists of hosts & ports as reported by a replica set master upon connection creation.
-}
+\title{Get a lists of hosts & ports as reported by a replica set master upon
+connection creation.}
 \usage{
-mongo.get.hosts(mongo)
+  mongo.get.hosts(mongo)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
 \value{
-NULL if a replica set was not connected to; otherwise, a
-list of host & port strings in the format "%s:%d".
+  NULL if a replica set was not connected to; otherwise, a
+  list of host & port strings in the format "%s:%d".
+}
+\description{
+  Get a lists of hosts & ports as reported by a replica set
+  master upon connection creation.
 }
 \examples{
 \dontrun{
@@ -22,8 +23,7 @@ if (mongo.is.connected(mongo))
     print(mongo.get.hosts(mongo))
 }
 }
-
 \seealso{
-\code{\link{mongo.create}},\cr
-\link{mongo}
+  \code{\link{mongo.create}},\cr \link{mongo}
 }
+

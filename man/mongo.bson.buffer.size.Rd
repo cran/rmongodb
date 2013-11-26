@@ -1,20 +1,23 @@
-% File rmongodb/man/mongo..bson.buffer.size.Rd
 \name{mongo.bson.buffer.size}
 \alias{mongo.bson.buffer.size}
 \title{Get the size of a mongo.bson.buffer object}
-\description{
-Get the number of bytes which would be taken up by the BSON data when the buffer is converted
-to a mongo.bson object with \code{\link{mongo.bson.from.buffer}()}.
-}
 \usage{
-mongo.bson.buffer.size(buf)
+  mongo.bson.buffer.size(buf)
 }
 \arguments{
-\item{buf}{(\link{mongo.bson.buffer}) the mongo.bson.buffer object to examine.}
+  \item{buf}{(\link{mongo.bson.buffer}) the
+  mongo.bson.buffer object to examine.}
 }
 \value{
-(integer) the number of bytes which would be taken up by the BSON data with the buffer is converted
-to a mongo.bson object with \code{\link{mongo.bson.from.buffer}()}.
+  (integer) the number of bytes which would be taken up by
+  the BSON data with the buffer is converted to a
+  mongo.bson object with
+  \code{\link{mongo.bson.from.buffer}()}.
+}
+\description{
+  Get the number of bytes which would be taken up by the
+  BSON data when the buffer is converted to a mongo.bson
+  object with \code{\link{mongo.bson.from.buffer}()}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -26,6 +29,6 @@ y <- mongo.bson.from.buffer(buf)
 print(mongo.bson.size(y))
 }
 \seealso{
-\link{mongo.bson.buffer},\cr
-\link{mongo.bson}.
+  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
+

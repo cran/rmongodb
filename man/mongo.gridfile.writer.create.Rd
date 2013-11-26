@@ -1,22 +1,29 @@
-% File rmongodb/man/mongo.gridfile.writer.create.Rd
 \name{mongo.gridfile.writer.create}
 \alias{mongo.gridfile.writer.create}
 \title{Create a mongo.gridfile.writer object}
-\description{
-Create a \link{mongo.gridfile.writer} object used to buffer many writes to a single GridFS file.
-Once the mongo.gridfile.writer is created, use \code{\link{mongo.gridfile.writer.write}()} to write data to the
-buffered GridFS file and \code{\link{mongo.gridfile.writer.finish}()} when done.
-}
 \usage{
-mongo.gridfile.writer.create(gridfs, remotename, contenttype="")
+  mongo.gridfile.writer.create(gridfs, remotename,
+    contenttype = "")
 }
 \arguments{
-\item{gridfs}{A (\link{mongo.gridfs}) object.}
-\item{remotename}{(string) The name the file will be known as within the GridFS.}
-\item{contenttype}{(string) Optional MIME content type.}
+  \item{gridfs}{A (\link{mongo.gridfs}) object.}
+
+  \item{remotename}{(string) The name the file will be
+  known as within the GridFS.}
+
+  \item{contenttype}{(string) Optional MIME content type.}
 }
 \value{
-(\link{mongo.gridfile.writer}) The object to be used for writing to the GridFS file.
+  (\link{mongo.gridfile.writer}) The object to be used for
+  writing to the GridFS file.
+}
+\description{
+  Create a \link{mongo.gridfile.writer} object used to
+  buffer many writes to a single GridFS file. Once the
+  mongo.gridfile.writer is created, use
+  \code{\link{mongo.gridfile.writer.write}()} to write data
+  to the buffered GridFS file and
+  \code{\link{mongo.gridfile.writer.finish}()} when done.
 }
 \examples{
 mongo <- mongo.create()
@@ -29,7 +36,7 @@ if (mongo.is.connected(mongo)) {
     mongo.gridfile.writer.write(gfw, charToRaw("test"))
 
     # store string & LF plus 0-byte terminator
-    buf <- writeBin("Test\n", as.raw(1))
+    buf <- writeBin("Test\\n", as.raw(1))
     mongo.gridfile.writer.write(gfw, buf)
 
     # store PI as a float
@@ -41,8 +48,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo.gridfs},\cr
-\code{\link{mongo.gridfs.create}},\cr
-\code{\link{mongo.gridfile.writer.write}},\cr
-\code{\link{mongo.gridfile.writer.finish}}.
+  \link{mongo.gridfs},\cr
+  \code{\link{mongo.gridfs.create}},\cr
+  \code{\link{mongo.gridfile.writer.write}},\cr
+  \code{\link{mongo.gridfile.writer.finish}}.
 }
+

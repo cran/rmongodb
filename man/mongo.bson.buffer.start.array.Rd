@@ -1,30 +1,39 @@
-% File rmongodb/man/mongo.bson.buffer.start.array.Rd
 \name{mongo.bson.buffer.start.array}
 \alias{mongo.bson.buffer.start.array}
 \title{Start an array within a mongo.bson.buffer}
-\description{
-Call this function to start an array within a \link{mongo.bson.buffer}.\cr
-\code{\link{mongo.bson.buffer.finish.object}()} must be called
-when finished appending the elements of the array.
-
-(\code{mongo.bson.buffer.start.object()}, \code{mongo.bson.buffer.start.array()}) and\cr
-\code{mongo.bson.buffer.finsih.object()} may be called in a stackwise (LIFO) order to 
-further nest arrays and documents.
-
-The names of the elements appended should properly be given sequentially numbered strings.
-
-Note that arrays will be automatically appended by the 'append' functions when appending vectors 
-(containing more than one element) of atomic types.
-}
 \usage{
-mongo.bson.buffer.start.array(buf, name)
+  mongo.bson.buffer.start.array(buf, name)
 }
 \arguments{
-\item{buf}{(\link{mongo.bson.buffer}) The buffer object to which to append.}
-\item{name}{(string) The name (key) of the array to be appended to the buffer. }
+  \item{buf}{(\link{mongo.bson.buffer}) The buffer object
+  to which to append.}
+
+  \item{name}{(string) The name (key) of the array to be
+  appended to the buffer.}
 }
 \value{
-TRUE if successful; otherwise, FALSE if an error occured appending the data.
+  TRUE if successful; otherwise, FALSE if an error occured
+  appending the data.
+}
+\description{
+  Call this function to start an array within a
+  \link{mongo.bson.buffer}.\cr
+  \code{\link{mongo.bson.buffer.finish.object}()} must be
+  called when finished appending the elements of the array.
+}
+\details{
+  (\code{mongo.bson.buffer.start.object()},
+  \code{mongo.bson.buffer.start.array()}) and\cr
+  \code{mongo.bson.buffer.finsih.object()} may be called in
+  a stackwise (LIFO) order to further nest arrays and
+  documents.
+
+  The names of the elements appended should properly be
+  given sequentially numbered strings.
+
+  Note that arrays will be automatically appended by the
+  'append' functions when appending vectors (containing
+  more than one element) of atomic types.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -46,9 +55,9 @@ b <- mongo.bson.from.buffer(buf)
 # { "Fibonacci" : [ 0, 1, 1, 2, 3, 5, 8, 13, 21 ] }
 }
 \seealso{
-\link{mongo.bson},\cr
-\link{mongo.bson.buffer},\cr
-\code{\link{mongo.bson.buffer.finish.object}},\cr
-\code{\link{mongo.bson.buffer.start.array}},\cr
-\code{\link{mongo.bson.buffer.append}}.
+  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+  \code{\link{mongo.bson.buffer.finish.object}},\cr
+  \code{\link{mongo.bson.buffer.start.array}},\cr
+  \code{\link{mongo.bson.buffer.append}}.
 }
+

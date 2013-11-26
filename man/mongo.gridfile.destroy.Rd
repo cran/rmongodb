@@ -1,22 +1,24 @@
-% File rmongodb/man/mongo.gridfs.destroy.Rd
 \name{mongo.gridfile.destroy}
 \alias{mongo.gridfile.destroy}
 \title{Destroy a mongo.gridfile object}
-\description{
-Releases the resources associated with a \link{mongo.gridfile} object.\cr
-These are created by \code{\link{mongo.gridfs.find}()}.
-
-It is not absolutely necessary to call this function since R's garbage collection will eventually
-get around to doing it for you.
-}
 \usage{
-mongo.gridfile.destroy(gridfile)
+  mongo.gridfile.destroy(gridfile)
 }
 \arguments{
-\item{gridfile}{A (\link{mongo.gridfile}) object.}
+  \item{gridfile}{A (\link{mongo.gridfile}) object.}
 }
 \value{
-NULL
+  NULL
+}
+\description{
+  Releases the resources associated with a
+  \link{mongo.gridfile} object.\cr These are created by
+  \code{\link{mongo.gridfs.find}()}.
+}
+\details{
+  It is not absolutely necessary to call this function
+  since R's garbage collection will eventually get around
+  to doing it for you.
 }
 \examples{
 mongo <- mongo.create()
@@ -32,7 +34,7 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.gridfs.find}},\cr
-\link{mongo.gridfile},\cr
-\link{mongo.gridfs}.
+  \code{\link{mongo.gridfs.find}},\cr
+  \link{mongo.gridfile},\cr \link{mongo.gridfs}.
 }
+

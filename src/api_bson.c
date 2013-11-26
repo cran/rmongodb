@@ -817,7 +817,7 @@ SEXP _get_R_object(bson* b) {
 }
 
 
-SEXP _mongo_bson_to_list(bson* b) {
+SEXP _mongo_bson_to_list(bson* b) { 
     SEXP names, ret;
     ret = _get_R_object(b);
     if (ret != R_NilValue)
@@ -899,7 +899,7 @@ SEXP _mongo_bson_to_list(bson* b) {
             PROTECT(ret = allocVector(LGLSXP, count));
             while (bson_iterator_next(&iter)) {
                 SET_STRING_ELT(names, i, mkChar(bson_iterator_key(&iter)));
-                LOGICAL(ret)[i++] = bson_iterator_int(&iter);
+                LOGICAL(ret)[i++] = bson_iterator_bool(&iter);
             }
             break;
         case BSON_OBJECT: /* complex */

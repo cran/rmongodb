@@ -1,20 +1,23 @@
-% File rmongodb/man/mongo.get.reset.err.Rd
 \name{mongo.reset.err}
 \alias{mongo.reset.err}
 \title{Retrieve an server error code from a mongo connection object}
-\description{
-Send a "reset error" command to the server, it also resets the values returned by\cr
-\code{\link{mongo.get.server.err}()} and \code{\link{mongo.get.server.err.string}()}.
-}
 \usage{
-mongo.reset.err(mongo, db)
+  mongo.reset.err(mongo, db)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
-\item{db}{(string) The name of the database on which to reset the error status. }
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
+
+  \item{db}{(string) The name of the database on which to
+  reset the error status.}
 }
 \value{
-NULL
+  NULL
+}
+\description{
+  Send a "reset error" command to the server, it also
+  resets the values returned by\cr
+  \code{\link{mongo.get.server.err}()} and
+  \code{\link{mongo.get.server.err.string}()}.
 }
 \examples{
 mongo <- mongo.create()
@@ -24,7 +27,7 @@ if (mongo.is.connected(mongo)) {
 
     db <- "test"
     ns <- "test.people"
-    mongo.index.create(mongo, ns, "name", mongo.index.unique)
+    mongo.index.create(mongo, ns, '{"name":1}', mongo.index.unique)
 
     buf <- mongo.bson.buffer.create()
     mongo.bson.buffer.append(buf, "name", "John")
@@ -45,9 +48,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.get.server.err}},\cr
-\code{\link{mongo.get.server.err.string}},\cr
-\code{\link{mongo.get.last.err}},\cr
-\code{\link{mongo.get.prev.err}},\cr
-\link{mongo}.
+  \code{\link{mongo.get.server.err}},\cr
+  \code{\link{mongo.get.server.err.string}},\cr
+  \code{\link{mongo.get.last.err}},\cr
+  \code{\link{mongo.get.prev.err}},\cr \link{mongo}.
 }
+

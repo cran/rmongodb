@@ -1,13 +1,16 @@
-% File rmongodb/man/mongo.find.exhaust.Rd
+\docType{data}
 \name{mongo.find.exhaust}
 \alias{mongo.find.exhaust}
 \title{mongo.find flag constant - exhaust}
-\description{
-\code{\link{mongo.find}()} flag constant - exhaust.
-}
+\format{int 64}
 \usage{
-mongo.find.exhaust
+  mongo.find.exhaust
 }
 \value{
-64L
+  64L
 }
+\description{
+  \code{\link{mongo.find}()} flag constant - exhaust.
+}
+\keyword{datasets}
+

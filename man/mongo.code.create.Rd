@@ -1,21 +1,22 @@
-% File rmongodb/man/mongo.code.create.Rd
 \name{mongo.code.create}
 \alias{mongo.code.create}
 \title{Create a mongo.code object}
-\description{
-Create a mongo.code object for appending to a buffer with \code{\link{mongo.bson.buffer.append}()} or
-for embedding in a list such that\cr
-\code{\link{mongo.bson.buffer.append.list}()} will properly insert a code
-value into the mongo.bson.buffer object.
-}
 \usage{
-mongo.code.create(code)
+  mongo.code.create(code)
 }
 \arguments{
-\item{code}{(string) javascript code}
+  \item{code}{(string) javascript code}
 }
 \value{
-A \link{mongo.code} object
+  A \link{mongo.code} object
+}
+\description{
+  Create a mongo.code object for appending to a buffer with
+  \code{\link{mongo.bson.buffer.append}()} or for embedding
+  in a list such that\cr
+  \code{\link{mongo.bson.buffer.append.list}()} will
+  properly insert a code value into the mongo.bson.buffer
+  object.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -28,14 +29,14 @@ b <- mongo.bson.from.buffer(buf)
 
 # the above will create a mongo.bson object of the following form:
 # { "Code": (CODE) "y = x",
-#   "listWcode" : { "c1"  : (CODE) "y = x", 
+#   "listWcode" : { "c1"  : (CODE) "y = x",
 #                   "One" : 1 },
 #   "Code2" : (CODE) "a = 1" }
 }
 \seealso{
-\link{mongo.code},\cr
-\code{\link{mongo.bson.buffer.append}},\cr
-\code{\link{mongo.bson.buffer.append.list}},\cr
-\link{mongo.bson.buffer},\cr
-\link{mongo.bson}.
+  \link{mongo.code},\cr
+  \code{\link{mongo.bson.buffer.append}},\cr
+  \code{\link{mongo.bson.buffer.append.list}},\cr
+  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
+

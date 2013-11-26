@@ -1,18 +1,18 @@
-% File rmongodb/man/mongo.get.primary.Rd
 \name{mongo.get.primary}
 \alias{mongo.get.primary}
 \title{Get the host & port of the server to which a mongo object is connected.}
-\description{
-Get the host & port of the server to which a mongo object is connected.
-}
 \usage{
-mongo.get.primary(mongo)
+  mongo.get.primary(mongo)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
 \value{
-String host & port in the format "\%s:\%d".
+  String host & port in the format "\%s:\%d".
+}
+\description{
+  Get the host & port of the server to which a mongo object
+  is connected.
 }
 \examples{
 \dontrun{
@@ -23,6 +23,6 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.create}},\cr
-\link{mongo}.
+  \code{\link{mongo.create}},\cr \link{mongo}.
 }
+

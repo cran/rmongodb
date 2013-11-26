@@ -1,17 +1,21 @@
-% File rmongodb/man/mongo.binary.binary.Rd
+\docType{data}
 \name{mongo.binary.binary}
 \alias{mongo.binary.binary}
 \title{BSON binary data subtype constant for standard binary data}
-\description{
-BSON binary data subtype constant for standard binary data.
-}
+\format{int 0}
 \usage{
-mongo.binary.binary
+  mongo.binary.binary
 }
 \value{
-0L
+  0L
+}
+\description{
+  BSON binary data subtype constant for standard binary
+  data.
 }
 \seealso{
-\code{\link{mongo.bson.buffer.append.raw}},\cr
-\link{mongo.bson}.
+  \code{\link{mongo.bson.buffer.append.raw}},\cr
+  \link{mongo.bson}.
 }
+\keyword{datasets}
+

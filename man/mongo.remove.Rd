@@ -1,23 +1,34 @@
-% File rmongodb/man/mongo.remove.Rd
 \name{mongo.remove}
 \alias{mongo.remove}
 \title{Remove records from a collection}
-\description{
-Remove all records from a collection that match a given criteria.
-
-See \url{http://www.mongodb.org/display/DOCS/Removing}.
-}
 \usage{
-mongo.remove(mongo, ns, criteria=mongo.bson.empty())
+  mongo.remove(mongo, ns, criteria = mongo.bson.empty())
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
-\item{ns}{(string) namespace of the collection from which to remove records.}
-\item{criteria}{(\link{mongo.bson}) The criteria with which to match records that are to be removed.
-The default of mongo.bson.empty() will cause \emph{all} records in the given collection to be removed.
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
 
-Alternately, \code{criteria} may be a list which will be converted to a mongo.bson object 
-by \code{\link{mongo.bson.from.list}()}.}
+  \item{ns}{(string) namespace of the collection from which
+  to remove records.}
+
+  \item{criteria}{(\link{mongo.bson}) The criteria with
+  which to match records that are to be removed. The
+  default of mongo.bson.empty() will cause \emph{all}
+  records in the given collection to be removed.
+
+  Alternately, \code{criteria} may be a list which will be
+  converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.
+
+  Alternately, \code{criteria} may be a valid JSON
+  character string which will be converted to a mongo.bson
+  object by \code{\link{mongo.bson.from.JSON}()}.}
+}
+\description{
+  Remove all records from a collection that match a given
+  criteria.
+}
+\details{
+  See \url{http://www.mongodb.org/display/DOCS/Removing}.
 }
 \examples{
 mongo <- mongo.create()
@@ -38,10 +49,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo},\cr
-\link{mongo.bson},\cr
-\code{\link{mongo.insert}},\cr
-\code{\link{mongo.update}},\cr
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.find.one}}.
+  \link{mongo},\cr \link{mongo.bson},\cr
+  \code{\link{mongo.insert}},\cr
+  \code{\link{mongo.update}},\cr
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.find.one}}.
 }
+

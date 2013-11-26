@@ -1,25 +1,34 @@
-% File rmongodb/man/mongo.count.Rd
 \name{mongo.count}
 \alias{mongo.count}
 \title{Count records in a collection}
-\description{
-Count the number of records in a collection that match a query
-See \url{http://www.mongodb.org/display/DOCS/Indexes}.
-}
 \usage{
-mongo.count(mongo, ns, query=mongo.bson.empty())
+  mongo.count(mongo, ns, query = mongo.bson.empty())
 }
 \arguments{
-\item{mongo}{(\link{mongo}) A mongo connection object.}
-\item{ns}{(string) The namespace of the collection in which to add count records.}
-\item{query}{\link{mongo.bson} The criteria with which to match records that are to be counted.
-    The default of mongo.bson.empty() matches all records in the collection.
-    
-Alternately, \code{query} may be
-a list which will be converted to a mongo.bson object by \code{\link{mongo.bson.from.list}()}.}
+  \item{mongo}{(\link{mongo}) A mongo connection object.}
+
+  \item{ns}{(string) The namespace of the collection in
+  which to add count records.}
+
+  \item{query}{\link{mongo.bson} The criteria with which to
+  match records that are to be counted.  The default of
+  mongo.bson.empty() matches all records in the collection.
+
+  Alternately, \code{query} may be a list which will be
+  converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.
+
+  Alternately, \code{query} may be a valid JSON character
+  string which will be converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.JSON}()}.}
 }
 \value{
-(double) The number of matching records.
+  (double) The number of matching records.
+}
+\description{
+  Count the number of records in a collection that match a
+  query See
+  \url{http://www.mongodb.org/display/DOCS/Indexes}.
 }
 \examples{
 mongo <- mongo.create()
@@ -56,11 +65,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.find.one}},\cr
-\code{\link{mongo.insert}},\cr
-\code{\link{mongo.update}},\cr
-\code{\link{mongo.remove}},\cr
-\link{mongo},\cr
-\link{mongo.bson}.
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.find.one}},\cr
+  \code{\link{mongo.insert}},\cr
+  \code{\link{mongo.update}},\cr
+  \code{\link{mongo.remove}},\cr \link{mongo},\cr
+  \link{mongo.bson}.
 }
+

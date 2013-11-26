@@ -1,19 +1,20 @@
-% File rmongodb/man/mongo.gridfs.remove.file.Rd
 \name{mongo.gridfs.remove.file}
 \alias{mongo.gridfs.remove.file}
 \title{Remove a file from a GridFS on a MongoDB server}
-\description{
-Remove a file from a GridFS on a MongoDB server.
-}
 \usage{
-mongo.gridfs.remove.file(gridfs, remotename)
+  mongo.gridfs.remove.file(gridfs, remotename)
 }
 \arguments{
-\item{gridfs}{A (\link{mongo.gridfs}) object.}
-\item{remotename}{(string) The name of the file to be removed (as known within the GridFS).}
+  \item{gridfs}{A (\link{mongo.gridfs}) object.}
+
+  \item{remotename}{(string) The name of the file to be
+  removed (as known within the GridFS).}
 }
 \value{
-NULL
+  NULL
+}
+\description{
+  Remove a file from a GridFS on a MongoDB server.
 }
 \examples{
 mongo <- mongo.create()
@@ -24,7 +25,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo.gridfs},\cr
-\code{\link{mongo.gridfs.store.file}}\cr
-\code{\link{mongo.gridfs.store}}.
+  \link{mongo.gridfs},\cr
+  \code{\link{mongo.gridfs.store.file}}\cr
+  \code{\link{mongo.gridfs.store}}.
 }
+

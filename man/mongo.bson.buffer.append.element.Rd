@@ -1,25 +1,33 @@
-% File rmongodb/man/mongo.bson.buffer.append.element.Rd
 \name{mongo.bson.buffer.append.element}
 \alias{mongo.bson.buffer.append.element}
 \title{Append a mongo.bson.iterator's element into a mongo.bson.buffer}
-\description{
-Append a \link{mongo.bson.iterator}'s element into a \link{mongo.bson.buffer}.
-
-\code{\link{mongo.bson.buffer.append}()} will detect if its value parameter
-is a mongo.bson.iterator object and perform the same action as this function.
-}
 \usage{
-mongo.bson.buffer.append.element(buf, name, value)
+  mongo.bson.buffer.append.element(buf, name, value)
 }
 \arguments{
-\item{buf}{(\link{mongo.bson.buffer}) The buffer object to which to append.}
-\item{name}{(string) The name (key) of the subobject field appended to the buffer.
+  \item{buf}{(\link{mongo.bson.buffer}) The buffer object
+  to which to append.}
 
-If NULL, the name appended will come from the element pointed to by the iterator.}
-\item{value}{A (\link{mongo.bson.iterator}) object.}
+  \item{name}{(string) The name (key) of the subobject
+  field appended to the buffer.
+
+  If NULL, the name appended will come from the element
+  pointed to by the iterator.}
+
+  \item{value}{A (\link{mongo.bson.iterator}) object.}
 }
 \value{
-TRUE if successful; otherwise, FALSE if an error occured appending the data.
+  TRUE if successful; otherwise, FALSE if an error occured
+  appending the data.
+}
+\description{
+  Append a \link{mongo.bson.iterator}'s element into a
+  \link{mongo.bson.buffer}.
+}
+\details{
+  \code{\link{mongo.bson.buffer.append}()} will detect if
+  its value parameter is a mongo.bson.iterator object and
+  perform the same action as this function.
 }
 \examples{
 name <- mongo.bson.from.list(list(first="Joe", last="Smith"))
@@ -32,9 +40,9 @@ b <- mongo.bson.from.buffer(buf)
 # { "last" : "Smith" }
 }
 \seealso{
-\link{mongo.bson},\cr
-\link{mongo.bson.buffer},\cr
-\code{\link{mongo.bson.find}},\cr
-\code{\link{mongo.bson.from.list}},\cr
-\code{\link{mongo.bson.buffer.append}}.
+  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+  \code{\link{mongo.bson.find}},\cr
+  \code{\link{mongo.bson.from.list}},\cr
+  \code{\link{mongo.bson.buffer.append}}.
 }
+

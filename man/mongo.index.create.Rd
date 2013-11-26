@@ -1,42 +1,55 @@
-% File rmongodb/man/mongo.index.create.Rd
 \name{mongo.index.create}
 \alias{mongo.index.create}
 \title{Add an index to a collection}
-\description{
-Add an index to a collection.
-
-See \url{http://www.mongodb.org/display/DOCS/Indexes}.
-}
 \usage{
-mongo.index.create(mongo, ns, key, options=0L)
+  mongo.index.create(mongo, ns, key, options = 0L)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) A mongo connection object.}
-\item{ns}{(string) The namespace of the collection to which to add an index.}
-\item{key}{An object enumerating the fields in order which are to participate in the index.
-This object may be a vector of strings listing the key fields or 
-a \link{mongo.bson} object containing the key fields in the desired order.
-    
-Alternately, \code{key} may be a list which will be converted to a mongo.bson object
-by \code{\link{mongo.bson.from.list}()}.}
-\item{options}{(integer vector) Optional flags governing the operation:
-    \itemize{
-        \item{\code{\link{mongo.index.unique}}}
-        \item{\code{\link{mongo.index.drop.dups}}}
-        \item{\code{\link{mongo.index.background}}}
-        \item{\code{\link{mongo.index.sparse}}}
-    }
-}
+  \item{mongo}{(\link{mongo}) A mongo connection object.}
+
+  \item{ns}{(string) The namespace of the collection to
+  which to add an index.}
+
+  \item{key}{An object enumerating the fields in order
+  which are to participate in the index. This object may be
+  a vector of strings listing the key fields or a
+  \link{mongo.bson} object containing the key fields in the
+  desired order.
+
+  Alternately, \code{key} may be a list which will be
+  converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.
+
+  Alternately, \code{key} may be a valid JSON character
+  string which will be converted to a mongo.bson object by
+  \code{\link{mongo.bson.from.JSON}()}.}
+
+  \item{options}{(integer vector) Optional flags governing
+  the operation: \itemize{
+  \item\code{\link{mongo.index.unique}}
+  \item\code{\link{mongo.index.drop.dups}}
+  \item\code{\link{mongo.index.background}}
+  \item\code{\link{mongo.index.sparse}} }}
 }
 \value{
-NULL if successful; otherwise, a \link{mongo.bson} object describing the error.\cr
-\code{\link{mongo.get.server.err}()} or \code{\link{mongo.get.server.err.string}()} may alternately be called in this case instead of examining the returned object.
+  NULL if successful; otherwise, a \link{mongo.bson} object
+  describing the error.\cr
+  \code{\link{mongo.get.server.err}()} or
+  \code{\link{mongo.get.server.err.string}()} may
+  alternately be called in this case instead of examining
+  the returned object.
+}
+\description{
+  Add an index to a collection.
+}
+\details{
+  See \url{http://www.mongodb.org/display/DOCS/Indexes}.
 }
 \examples{
 mongo <- mongo.create()
 if (mongo.is.connected(mongo)) {
     # Add a city index to collection people in database test
-    b <- mongo.index.create(mongo, "test.people", "city")
+    b <- mongo.index.create(mongo, "test.people", '{"city":1}')
     if (!is.null(b)) {
         print(b)
         stop("Server error")
@@ -59,11 +72,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.find.one}},\cr
-\code{\link{mongo.insert}},\cr
-\code{\link{mongo.update}},\cr
-\code{\link{mongo.remove}},\cr
-\link{mongo},\cr
-\link{mongo.bson}.
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.find.one}},\cr
+  \code{\link{mongo.insert}},\cr
+  \code{\link{mongo.update}},\cr
+  \code{\link{mongo.remove}},\cr \link{mongo},\cr
+  \link{mongo.bson}.
 }
+

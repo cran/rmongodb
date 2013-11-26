@@ -1,16 +1,47 @@
 rmongodb NEWS
 ========================================================
 
+November 25, 2013
+* version dump and new CRAN submission
+* more tests for JSON input
+* mongo.findOne as alias for mongo.find.one
+
+November 24, 2013
+* using more stable RJSONIO
+* package builds without locally installe mongodb
+* everywhere direkt JSON queries (incl. sort and field) are enabled
+* mongo.is.connected check added to all function for more stability
+
+November 22, 2013
+* finalizing first version of RUnit test (all old tests are now RUnit Tests)
+
+November 20, 2013
+* bugfix for boolean BSON values (github Issue #18)
+
+November 4, 2013
+* introduction of first mongo high level functionality
+** mongo.get.keys - to get all keys from a collection
+** mongo.summary - to get summary statistics all keys in a collection
+* JSON 2 BSON implemented
+** mongo.bson.from.JSON 
+* code to deal with cursors
+** mongo.cursor.to.list
+** mongo.cursor.to.data.frame
+
+November 2, 2013
+* use roxygen for documentation
+* implementing first high level functions
+
 October 31, 2013 - v1.1.3
 * bcon.c / bcon.h removed -> no more build warnings
 * NEWS file fixed for CRAN style
 
-October 30, 2013 - v1.1.2
+October 30, 2013
 * zips example data added
 * all build errors removed
 * submission to CRAN :-)
 
-October 25, 2013 - v1.1.1
+October 25, 2013
 * **mongo.find.all** function added
 * most build errors removed
 

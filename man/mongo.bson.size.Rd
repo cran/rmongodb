@@ -1,18 +1,20 @@
-% File rmongodb/man/mongo.bson.size.Rd
 \name{mongo.bson.size}
 \alias{mongo.bson.size}
 \title{Get the size of a mongo.bson object}
-\description{
-Get the number of bytes taken up by the BSON data attached to the mongo.bson object
-}
 \usage{
-mongo.bson.size(b)
+  mongo.bson.size(b)
 }
 \arguments{
-\item{b}{(\link{mongo.bson}) the mongo.bson object to examine.}
+  \item{b}{(\link{mongo.bson}) the mongo.bson object to
+  examine.}
 }
 \value{
-(integer) the number of bytes taken up by the BSON data attached to the mongo.bson object.
+  (integer) the number of bytes taken up by the BSON data
+  attached to the mongo.bson object.
+}
+\description{
+  Get the number of bytes taken up by the BSON data
+  attached to the mongo.bson object
 }
 \examples{
 # should report 5
@@ -26,5 +28,6 @@ y <- mongo.bson.from.buffer(buf)
 print(mongo.bson.size(y))
 }
 \seealso{
-\link{mongo.bson}
+  \link{mongo.bson}
 }
+

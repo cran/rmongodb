@@ -1,23 +1,26 @@
-% File rmongodb/man/print.mongo.bson.Rd
 \name{print.mongo.bson}
 \alias{print.mongo.bson}
 \title{Display a mongo.bson object}
-\description{
-Display formatted output of a mongo.bson object.
-
-Output is tabbed (indented to show the nesting level of subobjects and arrays).
-
-This version is an alias of mongo.bson.print() so that print() will properly handle the mongo.bson class.
-}
 \usage{
-\method{print}{mongo.bson}(x, ...)
+  \method{print}{mongo.bson} (x, ...)
 }
 \arguments{
-\item{x}{(\link{mongo.bson} The object to display.}
-\item{...}{Parameters passed from generic.}
+  \item{x}{(\link{mongo.bson} The object to display.}
+
+  \item{...}{Parameters passed from generic.}
 }
 \value{
-The parameter is returned unchanged.
+  The parameter is returned unchanged.
+}
+\description{
+  Display formatted output of a mongo.bson object.
+}
+\details{
+  Output is tabbed (indented to show the nesting level of
+  subobjects and arrays).
+
+  This version is an alias of mongo.bson.print() so that
+  print() will properly handle the mongo.bson class.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -31,6 +34,6 @@ mongo.bson.print(b)
 print(b)
 }
 \seealso{
-\code{\link{mongo.bson.print}},\cr
-\link{mongo.bson}.
+  \code{\link{mongo.bson.print}},\cr \link{mongo.bson}.
 }
+

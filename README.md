@@ -1,9 +1,9 @@
 rmongodb
 ===================
 
-This is an R (www.r-project.org) extension supporting access to MongoDB (www.mongodb.org) using the mongodb-c-driver.
+This is an R (www.r-project.org) extension supporting access to MongoDB (www.mongodb.org) using the mongodb-c-driver (http://docs.mongodb.org/ecosystem/drivers/c/).
 
-The latest stable version will be soon available on **CRAN**: http://cran.r-project.org/package=rmongodb
+The latest stable version is available on **CRAN**: http://cran.r-project.org/package=rmongodb
 
 Thanks to Gerald Lindsly and MongoDB, Inc. (formerly 10gen) for all the initial work. 
 In October 2013, **MongoSoup** (www.mongosoup.de) has overtaken the development and maintenance of the R package. 
@@ -24,17 +24,20 @@ Once you have installed the package, it may be loaded from within R like any oth
     mongo <- mongo.create()
     
     # create query object 
-    buf <- mongo.bson.buffer.create()
-    mongo.bson.buffer.append(buf, "age", 18L)
-    query <- mongo.bson.from.buffer(buf)
+    query <- mongo.bson.from.JSON('{"age": 27}')
 
     # Find the first 100 records
-    #    in collection people of database test where age == 18
+    #    in collection people of database test where age == 27
     cursor <- mongo.find(mongo, "test.people", query, limit=100L)
     # Step though the matching records and display them
     while (mongo.cursor.next(cursor))
         print(mongo.cursor.value(cursor))
     mongo.cursor.destroy(cursor)
+    
+    res <- mongo.find.batch(mongo, "test.people", query, limit=100L)
+    
+    mongo.disconnect(mongo)
+    mongo.destroy(mongo)
 
 There is also one demo available:
   
@@ -44,7 +47,7 @@ There is also one demo available:
 
 ### Supported Functionality by rmongodb
 * Connecting and disconnecting to MongoDB
-* Querying, inserting and updating to MongoDB
+* Querying, inserting and updating to MongoDB including with **JSON** and BSON
 * Creating and handling BSON objects
 * Dropping collections and databases on MongoDB
 * Creating indices on MongoDB collections
@@ -52,6 +55,7 @@ There is also one demo available:
 * Executing commands on MongoDB
 * Adding, removing, handling files on a "Grid File System" (GridFS) on a 
 MongoDB server
+* High Level functionality as mongo.apply, mongo.summary, mongo.get.keys, ...
 
 
 ### Good ressources to Get Started with rmongodb
@@ -92,15 +96,19 @@ To install the development version of rmongodb, it's easiest to use the devtools
     # install.packages("devtools")
     library(devtools)
     install_github("rmongodb", "mongosoup")
-
-To run the unit tests:
-
-    R --no-save < tests/test.R
     
 We advice using RStudio (www.rstudio.org) for the package development. The RStudio .Rproj file is included in the repository.
 
+### Usefull links
+* BSON specification: http://bsonspec.org/#/specification
 
+### Versioning
+We use a three step version number system, e.g. v1.2.1:
+* first: major changes as new C libraries
+* second: for each new stable CRAN release
+* third: for each new github version ready for testing
 
-
-
-
+### General Development Rules
+* we use roxygen2
+* we write RUnit tests for all new functionality in tests/test_XXX.R
+* for bigger changes we use branches

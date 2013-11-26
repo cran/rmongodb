@@ -1,25 +1,32 @@
-% File rmongodb/man/mongo.insert.batch.Rd
 \name{mongo.insert.batch}
 \alias{mongo.insert.batch}
 \title{Add multiple records to a collection}
-\description{
-Add multiple records to a collection.  This function eliminates some network traffic and server overhead 
-by sending all the records in a single message.
-
-See \url{http://www.mongodb.org/display/DOCS/Inserting}.
-}
 \usage{
-mongo.insert.batch(mongo, ns, lst)
+  mongo.insert.batch(mongo, ns, lst)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
-\item{ns}{(string) namespace of the collection to which to add the record.}
-\item{lst}{A list of (\link{mongo.bson}) records to add.}
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
+
+  \item{ns}{(string) namespace of the collection to which
+  to add the record.}
+
+  \item{lst}{A list of (\link{mongo.bson}) records to add.}
 }
 \value{
-TRUE if the command was successfully sent to the server; otherwise, FALSE.
+  TRUE if the command was successfully sent to the server;
+  otherwise, FALSE.
 
-\code{\link{mongo.get.last.err}()} may be examined to verify that the insert was successful on the server if necessary.
+  \code{\link{mongo.get.last.err}()} may be examined to
+  verify that the insert was successful on the server if
+  necessary.
+}
+\description{
+  Add multiple records to a collection.  This function
+  eliminates some network traffic and server overhead by
+  sending all the records in a single message.
+}
+\details{
+  See \url{http://www.mongodb.org/display/DOCS/Inserting}.
 }
 \examples{
 mongo <- mongo.create()
@@ -44,11 +51,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.insert}},\cr
-\code{\link{mongo.update}},\cr
-\code{\link{mongo.find}},\cr
-\code{\link{mongo.find.one}},\cr
-\code{\link{mongo.remove}},\cr
-\link{mongo.bson},\cr
-\link{mongo}.
+  \code{\link{mongo.insert}},\cr
+  \code{\link{mongo.update}},\cr
+  \code{\link{mongo.find}},\cr
+  \code{\link{mongo.find.one}},\cr
+  \code{\link{mongo.remove}},\cr \link{mongo.bson},\cr
+  \link{mongo}.
 }
+

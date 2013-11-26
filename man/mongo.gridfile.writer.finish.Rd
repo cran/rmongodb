@@ -1,19 +1,18 @@
-% File rmongodb/man/mongo.gridfile.writer.finish.Rd
 \name{mongo.gridfile.writer.finish}
 \alias{mongo.gridfile.writer.finish}
 \title{Finish writing to a buffered GridFS file}
-\description{
-Finish writing to a buffered GridFS file.
-This function flushes any partial buffer and finalizes the operation.
-}
 \usage{
-mongo.gridfile.writer.finish(gfw)
+  mongo.gridfile.writer.finish(gfw)
 }
 \arguments{
-\item{gfw}{A (\link{mongo.gridfile.writer}) object.}
+  \item{gfw}{A (\link{mongo.gridfile.writer}) object.}
 }
 \value{
-TRUE, if successfil; false, if an error occurred.
+  TRUE, if successfil; false, if an error occurred.
+}
+\description{
+  Finish writing to a buffered GridFS file. This function
+  flushes any partial buffer and finalizes the operation.
 }
 \examples{
 mongo <- mongo.create()
@@ -38,8 +37,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo.gridfs},\cr
-\code{\link{mongo.gridfile.writer.create}},\cr
-\link{mongo.gridfile.writer},\cr
-\code{\link{mongo.gridfile.writer.write}}.
+  \link{mongo.gridfs},\cr
+  \code{\link{mongo.gridfile.writer.create}},\cr
+  \link{mongo.gridfile.writer},\cr
+  \code{\link{mongo.gridfile.writer.write}}.
 }
+

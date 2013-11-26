@@ -1,22 +1,29 @@
-% File rmongodb/man/mongo.gridfs.find.Rd
 \name{mongo.gridfs.find}
 \alias{mongo.gridfs.find}
 \title{Find a GridFS file}
-\description{
-Find a GridFS file and return a \link{mongo.gridfile} object used for further operations on it}
 \usage{
-mongo.gridfs.find(gridfs, query)
+  mongo.gridfs.find(gridfs, query)
 }
 \arguments{
-\item{gridfs}{A (\link{mongo.gridfs}) object.}
-\item{query}{(string) The name of the GridFS file to locate.
+  \item{gridfs}{A (\link{mongo.gridfs}) object.}
 
-This parameter may also be a \link{mongo.bson} query object and is used to search 
-the GridFS "files" collection documents for matches.  Alternately, \code{query} may be
-a list which will be converted to a mongo.bson object by \code{\link{mongo.bson.from.list}()}.}
+  \item{query}{(string) The name of the GridFS file to
+  locate.
+
+  This parameter may also be a \link{mongo.bson} query
+  object and is used to search the GridFS "files"
+  collection documents for matches.  Alternately,
+  \code{query} may be a list which will be converted to a
+  mongo.bson object by
+  \code{\link{mongo.bson.from.list}()}.}
 }
 \value{
-NULL, if not found; otherwise, a \link{mongo.gridfile} object corresponding to the found GridFS file.
+  NULL, if not found; otherwise, a \link{mongo.gridfile}
+  object corresponding to the found GridFS file.
+}
+\description{
+  Find a GridFS file and return a \link{mongo.gridfile}
+  object used for further operations on it
 }
 \examples{
 mongo <- mongo.create()
@@ -40,7 +47,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\link{mongo.gridfile},\cr
-\code{\link{mongo.gridfile.get.filename}},\cr
-\link{mongo.gridfs}.
+  \link{mongo.gridfile},\cr
+  \code{\link{mongo.gridfile.get.filename}},\cr
+  \link{mongo.gridfs}.
 }
+

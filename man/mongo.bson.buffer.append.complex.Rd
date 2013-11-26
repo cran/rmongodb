@@ -1,33 +1,46 @@
-% File rmongodb/man/mongo.bson.buffer.append.complex.Rd
 \name{mongo.bson.buffer.append.complex}
 \alias{mongo.bson.buffer.append.complex}
 \title{Append a double field onto a mongo.bson.buffer}
-\description{
-Append a double or vector of doubles onto a \link{mongo.bson.buffer}.
-
-Note that since BSON has no built-in complex type, R's complex values are appended as subobjects with two fields:
-"r" : the real part and "i" : the imaginary part.
-}
 \usage{
-mongo.bson.buffer.append.complex(buf, name, value)
+  mongo.bson.buffer.append.complex(buf, name, value)
 }
 \arguments{
-\item{buf}{(\link{mongo.bson.buffer}) The buffer object to which to append.}
-\item{name}{(string) The name (key) of the field appended to the buffer. }
-\item{value}{(complex vector) The values(s) to append to the buffer.
+  \item{buf}{(\link{mongo.bson.buffer}) The buffer object
+  to which to append.}
 
-If value has a \code{dims} attribute of length > 1, any \code{names} or \code{dimnames} attribute
-is ignored and a nested array is appended.\cr
-(Use \code{\link{mongo.bson.buffer.append.object}()} if you want to preserve \code{dimnames}).
+  \item{name}{(string) The name (key) of the field appended
+  to the buffer.}
 
-If value has a names attribute, a subobject is appended and the subfields are given the indicated names.
+  \item{value}{(complex vector) The values(s) to append to
+  the buffer.
 
-Otherwise, if more than one element is present in value, the values are appended as a subarray.
+  If value has a \code{dims} attribute of length > 1, any
+  \code{names} or \code{dimnames} attribute is ignored and
+  a nested array is appended.\cr (Use
+  \code{\link{mongo.bson.buffer.append.object}()} if you
+  want to preserve \code{dimnames}).
 
-In the last case, a single complex is appended as the value of the field.}
+  If value has a names attribute, a subobject is appended
+  and the subfields are given the indicated names.
+
+  Otherwise, if more than one element is present in value,
+  the values are appended as a subarray.
+
+  In the last case, a single complex is appended as the
+  value of the field.}
 }
 \value{
-TRUE if successful; otherwise, FALSE if an error occured appending the data.
+  TRUE if successful; otherwise, FALSE if an error occured
+  appending the data.
+}
+\description{
+  Append a double or vector of doubles onto a
+  \link{mongo.bson.buffer}.
+}
+\details{
+  Note that since BSON has no built-in complex type, R's
+  complex values are appended as subobjects with two
+  fields: "r" : the real part and "i" : the imaginary part.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -55,7 +68,7 @@ b <- mongo.bson.from.buffer(buf)
 #                "Epsilon" : { " r" : 0.25, "i" : 0 } } }
 }
 \seealso{
-\link{mongo.bson},\cr
-\link{mongo.bson.buffer},\cr
-\code{\link{mongo.bson.buffer.append}}.
+  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+  \code{\link{mongo.bson.buffer.append}}.
 }
+

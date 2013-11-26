@@ -1,18 +1,18 @@
-% File rmongodb/man/mongo.get.timeout.Rd
 \name{mongo.get.timeout}
 \alias{mongo.get.timeout}
 \title{Get the timeout value of a mongo connection}
-\description{
-Get the timeout value for network operations on a mongo connection.  
-}
 \usage{
-mongo.get.timeout(mongo)
+  mongo.get.timeout(mongo)
 }
 \arguments{
-\item{mongo}{(\link{mongo}) a mongo connection object.}
+  \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
 \value{
-(integer) timeout value in milliseconds.
+  (integer) timeout value in milliseconds.
+}
+\description{
+  Get the timeout value for network operations on a mongo
+  connection.
 }
 \examples{
 mongo <- mongo.create()
@@ -24,7 +24,7 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-\code{\link{mongo.set.timeout}},\cr
-\code{\link{mongo.create}},\cr
-\link{mongo}.
+  \code{\link{mongo.set.timeout}},\cr
+  \code{\link{mongo.create}},\cr \link{mongo}.
 }
+
