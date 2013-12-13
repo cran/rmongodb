@@ -1,6 +1,9 @@
 rmongodb NEWS
 ========================================================
 
+Decemnber 13, 2013
+* mongo.distict is back to package including tests
+
 November 25, 2013
 * version dump and new CRAN submission
 * more tests for JSON input

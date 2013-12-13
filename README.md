@@ -5,7 +5,7 @@ This is an R (www.r-project.org) extension supporting access to MongoDB (www.mon
 
 The latest stable version is available on **CRAN**: http://cran.r-project.org/package=rmongodb
 
-Thanks to Gerald Lindsly and MongoDB, Inc. (formerly 10gen) for all the initial work. 
+Thanks to Gerald Lindsly and MongoDB, Inc. (formerly 10gen) for the initial work. 
 In October 2013, **MongoSoup** (www.mongosoup.de) has overtaken the development and maintenance of the R package. 
 
 Please feel free to send us issues or pull requests via github: https://github.com/mongosoup/rmongodb
@@ -59,6 +59,9 @@ MongoDB server
 
 
 ### Good ressources to Get Started with rmongodb
+* *Basic Overview of using the rmongodb package for R* - December 2013, Brock Tibert  
+  code examples: https://gist.github.com/Btibert3/7751989
+
 * *R with MongoDB* - MongoDB Munich conference, October 2013, Markus Schmidberger
   * video: http://www.youtube.com/watch?v=RR3UxemmJ1Q
   * slides: http://rpubs.com/schmidb/rstatsMongoDB
@@ -112,3 +115,8 @@ We use a three step version number system, e.g. v1.2.1:
 * we use roxygen2
 * we write RUnit tests for all new functionality in tests/test_XXX.R
 * for bigger changes we use branches
+* CRAN submission:
+ * http://cran.r-project.org/submit.html
+ * create Package tar.gz via RStudio "Build Source Package"
+ * run CRAN checks via: R CMD check --as-cran package.tar.gz
+ * create a tag / release on github for every CRAN submission

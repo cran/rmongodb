@@ -1,6 +1,6 @@
-b2656bb27283292a257ffb8d9f4ecbbf *DESCRIPTION
-348aeddeee9c2f1ca8a40a2c137ea4ac *NAMESPACE
-69088fc881c4e903c08d4172bd86f42c *NEWS
+c3e16bfa09498abe2a0504c50376694b *DESCRIPTION
+c203d051b8569aeaf922b0cc5f850dc5 *NAMESPACE
+b14a7680a1af9e4f9bcced9e2ee0557e *NEWS
 0f4e0442a0ad9969c5bd323929005381 *R/bson.R
 f2c010ef110559bdedde19c2ac180752 *R/bson_convert.R
 fb1f909050392c1eb54ca1c5c650a6e3 *R/gridfs.R
@@ -8,12 +8,13 @@ aef0706db7e2929c2f87aa52f0bbe220 *R/mongo.R
 406b394836504fe2948da81ec30e93ba *R/mongo_cursor.R
 ce80fba15b01bcb927355c2f0950ae84 *R/mongo_err.R
 1782172979ca69c5064adc0169294984 *R/mongo_find.R
+57cebe9d9b26ec4e93133b7740850f63 *R/mongo_high_level.R
 6e35fdaecd21b8bf2083522c821caa43 *R/mongo_index.R
 828198f401541297d7d95c73ded410de *R/mongo_records.R
 21c9581537ac910040dd6aeb326d9d5e *R/rmongodb-package.R
 7a3572ea1bb625d8e1354491bde58261 *R/shorthand.R
 38db2bf4f5e7d8d5eec0e46e3aaaa420 *R/zzz.R
-6c71388efe60f3d97b80fb6564d62a06 *README.md
+f2c51b6573ae47f482eb18430016f971 *README.md
 b1574fcd268641a3c06f3668c8a5202e *data/zips.rda
 79c6aed457d8bc59f26a9cf4c483378f *demo/00Index
 5a34823ab2016dc4025fe124f9a8b121 *demo/teachers_aid.R
@@ -105,6 +106,7 @@ f724ef4cb793e73261e832fda68ae36f *man/mongo.cursor.to.list.Rd
 34d7da716bfb69df3049e19048e72e31 *man/mongo.cursor.value.Rd
 8c17e1320fd31d04d8148941d027fa60 *man/mongo.destroy.Rd
 a77e0027dbab74e5f0d526e66e74c23e *man/mongo.disconnect.Rd
+5dca152f6eae1ed24d2b0d1db9ebef94 *man/mongo.distinct.Rd
 136a9cc29461808b52490c48002c77ce *man/mongo.drop.Rd
 54b9ca29cb2782d52a2fc0d6a8a0705d *man/mongo.drop.database.Rd
 1bb9af81d92625b2a58f63c096648a87 *man/mongo.find.Rd
@@ -225,6 +227,7 @@ bce8ae03b7f3492380ad1b58c9df1cb2 *tests/test_commands.R
 82980e1eae50b163aab5797ed92f8f6a *tests/test_errors.R
 03744cac1e482da74c7403648d626fa4 *tests/test_find.R
 58c3c9908aed4c3b2e46af6b0c50db7d *tests/test_gridfs.R
+076a424bd9aa29f903af8a63f204123d *tests/test_high_level.R
 226147f892947787b6bec715a03d7c52 *tests/test_indices.R
 abbaef7e6529d9517a332d6e8eadf861 *tests/test_insert.R
 55fdd07ae611db25dc504dbcc1d387b7 *tests/test_update.R
