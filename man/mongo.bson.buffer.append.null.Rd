@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.null}
 \title{Append a double field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.null(buf, name)
+mongo.bson.buffer.append.null(buf, name)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -12,11 +12,11 @@
   to the buffer.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a NULL value onto a \link{mongo.bson.buffer}.
+Append a NULL value onto a \link{mongo.bson.buffer}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -26,7 +26,7 @@ b <- mongo.bson.from.buffer(buf)
 # The above produces a BSON object of the form { "Nil" : NULL }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

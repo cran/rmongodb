@@ -2,9 +2,8 @@
 \alias{mongo.find}
 \title{Find records in a collection}
 \usage{
-  mongo.find(mongo, ns, query = mongo.bson.empty(),
-    sort = mongo.bson.empty(), fields = mongo.bson.empty(),
-    limit = 0L, skip = 0L, options = 0L)
+mongo.find(mongo, ns, query = mongo.bson.empty(), sort = mongo.bson.empty(),
+  fields = mongo.bson.empty(), limit = 0L, skip = 0L, options = 0L)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -72,19 +71,19 @@
   \item\link{mongo.find.partial.results} }}
 }
 \value{
-  (\link{mongo.cursor}) An object of class "mongo.cursor"
-  which is used to step through the matching records.
+(\link{mongo.cursor}) An object of class "mongo.cursor"
+which is used to step through the matching records.
 
-  Note that an empty cursor will be returned if a database
-  error occurred.\cr \code{\link{mongo.get.server.err}()}
-  and \code{\link{mongo.get.server.err.string}()} may be
-  examined in that case.
+Note that an empty cursor will be returned if a database
+error occurred.\cr \code{\link{mongo.get.server.err}()} and
+\code{\link{mongo.get.server.err.string}()} may be examined
+in that case.
 }
 \description{
-  Find records in a collection that match a given query.
+Find records in a collection that match a given query.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Querying}.
+See \url{http://www.mongodb.org/display/DOCS/Querying}.
 }
 \examples{
 mongo <- mongo.create()
@@ -109,14 +108,14 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.cursor}},\cr
-  \code{\link{mongo.cursor.next}},\cr
-  \code{\link{mongo.cursor.value}},\cr
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.index.create}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.cursor}},\cr
+\code{\link{mongo.cursor.next}},\cr
+\code{\link{mongo.cursor.value}},\cr
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.index.create}},\cr
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo},\cr
+\link{mongo.bson}.
 }
 

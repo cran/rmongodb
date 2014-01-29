@@ -2,7 +2,7 @@
 \alias{mongo.bson.find}
 \title{Find a field within a mongo.bson object by name}
 \usage{
-  mongo.bson.find(b, name)
+mongo.bson.find(b, name)
 }
 \arguments{
   \item{b}{(\link{mongo.bson}) The object in which to find
@@ -11,18 +11,18 @@
   \item{name}{(string) The name of the field to find.}
 }
 \value{
-  (\link{mongo.bson.iterator}) An iterator pointing to the
-  field found if name was found among the names of the
-  fields; otherwise, NULL.
+(\link{mongo.bson.iterator}) An iterator pointing to the
+field found if name was found among the names of the
+fields; otherwise, NULL.
 }
 \description{
-  Find a field within a \link{mongo.bson} object by the
-  name (key) of the field\cr and return a
-  \link{mongo.bson.iterator} pointing to that field.
+Find a field within a \link{mongo.bson} object by the name
+(key) of the field\cr and return a
+\link{mongo.bson.iterator} pointing to that field.
 }
 \details{
-  The search parameter may also be a 'dotted' reference to
-  a field in a subobject or array. See examples.
+The search parameter may also be a 'dotted' reference to a
+field in a subobject or array. See examples.
 }
 \examples{
 b <- mongo.bson.from.list(list(name="John", age=32L,
@@ -39,8 +39,8 @@ iter <- mongo.bson.find(b, "fib.3")  # BSON arrays are 0-based
 print(mongo.bson.iterator.value(iter)) # print 3
 }
 \seealso{
-  \link{mongo.bson.iterator},\cr
-  \code{\link{mongo.bson.iterator.value}},\cr
-  \link{mongo.bson}.
+\link{mongo.bson.iterator},\cr
+\code{\link{mongo.bson.iterator.value}},\cr
+\link{mongo.bson}.
 }
 

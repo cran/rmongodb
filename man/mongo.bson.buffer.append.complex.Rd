@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.complex}
 \title{Append a double field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.complex(buf, name, value)
+mongo.bson.buffer.append.complex(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -30,17 +30,17 @@
   value of the field.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a double or vector of doubles onto a
-  \link{mongo.bson.buffer}.
+Append a double or vector of doubles onto a
+\link{mongo.bson.buffer}.
 }
 \details{
-  Note that since BSON has no built-in complex type, R's
-  complex values are appended as subobjects with two
-  fields: "r" : the real part and "i" : the imaginary part.
+Note that since BSON has no built-in complex type, R's
+complex values are appended as subobjects with two fields:
+"r" : the real part and "i" : the imaginary part.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -68,7 +68,7 @@ b <- mongo.bson.from.buffer(buf)
 #                "Epsilon" : { " r" : 0.25, "i" : 0 } } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

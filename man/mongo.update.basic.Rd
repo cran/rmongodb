@@ -2,21 +2,22 @@
 \name{mongo.update.basic}
 \alias{mongo.update.basic}
 \title{mongo.update() flag constant for performing a basic update}
-\format{int 4}
+\format{\preformatted{ int 4
+}}
 \usage{
-  mongo.update.basic
+mongo.update.basic
 }
 \value{
-  4L
+4L
 }
 \description{
-  Flag to \code{\link{mongo.update}()} (4L): Perform a
-  basic update.
+Flag to \code{\link{mongo.update}()} (4L): Perform a basic
+update.
 }
 \seealso{
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.update.multi}}\cr
-  \code{\link{mongo.update.upsert}}
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.update.multi}}\cr
+\code{\link{mongo.update.upsert}}
 }
 \keyword{datasets}
 

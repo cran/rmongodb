@@ -2,7 +2,7 @@
 \alias{mongo.bson.iterator.create}
 \title{Create a mongo.bson.iterator object}
 \usage{
-  mongo.bson.iterator.create(b)
+mongo.bson.iterator.create(b)
 }
 \arguments{
   \item{b}{(\link{mongo.bson}) The mongo.bson object
@@ -14,15 +14,15 @@
   array.}
 }
 \value{
-  (\link{mongo.bson.iterator}) An iterator initialized to
-  'before' the start of the given mongo.bson object.
-  \code{\link{mongo.bson.iterator.next}()} should be used
-  on the iterator first to step to the first field.
+(\link{mongo.bson.iterator}) An iterator initialized to
+'before' the start of the given mongo.bson object.
+\code{\link{mongo.bson.iterator.next}()} should be used on
+the iterator first to step to the first field.
 }
 \description{
-  Create a \link{mongo.bson.iterator} object used to step
-  through a given \link{mongo.bson} object one field at a
-  time.
+Create a \link{mongo.bson.iterator} object used to step
+through a given \link{mongo.bson} object one field at a
+time.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -47,12 +47,12 @@ iter <- mongo.bson.find(b, "created")
 print(mongo.bson.iterator.value(iter))
 }
 \seealso{
-  \link{mongo.bson.iterator},\cr
-  \code{\link{mongo.bson.find}},\cr
-  \code{\link{mongo.bson.iterator.next}},\cr
-  \code{\link{mongo.bson.iterator.key}},\cr
-  \code{\link{mongo.bson.iterator.type}},\cr
-  \code{\link{mongo.bson.iterator.value}},\cr
-  \link{mongo.bson}.
+\link{mongo.bson.iterator},\cr
+\code{\link{mongo.bson.find}},\cr
+\code{\link{mongo.bson.iterator.next}},\cr
+\code{\link{mongo.bson.iterator.key}},\cr
+\code{\link{mongo.bson.iterator.type}},\cr
+\code{\link{mongo.bson.iterator.value}},\cr
+\link{mongo.bson}.
 }
 

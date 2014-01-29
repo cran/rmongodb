@@ -3,8 +3,8 @@
 \alias{mongo.findOne}
 \title{Find one record in a collection}
 \usage{
-  mongo.find.one(mongo, ns, query = mongo.bson.empty(),
-    fields = mongo.bson.empty())
+mongo.find.one(mongo, ns, query = mongo.bson.empty(),
+  fields = mongo.bson.empty())
 }
 \arguments{
   \item{mongo}{(\link{mongo}) A mongo connection object.}
@@ -41,27 +41,27 @@
   \code{\link{mongo.bson.from.JSON}()}.}
 }
 \value{
-  NULL if no record matching the criteria is found;
-  otherwise,
+NULL if no record matching the criteria is found;
+otherwise,
 
-  (\link{mongo.bson}) The matching record/fields.
+(\link{mongo.bson}) The matching record/fields.
 
-  Note that NULL may also be returned if a database error
-  occurred (when a badly formed query is used, for
-  example). \code{\link{mongo.get.server.err}} and
-  \code{\link{mongo.get.server.err.string}} may be examined
-  in that case.
+Note that NULL may also be returned if a database error
+occurred (when a badly formed query is used, for example).
+\code{\link{mongo.get.server.err}} and
+\code{\link{mongo.get.server.err.string}} may be examined
+in that case.
 }
 \description{
-  Find the first record in a collection that matches a
-  given query.
+Find the first record in a collection that matches a given
+query.
 }
 \details{
-  This is a simplified version of mongo.find() which
-  eliminates the need to step through returned records with
-  a cursor.
+This is a simplified version of mongo.find() which
+eliminates the need to step through returned records with a
+cursor.
 
-  See \url{http://www.mongodb.org/display/DOCS/Querying}.
+See \url{http://www.mongodb.org/display/DOCS/Querying}.
 }
 \examples{
 mongo <- mongo.create()
@@ -96,11 +96,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.index.create}},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.find}},\cr
+\code{\link{mongo.index.create}},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo},\cr
+\link{mongo.bson}.
 }
 

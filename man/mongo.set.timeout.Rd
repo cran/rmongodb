@@ -2,7 +2,7 @@
 \alias{mongo.set.timeout}
 \title{Set the timeout value on a mongo connection}
 \usage{
-  mongo.set.timeout(mongo, timeout)
+mongo.set.timeout(mongo, timeout)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -11,9 +11,9 @@
   which to set the timeout value.}
 }
 \description{
-  Set the timeout value for network operations on a mongo
-  connection. Subsequent network operations will timeout if
-  they take longer than the given number of milliseconds.
+Set the timeout value for network operations on a mongo
+connection. Subsequent network operations will timeout if
+they take longer than the given number of milliseconds.
 }
 \examples{
 mongo <- mongo.create()
@@ -25,7 +25,7 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.get.timeout}},\cr
-  \code{\link{mongo.create}},\cr \link{mongo}.
+\code{\link{mongo.get.timeout}},\cr
+\code{\link{mongo.create}},\cr \link{mongo}.
 }
 

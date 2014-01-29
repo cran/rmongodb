@@ -1,8 +1,8 @@
 library(rmongodb)
 library(RUnit)
 
-# 17 tests
-# 25.11.2013
+# 19 tests
+# 16.12.2013
 
 # set up mongoDB connection and db / collection parameters
 mongo <- mongo.create()
@@ -48,9 +48,12 @@ if( mongo.is.connected(mongo) ){
   if (is.null(result)) {
     err <- mongo.get.server.err(mongo)
     print(err)
-    print(mongo.get.server.err.string(mongo))
+    err_str <- mongo.get.server.err.string(mongo)
+    print(err_str)
   } 
-  checkEqualsNumeric(err, 10068)
+  checkTrue( is.integer(err) )
+  checkTrue( is.character(err_str) )
+  checkTrue( grep("\\$bad", err_str) == 1 )
   
   
   # good query with find.one

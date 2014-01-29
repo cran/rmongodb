@@ -2,26 +2,26 @@
 \alias{mongo.bson.from.buffer}
 \title{Convert a mongo.bson.buffer object to a mongo.bson object}
 \usage{
-  mongo.bson.from.buffer(buf)
+mongo.bson.from.buffer(buf)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer to
   convert.}
 }
 \value{
-  A \link{mongo.bson} object as converted from the buffer
-  parameter.
+A \link{mongo.bson} object as converted from the buffer
+parameter.
 }
 \description{
-  Convert a \link{mongo.bson.buffer} object to a
-  \link{mongo.bson} object.
+Convert a \link{mongo.bson.buffer} object to a
+\link{mongo.bson} object.
 }
 \details{
-  Use this after appending data to a buffer to turn it into
-  a mongo.bson object for network transport.
+Use this after appending data to a buffer to turn it into a
+mongo.bson object for network transport.
 
-  No futher data may be appended to the buffer after
-  calling this function.
+No futher data may be appended to the buffer after calling
+this function.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -32,8 +32,8 @@ print(b)
 mongo.bson.destroy(b)
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \code{\link{mongo.bson.destroy}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}},\cr
+\code{\link{mongo.bson.destroy}}.
 }
 

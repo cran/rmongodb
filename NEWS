@@ -1,7 +1,13 @@
 rmongodb NEWS
 ========================================================
+January 29, 2014
+* switching from RJSONIO to jsonlite - solves many issues converting JSON to R
+* moving RJSONIO / jsonlite to IMPORTS
 
-Decemnber 13, 2013
+December 16, 2013
+* RUnit test bugfix for errors in test_find
+
+December 13, 2013
 * mongo.distict is back to package including tests
 
 November 25, 2013

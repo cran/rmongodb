@@ -2,23 +2,24 @@
 \name{mongo.bson.null}
 \alias{mongo.bson.null}
 \title{BSON data type constant for a null value}
-\format{int 10}
+\format{\preformatted{ int 10
+}}
 \usage{
-  mongo.bson.null
+mongo.bson.null
 }
 \value{
-  10L
+10L
 }
 \description{
-  \code{\link{mongo.bson.iterator.type}()} and
-  \code{\link{mongo.bson.iterator.next}()} will return this
-  constant (10L) to indicate that the value pointer to by
-  an iterator is a null.
+\code{\link{mongo.bson.iterator.type}()} and
+\code{\link{mongo.bson.iterator.next}()} will return this
+constant (10L) to indicate that the value pointer to by an
+iterator is a null.
 }
 \seealso{
-  \code{\link{mongo.bson.iterator.type}},\cr
-  \code{\link{mongo.bson.iterator.next}},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.bson.iterator.type}},\cr
+\code{\link{mongo.bson.iterator.next}},\cr
+\link{mongo.bson}.
 }
 \keyword{datasets}
 

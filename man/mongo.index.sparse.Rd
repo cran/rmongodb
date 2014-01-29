@@ -2,16 +2,16 @@
 \name{mongo.index.sparse}
 \alias{mongo.index.sparse}
 \title{mongo.index.create flag constant - sparse}
-\format{int 16}
+\format{\preformatted{ int 16
+}}
 \usage{
-  mongo.index.sparse
+mongo.index.sparse
 }
 \value{
-  16L
+16L
 }
 \description{
-  \code{\link{mongo.index.create}()} flag constant -
-  sparse.
+\code{\link{mongo.index.create}()} flag constant - sparse.
 }
 \keyword{datasets}
 

@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.int}
 \title{Append an integer field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.int(buf, name, value)
+mongo.bson.buffer.append.int(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -31,12 +31,12 @@
   integer.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append an integer or vector of integers onto a
-  \link{mongo.bson.buffer}.
+Append an integer or vector of integers onto a
+\link{mongo.bson.buffer}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -61,7 +61,7 @@ b <- mongo.bson.from.buffer(buf)
 # { "board" : { "width" : 2, "height" : 4, "length" : 8 } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

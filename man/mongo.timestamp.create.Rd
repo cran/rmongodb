@@ -2,7 +2,7 @@
 \alias{mongo.timestamp.create}
 \title{Create a mongo.timestamp object}
 \usage{
-  mongo.timestamp.create(time, increment)
+mongo.timestamp.create(time, increment)
 }
 \arguments{
   \item{time}{(integer) date/time value (milliseconds since
@@ -13,21 +13,20 @@
   \item{increment}{increment ordinal}
 }
 \value{
-  A \link{mongo.timestamp} object
+A \link{mongo.timestamp} object
 }
 \description{
-  Create a \link{mongo.timestamp} object for appending to a
-  buffer with\cr
-  \code{\link{mongo.bson.buffer.append.timestamp}()} or
-  \code{\link{mongo.bson.buffer.append}()}, or for
-  embedding in a list such that
-  \code{\link{mongo.bson.buffer.append.list}()} will
-  properly insert a timestamp value into the
-  mongo.bson.buffer object.
+Create a \link{mongo.timestamp} object for appending to a
+buffer with\cr
+\code{\link{mongo.bson.buffer.append.timestamp}()} or
+\code{\link{mongo.bson.buffer.append}()}, or for embedding
+in a list such that
+\code{\link{mongo.bson.buffer.append.list}()} will properly
+insert a timestamp value into the mongo.bson.buffer object.
 }
 \details{
-  See
-  \url{http://www.mongodb.org/display/DOCS/Timestamp+Data+Type}
+See
+\url{http://www.mongodb.org/display/DOCS/Timestamp+Data+Type}
 }
 \examples{
 mongo <- mongo.create()
@@ -47,10 +46,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo.timestamp},\cr
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \code{\link{mongo.bson.buffer.append.time}},\cr
-  \code{\link{mongo.bson.buffer.append.list}},\cr
-  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
+\link{mongo.timestamp},\cr
+\code{\link{mongo.bson.buffer.append}},\cr
+\code{\link{mongo.bson.buffer.append.time}},\cr
+\code{\link{mongo.bson.buffer.append.list}},\cr
+\link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
 

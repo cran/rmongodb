@@ -3,22 +3,22 @@
 \alias{mongo.symbol}
 \title{The mongo.symbol class}
 \description{
-  Objects of class "mongo.symbol" are used to represent
-  symbol values in BSON documents.
+Objects of class "mongo.symbol" are used to represent
+symbol values in BSON documents.
 }
 \details{
-  mongo.symbol objects' value is a string representing the
-  value of the symbol.
+mongo.symbol objects' value is a string representing the
+value of the symbol.
 
-  mongo.symbol objects have "mongo.symbol" as their class
-  so that\cr \code{\link{mongo.bson.buffer.append}()} may
-  detect them and append the appropriate BSON symbol-typed
-  value to a buffer.
+mongo.symbol objects have "mongo.symbol" as their class so
+that\cr \code{\link{mongo.bson.buffer.append}()} may detect
+them and append the appropriate BSON symbol-typed value to
+a buffer.
 
-  These mongo.symbol values may also be present in a list
-  and will be handled properly\cr by
-  \code{\link{mongo.bson.buffer.append.list}()} and
-  \code{\link{mongo.bson.from.list}()}.
+These mongo.symbol values may also be present in a list and
+will be handled properly\cr by
+\code{\link{mongo.bson.buffer.append.list}()} and
+\code{\link{mongo.bson.from.list}()}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -34,9 +34,9 @@ b <- mongo.bson.from.buffer(buf)
 #                  "Two" : 2 } }
 }
 \seealso{
-  \code{\link{mongo.symbol.create}},\cr
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \code{\link{mongo.bson.buffer.append.list}},\cr
-  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
+\code{\link{mongo.symbol.create}},\cr
+\code{\link{mongo.bson.buffer.append}},\cr
+\code{\link{mongo.bson.buffer.append.list}},\cr
+\link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
 

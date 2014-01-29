@@ -103,6 +103,50 @@ mongo.cursor.to.data.frame <- function(cursor, nullToNA=TRUE, ...){
 
 
 
+# rbind.nosql <- function (...) 
+# {
+#   # based on rbind.fill idea of plyr
+#   dfs <- list(...)
+#   if (length(dfs) == 0) 
+#     return()
+#   if (is.list(dfs[[1]]) && !is.data.frame(dfs[[1]])) {
+#     dfs <- dfs[[1]]
+#   }
+#   if (length(dfs) == 0) 
+#     return()
+#   if (length(dfs) == 1) 
+#     return(dfs[[1]])
+#   #is_df <- vapply(dfs, is.data.frame, logical(1))
+#   #if (any(!is_df)) {
+#   #  stop("All inputs to rbind.fill must be data.frames", 
+#   #       call. = FALSE)
+#   #}
+#   rows <- unlist(lapply(dfs, .row_names_info, 2L))
+#   nrows <- sum(rows)
+#   output <- output_template(dfs, nrows)
+#   if (length(output) == 0) {
+#     return(as.data.frame(matrix(nrow = nrows, ncol = 0)))
+#   }
+#   pos <- matrix(c(cumsum(rows) - rows + 1, rows), ncol = 2)
+#   for (i in seq_along(rows)) {
+#     rng <- seq(pos[i, 1], length = pos[i, 2])
+#     df <- dfs[[i]]
+#     for (var in names(df)) {
+#       if (!is.matrix(output[[var]])) {
+#         if (is.factor(output[[var]]) && is.character(df[[var]])) {
+#           output[[var]] <- as.character(output[[var]])
+#         }
+#         output[[var]][rng] <- df[[var]]
+#       }
+#       else {
+#         output[[var]][rng, ] <- df[[var]]
+#       }
+#     }
+#   }
+#   quickdf(output)
+# }
+
+
 
 #' Advance a cursor to the next record
 #' 

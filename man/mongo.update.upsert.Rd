@@ -2,22 +2,22 @@
 \name{mongo.update.upsert}
 \alias{mongo.update.upsert}
 \title{mongo.update() flag constant for an upsert}
-\format{int 1}
+\format{\preformatted{ int 1
+}}
 \usage{
-  mongo.update.upsert
+mongo.update.upsert
 }
 \value{
-  1L
+1L
 }
 \description{
-  Flag to \code{\link{mongo.update}()} (1L): insert ObjNew
-  into the database if no record matching criteria is
-  found.
+Flag to \code{\link{mongo.update}()} (1L): insert ObjNew
+into the database if no record matching criteria is found.
 }
 \seealso{
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.update.multi}},\cr
-  \code{\link{mongo.update.basic}}.
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.update.multi}},\cr
+\code{\link{mongo.update.basic}}.
 }
 \keyword{datasets}
 

@@ -2,7 +2,7 @@
 \alias{mongo.remove}
 \title{Remove records from a collection}
 \usage{
-  mongo.remove(mongo, ns, criteria = mongo.bson.empty())
+mongo.remove(mongo, ns, criteria = mongo.bson.empty())
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -24,11 +24,11 @@
   object by \code{\link{mongo.bson.from.JSON}()}.}
 }
 \description{
-  Remove all records from a collection that match a given
-  criteria.
+Remove all records from a collection that match a given
+criteria.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Removing}.
+See \url{http://www.mongodb.org/display/DOCS/Removing}.
 }
 \examples{
 mongo <- mongo.create()
@@ -49,10 +49,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo},\cr \link{mongo.bson},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.find.one}}.
+\link{mongo},\cr \link{mongo.bson},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.update}},\cr \code{\link{mongo.find}},\cr
+\code{\link{mongo.find.one}}.
 }
 

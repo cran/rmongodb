@@ -2,20 +2,21 @@
 \name{mongo.binary.old}
 \alias{mongo.binary.old}
 \title{BSON binary data subtype constant for old format data}
-\format{int 2}
+\format{\preformatted{ int 2
+}}
 \usage{
-  mongo.binary.old
+mongo.binary.old
 }
 \value{
-  2L
+2L
 }
 \description{
-  BSON binary data subtype constant for old format data
-  (deprecated).
+BSON binary data subtype constant for old format data
+(deprecated).
 }
 \seealso{
-  \code{\link{mongo.bson.buffer.append.raw}},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.bson.buffer.append.raw}},\cr
+\link{mongo.bson}.
 }
 \keyword{datasets}
 

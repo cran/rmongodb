@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.string}
 \title{Append a string field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.string(buf, name, value)
+mongo.bson.buffer.append.string(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -30,12 +30,12 @@
   value of the field.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append an string or vector of strings onto a
-  \link{mongo.bson.buffer}.
+Append an string or vector of strings onto a
+\link{mongo.bson.buffer}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -63,7 +63,7 @@ b <- mongo.bson.from.buffer(buf)
 #               "Secretary" : "Robert" } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

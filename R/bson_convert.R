@@ -3,6 +3,7 @@
 #' Converts a JSON string to a mongo BSON object.
 #' 
 #' @param JSON (string) A valid JSON string.
+#' @param simplifyVector (FALSE) coerse JSON arrays containing only scalars into a vector.
 #' @param ... additional parameters parsed to fromJSON
 #' 
 #' @return A BSON object.
@@ -16,13 +17,13 @@
 #' 
 #' 
 #' @export mongo.bson.from.JSON
-mongo.bson.from.JSON <- function(JSON, ...){
+mongo.bson.from.JSON <- function(JSON, simplifyVector=FALSE, ...){
   
-  if( !isValidJSON(I(JSON)) ){
+  if( !validate(I(JSON)) ){
     stop("Not a valid JSON content: ", JSON)
   }
   
-  json_list <- fromJSON(JSON, simplify=FALSE, ...)
+  json_list <- fromJSON(JSON, simplifyVector=simplifyVector, ...)
   
   if( length(json_list) == 0 ){
     bson <- mongo.bson.empty()

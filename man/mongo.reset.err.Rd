@@ -2,7 +2,7 @@
 \alias{mongo.reset.err}
 \title{Retrieve an server error code from a mongo connection object}
 \usage{
-  mongo.reset.err(mongo, db)
+mongo.reset.err(mongo, db)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -10,14 +10,11 @@
   \item{db}{(string) The name of the database on which to
   reset the error status.}
 }
-\value{
-  NULL
-}
 \description{
-  Send a "reset error" command to the server, it also
-  resets the values returned by\cr
-  \code{\link{mongo.get.server.err}()} and
-  \code{\link{mongo.get.server.err.string}()}.
+Send a "reset error" command to the server, it also resets
+the values returned by\cr
+\code{\link{mongo.get.server.err}()} and
+\code{\link{mongo.get.server.err.string}()}.
 }
 \examples{
 mongo <- mongo.create()
@@ -48,9 +45,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.get.server.err}},\cr
-  \code{\link{mongo.get.server.err.string}},\cr
-  \code{\link{mongo.get.last.err}},\cr
-  \code{\link{mongo.get.prev.err}},\cr \link{mongo}.
+\code{\link{mongo.get.server.err}},\cr
+\code{\link{mongo.get.server.err.string}},\cr
+\code{\link{mongo.get.last.err}},\cr
+\code{\link{mongo.get.prev.err}},\cr \link{mongo}.
 }
 

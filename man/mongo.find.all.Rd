@@ -3,10 +3,9 @@
 \alias{mongo.find.batch}
 \title{Find records in a collection and returns one R data frame object}
 \usage{
-  mongo.find.all(mongo, ns, query = mongo.bson.empty(),
-    sort = mongo.bson.empty(), fields = mongo.bson.empty(),
-    limit = 0L, skip = 0L, options = 0L,
-    data.frame = FALSE, ...)
+mongo.find.all(mongo, ns, query = mongo.bson.empty(),
+  sort = mongo.bson.empty(), fields = mongo.bson.empty(), limit = 0L,
+  skip = 0L, options = 0L, data.frame = FALSE, ...)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -81,14 +80,14 @@
   \item{...}{optional arguments to \link{as.data.frame}}
 }
 \value{
-  An R data frame object.
+An R data frame object.
 }
 \description{
-  Find records in a collection that match a given query and
-  return an R data frame object.
+Find records in a collection that match a given query and
+return an R data frame object.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Querying}.
+See \url{http://www.mongodb.org/display/DOCS/Querying}.
 }
 \examples{
 mongo <- mongo.create()
@@ -109,10 +108,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.index.create}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo}.
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.index.create}},\cr
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo}.
 }
 

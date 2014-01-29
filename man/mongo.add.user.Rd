@@ -2,7 +2,7 @@
 \alias{mongo.add.user}
 \title{Add a user and password}
 \usage{
-  mongo.add.user(mongo, username, password, db = "admin")
+mongo.add.user(mongo, username, password, db = "admin")
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -16,12 +16,12 @@
   add the username and password.}
 }
 \description{
-  Add a user and password to the given database on a
-  MongoDB server for authentication purposes.
+Add a user and password to the given database on a MongoDB
+server for authentication purposes.
 }
 \details{
-  See
-  \url{http://www.mongodb.org/display/DOCS/Security+and+Authentication}.
+See
+\url{http://www.mongodb.org/display/DOCS/Security+and+Authentication}.
 }
 \examples{
 mongo <- mongo.create()
@@ -29,7 +29,7 @@ if (mongo.is.connected(mongo))
     mongo.add.user(mongo, "Jeff", "H87b5dog")
 }
 \seealso{
-  \code{\link{mongo.authenticate}},\cr \link{mongo},\cr
-  \code{\link{mongo.create}}.
+\code{\link{mongo.authenticate}},\cr \link{mongo},\cr
+\code{\link{mongo.create}}.
 }
 

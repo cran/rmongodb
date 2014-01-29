@@ -2,7 +2,7 @@
 \alias{mongo.drop}
 \title{Drop a collection from a MongoDB server}
 \usage{
-  mongo.drop(mongo, ns)
+mongo.drop(mongo, ns)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) A mongo connection object.}
@@ -11,14 +11,14 @@
   drop.}
 }
 \value{
-  (Logical) TRUE if successful; otherwise, FALSE
+(Logical) TRUE if successful; otherwise, FALSE
 }
 \description{
-  Drop a collection from a database on MongoDB server.
-  This removes the entire collection.
+Drop a collection from a database on MongoDB server.  This
+removes the entire collection.
 }
 \details{
-  Obviously, care should be taken when using this command.
+Obviously, care should be taken when using this command.
 }
 \examples{
 mongo <- mongo.create()
@@ -29,9 +29,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.drop.database}},\cr
-  \code{\link{mongo.command}},\cr
-  \code{\link{mongo.rename}},\cr
-  \code{\link{mongo.count}},\cr \link{mongo}.
+\code{\link{mongo.drop.database}},\cr
+\code{\link{mongo.command}},\cr
+\code{\link{mongo.rename}},\cr
+\code{\link{mongo.count}},\cr \link{mongo}.
 }
 

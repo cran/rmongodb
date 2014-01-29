@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.long}
 \title{Append a long valued field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.long(buf, name, value)
+mongo.bson.buffer.append.long(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -31,25 +31,24 @@
   of the field.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a long value or vector of longs onto a
-  \link{mongo.bson.buffer}.
+Append a long value or vector of longs onto a
+\link{mongo.bson.buffer}.
 }
 \details{
-  Note that since R has no long (64-bit integer) type,
-  doubles are used in R, but are converted to 64-bit values
-  when stored in the buffer; some loss of precision may
-  occur.
+Note that since R has no long (64-bit integer) type,
+doubles are used in R, but are converted to 64-bit values
+when stored in the buffer; some loss of precision may
+occur.
 
-  This is the only case in which
-  \code{\link{mongo.bson.buffer.append}()} cannot make the
-  proper guess about what type to encode into the
-  buffer.\cr You must call
-  \code{mongo.bson.buffer.append.long()} explicitly;
-  otherwise, doubles are appended.
+This is the only case in which
+\code{\link{mongo.bson.buffer.append}()} cannot make the
+proper guess about what type to encode into the buffer.\cr
+You must call \code{mongo.bson.buffer.append.long()}
+explicitly; otherwise, doubles are appended.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -80,7 +79,7 @@ b <- mongo.bson.from.buffer(buf)
 #               "Bernard's Star"  : 188178313 } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.\cr
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.\cr
 }
 

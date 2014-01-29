@@ -2,18 +2,18 @@
 \alias{mongo.undefined.create}
 \title{Create a mongo.undefined object}
 \usage{
-  mongo.undefined.create()
+mongo.undefined.create()
 }
 \value{
-  a \link{mongo.undefined} object
+a \link{mongo.undefined} object
 }
 \description{
-  Create a mongo.undefined object for appending to a buffer
-  with\cr \code{\link{mongo.bson.buffer.append}()} or for
-  embedding in a list such that
-  \code{\link{mongo.bson.buffer.append.list}()} will
-  properly insert an undefined value into the
-  mongo.bson.buffer object.
+Create a mongo.undefined object for appending to a buffer
+with\cr \code{\link{mongo.bson.buffer.append}()} or for
+embedding in a list such that
+\code{\link{mongo.bson.buffer.append.list}()} will properly
+insert an undefined value into the mongo.bson.buffer
+object.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -27,9 +27,9 @@ b <- mongo.bson.from.buffer(buf)
 # { "Undef": UNDEFINED, "listWundef" : { "u1" : UNDEFINED, "One" : 1 } }
 }
 \seealso{
-  \link{mongo.undefined},\cr
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \code{\link{mongo.bson.buffer.append.list}},\cr
-  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
+\link{mongo.undefined},\cr
+\code{\link{mongo.bson.buffer.append}},\cr
+\code{\link{mongo.bson.buffer.append.list}},\cr
+\link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
 

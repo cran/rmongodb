@@ -2,16 +2,17 @@
 \name{mongo.index.unique}
 \alias{mongo.index.unique}
 \title{mongo.index.create flag constant - unique keys}
-\format{int 1}
+\format{\preformatted{ int 1
+}}
 \usage{
-  mongo.index.unique
+mongo.index.unique
 }
 \value{
-  1L
+1L
 }
 \description{
-  \code{\link{mongo.index.create}()} flag constant - unique
-  keys (no duplicates).
+\code{\link{mongo.index.create}()} flag constant - unique
+keys (no duplicates).
 }
 \keyword{datasets}
 

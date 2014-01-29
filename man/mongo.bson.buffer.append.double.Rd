@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.double}
 \title{Append a double field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.double(buf, name, value)
+mongo.bson.buffer.append.double(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -30,12 +30,12 @@
   value of the field.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a double or vector of doubles onto a
-  \link{mongo.bson.buffer}.
+Append a double or vector of doubles onto a
+\link{mongo.bson.buffer}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -66,7 +66,7 @@ b <- mongo.bson.from.buffer(buf)
 #                   "Third"   : 0.333333 } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

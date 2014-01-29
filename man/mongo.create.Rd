@@ -2,9 +2,8 @@
 \alias{mongo.create}
 \title{Create an object of class "mongo"}
 \usage{
-  mongo.create(host = "127.0.0.1", name = "",
-    username = "", password = "", db = "admin",
-    timeout = 0L)
+mongo.create(host = "127.0.0.1", name = "", username = "",
+  password = "", db = "admin", timeout = 0L)
 }
 \arguments{
   \item{host}{(string vector) A list of hosts/ports to
@@ -42,22 +41,22 @@
   default (0L) indicates no timeout.}
 }
 \value{
-  If successful, a mongo object for use in subsequent
-  database operations; otherwise, mongo.get.err() may be
-  called on the returned mongo object to see why it failed.
+If successful, a mongo object for use in subsequent
+database operations; otherwise, mongo.get.err() may be
+called on the returned mongo object to see why it failed.
 }
 \description{
-  Connect to a MongoDB server or replset and return an
-  object of class "mongo" used for further communication
-  over the connection.
+Connect to a MongoDB server or replset and return an object
+of class "mongo" used for further communication over the
+connection.
 }
 \details{
-  All parameters are stored as attributes of the returned
-  mongo object. Note that these attributes only reflect the
-  initial parameters. Only the external data pointed to by
-  the "mongo" attribute actually changes if, for example,
-  mongo.timeout is called after the initial call to
-  \code{mongo.create}.
+All parameters are stored as attributes of the returned
+mongo object. Note that these attributes only reflect the
+initial parameters. Only the external data pointed to by
+the "mongo" attribute actually changes if, for example,
+mongo.timeout is called after the initial call to
+\code{mongo.create}.
 }
 \examples{
 mongo <- mongo.create()
@@ -65,14 +64,14 @@ mongo <- mongo.create()
     mongo <- mongo.create("192.168.0.3")}
 }
 \seealso{
-  \link{mongo},\cr \code{\link{mongo.is.connected}},\cr
-  \code{\link{mongo.disconnect}},\cr
-  \code{\link{mongo.reconnect}},\cr
-  \code{\link{mongo.get.err}},\cr
-  \code{\link{mongo.get.primary}},\cr
-  \code{\link{mongo.get.hosts}},\cr
-  \code{\link{mongo.get.socket}},\cr
-  \code{\link{mongo.set.timeout}},\cr
-  \code{\link{mongo.get.timeout}}.
+\link{mongo},\cr \code{\link{mongo.is.connected}},\cr
+\code{\link{mongo.disconnect}},\cr
+\code{\link{mongo.reconnect}},\cr
+\code{\link{mongo.get.err}},\cr
+\code{\link{mongo.get.primary}},\cr
+\code{\link{mongo.get.hosts}},\cr
+\code{\link{mongo.get.socket}},\cr
+\code{\link{mongo.set.timeout}},\cr
+\code{\link{mongo.get.timeout}}.
 }
 

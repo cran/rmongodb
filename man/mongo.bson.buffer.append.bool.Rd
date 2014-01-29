@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.bool}
 \title{Append a boolean field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.bool(buf, name, value)
+mongo.bson.buffer.append.bool(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -30,12 +30,12 @@
   value of the field.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append an logical (boolean) or vector of logical values
-  onto a \link{mongo.bson.buffer}.
+Append an logical (boolean) or vector of logical values
+onto a \link{mongo.bson.buffer}.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -61,7 +61,7 @@ b <- mongo.bson.from.buffer(buf)
 # { "Looks" : { "Tall" : false, "Fat" : false, "Pretty" : true } }
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

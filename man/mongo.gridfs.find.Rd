@@ -2,7 +2,7 @@
 \alias{mongo.gridfs.find}
 \title{Find a GridFS file}
 \usage{
-  mongo.gridfs.find(gridfs, query)
+mongo.gridfs.find(gridfs, query)
 }
 \arguments{
   \item{gridfs}{A (\link{mongo.gridfs}) object.}
@@ -18,12 +18,12 @@
   \code{\link{mongo.bson.from.list}()}.}
 }
 \value{
-  NULL, if not found; otherwise, a \link{mongo.gridfile}
-  object corresponding to the found GridFS file.
+NULL, if not found; otherwise, a \link{mongo.gridfile}
+object corresponding to the found GridFS file.
 }
 \description{
-  Find a GridFS file and return a \link{mongo.gridfile}
-  object used for further operations on it
+Find a GridFS file and return a \link{mongo.gridfile}
+object used for further operations on it
 }
 \examples{
 mongo <- mongo.create()
@@ -47,8 +47,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo.gridfile},\cr
-  \code{\link{mongo.gridfile.get.filename}},\cr
-  \link{mongo.gridfs}.
+\link{mongo.gridfile},\cr
+\code{\link{mongo.gridfile.get.filename}},\cr
+\link{mongo.gridfs}.
 }
 

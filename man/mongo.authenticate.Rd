@@ -2,8 +2,7 @@
 \alias{mongo.authenticate}
 \title{Autherticate a user and password}
 \usage{
-  mongo.authenticate(mongo, username, password,
-    db = "admin")
+mongo.authenticate(mongo, username, password, db = "admin")
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -17,16 +16,16 @@
   which to validate the username and password.}
 }
 \description{
-  Autherticate a user and password against a given database
-  on a MongoDB server.
+Autherticate a user and password against a given database
+on a MongoDB server.
 }
 \details{
-  See
-  \url{http://www.mongodb.org/display/DOCS/Security+and+Authentication}.
+See
+\url{http://www.mongodb.org/display/DOCS/Security+and+Authentication}.
 
-  Note that \code{\link{mongo.create}()} can authenticate a
-  username and password before returning a connected mongo
-  object.
+Note that \code{\link{mongo.create}()} can authenticate a
+username and password before returning a connected mongo
+object.
 }
 \examples{
 mongo <- mongo.create()
@@ -34,7 +33,7 @@ if (mongo.is.connected(mongo))
     mongo.authenticate(mongo, "Joe", "ZxYaBc217")
 }
 \seealso{
-  \code{\link{mongo.add.user}},\cr
-  \code{\link{mongo.create}}.
+\code{\link{mongo.add.user}},\cr
+\code{\link{mongo.create}}.
 }
 

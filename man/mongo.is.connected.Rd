@@ -2,18 +2,18 @@
 \alias{mongo.is.connected}
 \title{Determine if a mongo object is connected to a MongoDB server}
 \usage{
-  mongo.is.connected(mongo)
+mongo.is.connected(mongo)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
 \value{
-  Logical TRUE if the mongo connection object is currently
-  connected to a server; otherwise, FALSE.
+Logical TRUE if the mongo connection object is currently
+connected to a server; otherwise, FALSE.
 }
 \description{
-  Returns TRUE if the parameter mongo object is connected
-  to a MongoDB server; otherwise, FALSE.
+Returns TRUE if the parameter mongo object is connected to
+a MongoDB server; otherwise, FALSE.
 }
 \examples{
 mongo <- mongo.create()
@@ -22,6 +22,6 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.create}},\cr \link{mongo}.
+\code{\link{mongo.create}},\cr \link{mongo}.
 }
 

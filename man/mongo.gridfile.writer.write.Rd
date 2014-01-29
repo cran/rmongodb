@@ -2,29 +2,26 @@
 \alias{mongo.gridfile.writer.write}
 \title{Write raw data to a buffered GridFS file}
 \usage{
-  mongo.gridfile.writer.write(gfw, raw)
+mongo.gridfile.writer.write(gfw, raw)
 }
 \arguments{
   \item{gfw}{A (\link{mongo.gridfile.writer}) object.}
 
   \item{raw}{(raw) The data to write to the GridFS file.}
 }
-\value{
-  NULL
-}
 \description{
-  Write raw data to a buffered GridFS file. The data is
-  buffered and sent to the server in 256k chunks as it
-  accumulates.
+Write raw data to a buffered GridFS file. The data is
+buffered and sent to the server in 256k chunks as it
+accumulates.
 }
 \details{
-  This function only handles the RAW type. Use
-  \code{writeBin()} as necessary to pack your data
-  appropriately for storage.  See the examples and R's
-  documentation on \code{writeBin()}.
+This function only handles the RAW type. Use
+\code{writeBin()} as necessary to pack your data
+appropriately for storage.  See the examples and R's
+documentation on \code{writeBin()}.
 
-  Use \code{\link{mongo.gridfs.store}()} when you only need
-  to write one data packet as a complete GridFS file.
+Use \code{\link{mongo.gridfs.store}()} when you only need
+to write one data packet as a complete GridFS file.
 }
 \examples{
 mongo <- mongo.create()
@@ -50,9 +47,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo.gridfs},\cr
-  \code{\link{mongo.gridfile.writer.create}},\cr
-  \link{mongo.gridfile.writer},\cr
-  \code{\link{mongo.gridfile.writer.finish}}.
+\link{mongo.gridfs},\cr
+\code{\link{mongo.gridfile.writer.create}},\cr
+\link{mongo.gridfile.writer},\cr
+\code{\link{mongo.gridfile.writer.finish}}.
 }
 

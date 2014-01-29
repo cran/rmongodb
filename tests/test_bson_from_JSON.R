@@ -1,8 +1,9 @@
 library(rmongodb)
+library(jsonlite)
 library(RUnit)
 
 # 10 tests
-# 24.11.2013
+# 29.01.2014
 
 out <- mongo.bson.from.JSON('{"name" : "Peter"}')
 checkEquals(class(out), "mongo.bson")
@@ -12,12 +13,16 @@ out <- mongo.bson.from.JSON('{"name" : {"firstname":"Peter"}, "age":12, "visa":[
 checkEquals(class(out), "mongo.bson")
 checkEquals(mongo.bson.value(out, "name.firstname"), "Peter")
 checkEquals(mongo.bson.value(out, "age"), 12)
-checkEquals(mongo.bson.value(out, "visa"), c(123,321), checkNames=FALSE)
+checkEquals(as.vector( mongo.bson.value(out, "visa") ), c(123,321))
 
 checkException( mongo.bson.from.JSON( "{'name': 'Peter'}", "Not a valid JSON content: {'name': 'Peter'}"))
 
-out <- mongo.bson.from.JSON( '{"a":{"b":[1,{"a":3},3]}}' )
+json <- '{"a":{"b":[1,{"a":3},3]}}'
+cat(prettify(json))
+validate(json)
+out <- mongo.bson.from.JSON( json )
 out2 <- mongo.bson.to.list(out)
 checkEquals(class(out), "mongo.bson")
 checkEquals(class(out2), "list")
 checkTrue( is.vector(out2$a$b) )
+

@@ -3,24 +3,24 @@
 \alias{mongo.cursor}
 \title{The mongo.cursor class}
 \description{
-  Objects of class "mongo.cursor" are returned from
-  \code{\link{mongo.find}()} and used to iterate over the
-  records matching the query.
+Objects of class "mongo.cursor" are returned from
+\code{\link{mongo.find}()} and used to iterate over the
+records matching the query.
 }
 \details{
-  \code{\link{mongo.cursor.next}(cursor)} is used to step
-  to the first or next record.
+\code{\link{mongo.cursor.next}(cursor)} is used to step to
+the first or next record.
 
-  \code{\link{mongo.cursor.value}(cursor)} returns a
-  mongo.bson object representing the current record.
+\code{\link{mongo.cursor.value}(cursor)} returns a
+mongo.bson object representing the current record.
 
-  \code{\link{mongo.cursor.destroy}(cursor)} releases the
-  resources attached to the cursor.
+\code{\link{mongo.cursor.destroy}(cursor)} releases the
+resources attached to the cursor.
 
-  mongo.cursor objects have "mongo.cursor" as their class
-  and contain an externally managed pointer to the actual
-  cursor data. This pointer is stored in the "mongo.cursor"
-  attribute of the object.
+mongo.cursor objects have "mongo.cursor" as their class and
+contain an externally managed pointer to the actual cursor
+data. This pointer is stored in the "mongo.cursor"
+attribute of the object.
 }
 \examples{
 mongo <- mongo.create()
@@ -39,9 +39,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.cursor.next}},\cr
-  \code{\link{mongo.cursor.value}},\cr
-  \code{\link{mongo.cursor.destroy}}.
+\code{\link{mongo.find}},\cr
+\code{\link{mongo.cursor.next}},\cr
+\code{\link{mongo.cursor.value}},\cr
+\code{\link{mongo.cursor.destroy}}.
 }
 

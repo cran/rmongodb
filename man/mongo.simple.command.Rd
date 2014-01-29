@@ -2,7 +2,7 @@
 \alias{mongo.simple.command}
 \title{Issue a simple.command to a database on MongoDB server}
 \usage{
-  mongo.simple.command(mongo, db, cmdstr, arg)
+mongo.simple.command(mongo, db, cmdstr, arg)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) A mongo connection object.}
@@ -16,24 +16,23 @@
   numeric (as.integer).}
 }
 \value{
-  NULL if the command failed.  Use
-  \code{\link{mongo.get.last.err}()} to determine the
-  cause.
+NULL if the command failed.  Use
+\code{\link{mongo.get.last.err}()} to determine the cause.
 
-  (\link{mongo.bson}) The server's response if successful.
+(\link{mongo.bson}) The server's response if successful.
 }
 \description{
-  Issue a simple command to a MongoDB server and return the
-  response from the server.
+Issue a simple command to a MongoDB server and return the
+response from the server.
 }
 \details{
-  This function supports many of the MongoDB database
-  commands by allowing you to specify a simple command
-  object which is entirely specified by the command name
-  and an integer or string argument.
+This function supports many of the MongoDB database
+commands by allowing you to specify a simple command object
+which is entirely specified by the command name and an
+integer or string argument.
 
-  See
-  \url{http://www.mongodb.org/display/DOCS/List+of+Database+Commands}.
+See
+\url{http://www.mongodb.org/display/DOCS/List+of+Database+Commands}.
 }
 \examples{
 mongo <- mongo.create()
@@ -44,11 +43,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.command}},\cr
-  \code{\link{mongo.rename}},\cr
-  \code{\link{mongo.count}},\cr
-  \code{\link{mongo.drop.database}},\cr
-  \code{\link{mongo.drop}},\cr \link{mongo},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.command}},\cr
+\code{\link{mongo.rename}},\cr
+\code{\link{mongo.count}},\cr
+\code{\link{mongo.drop.database}},\cr
+\code{\link{mongo.drop}},\cr \link{mongo},\cr
+\link{mongo.bson}.
 }
 

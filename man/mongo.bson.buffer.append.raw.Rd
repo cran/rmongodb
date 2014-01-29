@@ -2,8 +2,7 @@
 \alias{mongo.bson.buffer.append.raw}
 \title{Append a raw (binary) field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.raw(buf, name, value,
-    subtype = NULL)
+mongo.bson.buffer.append.raw(buf, name, value, subtype = NULL)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -26,22 +25,22 @@
   \item\code{\link{mongo.binary.user}} (128L) }}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append raw (binary) data onto a \link{mongo.bson.buffer}.
+Append raw (binary) data onto a \link{mongo.bson.buffer}.
 }
 \details{
-  BSON has a special field type to indicate binary data.
-  This function appends such an indicator as the type of a
-  field with its value.
+BSON has a special field type to indicate binary data. This
+function appends such an indicator as the type of a field
+with its value.
 
-  If value has a \code{dims} attribute of length > 1, any
-  \code{names} or \code{dimnames} attribute is ignored and
-  a nested array is appended.\cr (Use
-  \code{\link{mongo.bson.buffer.append.object}()} if you
-  want to preserve \code{dimnames}).
+If value has a \code{dims} attribute of length > 1, any
+\code{names} or \code{dimnames} attribute is ignored and a
+nested array is appended.\cr (Use
+\code{\link{mongo.bson.buffer.append.object}()} if you want
+to preserve \code{dimnames}).
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -57,7 +56,7 @@ mongo.bson.buffer.append.raw(buf, "bin1", bin)
 mongo.bson.buffer.append(buf, "bin2", bin)  # gives same result
 }
 \seealso{
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \link{mongo.bson},\cr \link{mongo.bson.buffer}.
+\code{\link{mongo.bson.buffer.append}},\cr
+\link{mongo.bson},\cr \link{mongo.bson.buffer}.
 }
 

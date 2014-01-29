@@ -2,7 +2,7 @@
 \alias{mongo.update}
 \title{Perform an update on a collection}
 \usage{
-  mongo.update(mongo, ns, criteria, objNew, flags = 0L)
+mongo.update(mongo, ns, criteria, objNew, flags = 0L)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -41,10 +41,10 @@
   Perform a basic update.  }}
 }
 \description{
-  Perform an update on a collection.
+Perform an update on a collection.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Updating}.
+See \url{http://www.mongodb.org/display/DOCS/Updating}.
 }
 \examples{
 mongo <- mongo.create()
@@ -84,10 +84,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo},\cr \link{mongo.bson},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.remove}}.
+\link{mongo},\cr \link{mongo.bson},\cr
+\code{\link{mongo.insert}},\cr \code{\link{mongo.find}},\cr
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.remove}}.
 }
 

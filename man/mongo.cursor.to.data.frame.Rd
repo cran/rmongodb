@@ -2,7 +2,7 @@
 \alias{mongo.cursor.to.data.frame}
 \title{Convert Mongo Cursor Object to Data.Frame}
 \usage{
-  mongo.cursor.to.data.frame(cursor, nullToNA = TRUE, ...)
+mongo.cursor.to.data.frame(cursor, nullToNA = TRUE, ...)
 }
 \arguments{
   \item{cursor}{(\link{mongo.cursor}) A mongo.cursor object
@@ -18,15 +18,15 @@
   values will just appear as regular \code{NA}s.}
 }
 \value{
-  An R data.frame object.
+An R data.frame object.
 }
 \description{
-  Converts a mongo cursor object to a data.frame by
-  interating over all cursor objects and combining them.
+Converts a mongo cursor object to a data.frame by
+interating over all cursor objects and combining them.
 }
 \details{
-  Note that mongo.oid columns will be removed. data.frame
-  can not deal with them.
+Note that mongo.oid columns will be removed. data.frame can
+not deal with them.
 }
 \examples{
 mongo <- mongo.create()
@@ -44,6 +44,6 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr \code{\link{as.data.frame}}.
+\code{\link{mongo.find}},\cr \code{\link{as.data.frame}}.
 }
 

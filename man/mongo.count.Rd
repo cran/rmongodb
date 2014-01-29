@@ -2,7 +2,7 @@
 \alias{mongo.count}
 \title{Count records in a collection}
 \usage{
-  mongo.count(mongo, ns, query = mongo.bson.empty())
+mongo.count(mongo, ns, query = mongo.bson.empty())
 }
 \arguments{
   \item{mongo}{(\link{mongo}) A mongo connection object.}
@@ -23,12 +23,12 @@
   \code{\link{mongo.bson.from.JSON}()}.}
 }
 \value{
-  (double) The number of matching records.
+(double) The number of matching records.
 }
 \description{
-  Count the number of records in a collection that match a
-  query See
-  \url{http://www.mongodb.org/display/DOCS/Indexes}.
+Count the number of records in a collection that match a
+query See
+\url{http://www.mongodb.org/display/DOCS/Indexes}.
 }
 \examples{
 mongo <- mongo.create()
@@ -65,11 +65,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.find}},\cr
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo},\cr
+\link{mongo.bson}.
 }
 

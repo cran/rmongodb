@@ -2,7 +2,7 @@
 \alias{mongo.bson.from.list}
 \title{Convert a list to a mongo.bson object}
 \usage{
-  mongo.bson.from.list(lst)
+mongo.bson.from.list(lst)
 }
 \arguments{
   \item{lst}{(list) The list to convert.
@@ -12,24 +12,23 @@
   \code{as.list()} as necessary.}
 }
 \value{
-  (\link{mongo.bson}) A mongo.bson object serialized from
-  \code{lst}.
+(\link{mongo.bson}) A mongo.bson object serialized from
+\code{lst}.
 }
 \description{
-  Convert a list to a \link{mongo.bson} object.
+Convert a list to a \link{mongo.bson} object.
 }
 \details{
-  This function permits the simple and convenient creation
-  of a mongo.bson object.  This bypasses the creation of a
-  \link{mongo.bson.buffer}, appending fields one by one,
-  and then turning the buffer into a mongo.bson object with
-  \code{\link{mongo.bson.from.buffer}()}.
+This function permits the simple and convenient creation of
+a mongo.bson object.  This bypasses the creation of a
+\link{mongo.bson.buffer}, appending fields one by one, and
+then turning the buffer into a mongo.bson object with
+\code{\link{mongo.bson.from.buffer}()}.
 
-  Note that this function and
-  \code{\link{mongo.bson.to.list}()} do not always perform
-  inverse conversions since mongo.bson.to.list() will
-  convert objects and subobjects to atomic vectors if
-  possible.
+Note that this function and
+\code{\link{mongo.bson.to.list}()} do not always perform
+inverse conversions since mongo.bson.to.list() will convert
+objects and subobjects to atomic vectors if possible.
 }
 \examples{
 lst <- list(name="John", age=32)
@@ -45,7 +44,7 @@ b <- mongo.bson.from.list(as.list(v))
 # { "president" : "Jefferson", "vice" : "Burr" }
 }
 \seealso{
-  \code{\link{mongo.bson.to.list}},\cr
-  \link{mongo.bson},\cr \code{\link{mongo.bson.destroy}}.
+\code{\link{mongo.bson.to.list}},\cr \link{mongo.bson},\cr
+\code{\link{mongo.bson.destroy}}.
 }
 

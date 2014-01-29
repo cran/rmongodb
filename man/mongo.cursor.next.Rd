@@ -2,22 +2,22 @@
 \alias{mongo.cursor.next}
 \title{Advance a cursor to the next record}
 \usage{
-  mongo.cursor.next(cursor)
+mongo.cursor.next(cursor)
 }
 \arguments{
   \item{cursor}{(\link{mongo.cursor}) A mongo.cursor object
   returned from \code{\link{mongo.find}()}.}
 }
 \value{
-  TRUE if there is a next record; otherwise, FALSE.
+TRUE if there is a next record; otherwise, FALSE.
 }
 \description{
-  \code{\link{mongo.cursor.next}(cursor)} is used to step
-  to the first or next record.
+\code{\link{mongo.cursor.next}(cursor)} is used to step to
+the first or next record.
 }
 \details{
-  \code{\link{mongo.cursor.value}(cursor)} may then be used
-  to examine it.
+\code{\link{mongo.cursor.value}(cursor)} may then be used
+to examine it.
 }
 \examples{
 mongo <- mongo.create()
@@ -36,8 +36,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr \link{mongo.cursor},\cr
-  \code{\link{mongo.cursor.value}},\cr
-  \code{\link{mongo.cursor.destroy}}.
+\code{\link{mongo.find}},\cr \link{mongo.cursor},\cr
+\code{\link{mongo.cursor.value}},\cr
+\code{\link{mongo.cursor.destroy}}.
 }
 

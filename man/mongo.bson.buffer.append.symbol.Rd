@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.symbol}
 \title{Append a symbol field onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.symbol(buf, name, value)
+mongo.bson.buffer.append.symbol(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -18,16 +18,16 @@
   \link{mongo.symbol} object.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a symbol value onto a \link{mongo.bson.buffer}.
+Append a symbol value onto a \link{mongo.bson.buffer}.
 }
 \details{
-  BSON has a special field type to indicate a symbol. This
-  function appends such an indicator as the type of a field
-  with its value.
+BSON has a special field type to indicate a symbol. This
+function appends such an indicator as the type of a field
+with its value.
 }
 \examples{
 buf <- mongo.bson.buffer.create()
@@ -43,9 +43,9 @@ mongo.bson.buffer.append(buf, "A", sym)
 b <- mongo.bson.from.buffer(buf)
 }
 \seealso{
-  \link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
-  \link{mongo.symbol},\cr
-  \code{\link{mongo.symbol.create}},\cr
-  \code{\link{mongo.bson.buffer.append}}.
+\link{mongo.bson},\cr \link{mongo.bson.buffer},\cr
+\link{mongo.symbol},\cr
+\code{\link{mongo.symbol.create}},\cr
+\code{\link{mongo.bson.buffer.append}}.
 }
 

@@ -2,7 +2,7 @@
 \alias{mongo.cursor.to.list}
 \title{Convert Mongo Cursor Object to List}
 \usage{
-  mongo.cursor.to.list(cursor, nullToNA = TRUE)
+mongo.cursor.to.list(cursor, nullToNA = TRUE)
 }
 \arguments{
   \item{cursor}{(\link{mongo.cursor}) A mongo.cursor object
@@ -15,11 +15,11 @@
   values will just appear as regular \code{NA}s.}
 }
 \value{
-  An R list object.
+An R list object.
 }
 \description{
-  Converts a mongo cursor object to a list by interating
-  over all cursor objects and combining them.
+Converts a mongo cursor object to a list by interating over
+all cursor objects and combining them.
 }
 \examples{
 mongo <- mongo.create()
@@ -37,7 +37,7 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.bson.to.list}}.
+\code{\link{mongo.find}},\cr
+\code{\link{mongo.bson.to.list}}.
 }
 

@@ -2,7 +2,7 @@
 \alias{mongo.insert}
 \title{Add record to a collection}
 \usage{
-  mongo.insert(mongo, ns, b)
+mongo.insert(mongo, ns, b)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
@@ -17,18 +17,18 @@
   \code{\link{mongo.bson.from.list}()}.}
 }
 \value{
-  TRUE if the command was successfully sent to the server;
-  otherwise, FALSE.
+TRUE if the command was successfully sent to the server;
+otherwise, FALSE.
 
-  \code{\link{mongo.get.last.err}()} may be examined to
-  verify that the insert was successful on the server if
-  necessary.
+\code{\link{mongo.get.last.err}()} may be examined to
+verify that the insert was successful on the server if
+necessary.
 }
 \description{
-  Add record to a collection.
+Add record to a collection.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Inserting}.
+See \url{http://www.mongodb.org/display/DOCS/Inserting}.
 }
 \examples{
 mongo <- mongo.create()
@@ -46,11 +46,10 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.insert.batch}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo.bson},\cr
-  \link{mongo}.
+\code{\link{mongo.insert.batch}},\cr
+\code{\link{mongo.update}},\cr \code{\link{mongo.find}},\cr
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo.bson},\cr
+\link{mongo}.
 }
 

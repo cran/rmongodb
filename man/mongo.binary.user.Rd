@@ -2,19 +2,20 @@
 \name{mongo.binary.user}
 \alias{mongo.binary.user}
 \title{BSON binary data subtype constant for user data}
-\format{int 128}
+\format{\preformatted{ int 128
+}}
 \usage{
-  mongo.binary.user
+mongo.binary.user
 }
 \value{
-  128L
+128L
 }
 \description{
-  BSON binary data subtype constant for user data.
+BSON binary data subtype constant for user data.
 }
 \seealso{
-  \code{\link{mongo.bson.buffer.append.raw}},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.bson.buffer.append.raw}},\cr
+\link{mongo.bson}.
 }
 \keyword{datasets}
 

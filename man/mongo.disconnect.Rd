@@ -2,19 +2,19 @@
 \alias{mongo.disconnect}
 \title{Disconnect from a MongoDB server}
 \usage{
-  mongo.disconnect(mongo)
+mongo.disconnect(mongo)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
 \value{
-  The mongo object is returned.
+The mongo object is returned.
 }
 \description{
-  Disconnect from a MongoDB server.  No further
-  communication is possible on the connection. However,
-  \code{\link{mongo.reconnect}()} may be called on the
-  mongo object to restablish the connection.
+Disconnect from a MongoDB server.  No further communication
+is possible on the connection. However,
+\code{\link{mongo.reconnect}()} may be called on the mongo
+object to restablish the connection.
 }
 \examples{
 mongo <- mongo.create()
@@ -24,8 +24,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo},\cr \code{\link{mongo.create}},\cr
-  \code{\link{mongo.reconnect}},\cr
-  \code{\link{mongo.is.connected}}.
+\link{mongo},\cr \code{\link{mongo.create}},\cr
+\code{\link{mongo.reconnect}},\cr
+\code{\link{mongo.is.connected}}.
 }
 

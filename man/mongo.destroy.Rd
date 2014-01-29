@@ -2,27 +2,23 @@
 \alias{mongo.destroy}
 \title{Destroy a MongoDB connection}
 \usage{
-  mongo.destroy(mongo)
+mongo.destroy(mongo)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) a mongo connection object.}
 }
-\value{
-  NULL
-}
 \description{
-  Destroy a \link{mongo} connection.  The connection is
-  disconnected first if it is still connected. No further
-  communication is possible on the connection.  Releases
-  resources attached to the connection on both client and
-  server.
+Destroy a \link{mongo} connection.  The connection is
+disconnected first if it is still connected. No further
+communication is possible on the connection.  Releases
+resources attached to the connection on both client and
+server.
 }
 \details{
-  Although the 'destroy' functions in this package are
-  called automatically by garbage collection, this one in
-  particular should be called as soon as feasible when
-  finished with the connection so that server resources are
-  freed.
+Although the 'destroy' functions in this package are called
+automatically by garbage collection, this one in particular
+should be called as soon as feasible when finished with the
+connection so that server resources are freed.
 }
 \examples{
 mongo <- mongo.create()
@@ -33,8 +29,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo},\cr \code{\link{mongo.disconnect}},\cr
-  \code{\link{mongo.is.connected}}\cr
-  \code{\link{mongo.reconnect}}.
+\link{mongo},\cr \code{\link{mongo.disconnect}},\cr
+\code{\link{mongo.is.connected}}\cr
+\code{\link{mongo.reconnect}}.
 }
 

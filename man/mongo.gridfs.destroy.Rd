@@ -2,22 +2,19 @@
 \alias{mongo.gridfs.destroy}
 \title{Destroy a mongo.gridfs object}
 \usage{
-  mongo.gridfs.destroy(gridfs)
+mongo.gridfs.destroy(gridfs)
 }
 \arguments{
   \item{gridfs}{A (\link{mongo.gridfs}) object.}
 }
-\value{
-  NULL
-}
 \description{
-  Releases the resources associated with a
-  \link{mongo.gridfs} object.
+Releases the resources associated with a
+\link{mongo.gridfs} object.
 }
 \details{
-  It is not absolutely necessary to call this function
-  since R's garbage collection will eventually get around
-  to doing it for you.
+It is not absolutely necessary to call this function since
+R's garbage collection will eventually get around to doing
+it for you.
 }
 \examples{
 mongo <- mongo.create()
@@ -29,8 +26,8 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo.gridfs},\cr
-  \code{\link{mongo.gridfs.create}},\cr
-  \code{\link{mongo.gridfs.store.file}}.
+\link{mongo.gridfs},\cr
+\code{\link{mongo.gridfs.create}},\cr
+\code{\link{mongo.gridfs.store.file}}.
 }
 

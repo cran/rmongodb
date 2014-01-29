@@ -13,11 +13,11 @@ The pop field holds the population.
 
 The loc field holds the location as a latitude longitude pair.}
 \source{
-  \url{http://media.mongodb.org/zips.json}
+\url{http://media.mongodb.org/zips.json}
 }
 \description{
-  A dataset with US zip data provided by mongodb for
-  education.
+A dataset with US zip data provided by mongodb for
+education.
 }
 \examples{
 \dontrun{
@@ -35,5 +35,4 @@ for(i in rL){
 save(zips, file="data/zips.rda", compress="xz")
 }
 }
-\keyword{datasets}
 

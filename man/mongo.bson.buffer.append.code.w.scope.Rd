@@ -2,7 +2,7 @@
 \alias{mongo.bson.buffer.append.code.w.scope}
 \title{Append a code field with a scope onto a mongo.bson.buffer}
 \usage{
-  mongo.bson.buffer.append.code.w.scope(buf, name, value)
+mongo.bson.buffer.append.code.w.scope(buf, name, value)
 }
 \arguments{
   \item{buf}{(\link{mongo.bson.buffer}) The buffer object
@@ -15,17 +15,17 @@
   javascript code.}
 }
 \value{
-  TRUE if successful; otherwise, FALSE if an error occured
-  appending the data.
+TRUE if successful; otherwise, FALSE if an error occured
+appending the data.
 }
 \description{
-  Append a javascript code value with a scope object onto a
-  \link{mongo.bson.buffer}.
+Append a javascript code value with a scope object onto a
+\link{mongo.bson.buffer}.
 }
 \details{
-  BSON has a special field type to indicate javascript code
-  with a scope. This function appends such an indicator as
-  the type of a field with its value.
+BSON has a special field type to indicate javascript code
+with a scope. This function appends such an indicator as
+the type of a field with its value.
 }
 \examples{
 scope <- mongo.bson.from.list(list(scopevar="scopevalue"))
@@ -47,10 +47,10 @@ b <- mongo.bson.from.buffer(buf)
 #        (SCOPE) { "scopevar" : "scopevalue" } }
 }
 \seealso{
-  \link{mongo.code.w.scope},\cr
-  \code{\link{mongo.code.w.scope.create}},\cr
-  \code{\link{mongo.bson.buffer.append}},\cr
-  \code{\link{mongo.bson.from.list}},\cr
-  \link{mongo.bson.buffer},\cr \link{mongo.bson}.
+\link{mongo.code.w.scope},\cr
+\code{\link{mongo.code.w.scope.create}},\cr
+\code{\link{mongo.bson.buffer.append}},\cr
+\code{\link{mongo.bson.from.list}},\cr
+\link{mongo.bson.buffer},\cr \link{mongo.bson}.
 }
 

@@ -2,8 +2,7 @@
 \alias{mongo.gridfile.writer.create}
 \title{Create a mongo.gridfile.writer object}
 \usage{
-  mongo.gridfile.writer.create(gridfs, remotename,
-    contenttype = "")
+mongo.gridfile.writer.create(gridfs, remotename, contenttype = "")
 }
 \arguments{
   \item{gridfs}{A (\link{mongo.gridfs}) object.}
@@ -14,16 +13,16 @@
   \item{contenttype}{(string) Optional MIME content type.}
 }
 \value{
-  (\link{mongo.gridfile.writer}) The object to be used for
-  writing to the GridFS file.
+(\link{mongo.gridfile.writer}) The object to be used for
+writing to the GridFS file.
 }
 \description{
-  Create a \link{mongo.gridfile.writer} object used to
-  buffer many writes to a single GridFS file. Once the
-  mongo.gridfile.writer is created, use
-  \code{\link{mongo.gridfile.writer.write}()} to write data
-  to the buffered GridFS file and
-  \code{\link{mongo.gridfile.writer.finish}()} when done.
+Create a \link{mongo.gridfile.writer} object used to buffer
+many writes to a single GridFS file. Once the
+mongo.gridfile.writer is created, use
+\code{\link{mongo.gridfile.writer.write}()} to write data
+to the buffered GridFS file and
+\code{\link{mongo.gridfile.writer.finish}()} when done.
 }
 \examples{
 mongo <- mongo.create()
@@ -48,9 +47,9 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \link{mongo.gridfs},\cr
-  \code{\link{mongo.gridfs.create}},\cr
-  \code{\link{mongo.gridfile.writer.write}},\cr
-  \code{\link{mongo.gridfile.writer.finish}}.
+\link{mongo.gridfs},\cr
+\code{\link{mongo.gridfs.create}},\cr
+\code{\link{mongo.gridfile.writer.write}},\cr
+\code{\link{mongo.gridfile.writer.finish}}.
 }
 

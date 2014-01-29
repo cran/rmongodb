@@ -2,7 +2,7 @@
 \alias{mongo.index.create}
 \title{Add an index to a collection}
 \usage{
-  mongo.index.create(mongo, ns, key, options = 0L)
+mongo.index.create(mongo, ns, key, options = 0L)
 }
 \arguments{
   \item{mongo}{(\link{mongo}) A mongo connection object.}
@@ -32,18 +32,18 @@
   \item\code{\link{mongo.index.sparse}} }}
 }
 \value{
-  NULL if successful; otherwise, a \link{mongo.bson} object
-  describing the error.\cr
-  \code{\link{mongo.get.server.err}()} or
-  \code{\link{mongo.get.server.err.string}()} may
-  alternately be called in this case instead of examining
-  the returned object.
+NULL if successful; otherwise, a \link{mongo.bson} object
+describing the error.\cr
+\code{\link{mongo.get.server.err}()} or
+\code{\link{mongo.get.server.err.string}()} may alternately
+be called in this case instead of examining the returned
+object.
 }
 \description{
-  Add an index to a collection.
+Add an index to a collection.
 }
 \details{
-  See \url{http://www.mongodb.org/display/DOCS/Indexes}.
+See \url{http://www.mongodb.org/display/DOCS/Indexes}.
 }
 \examples{
 mongo <- mongo.create()
@@ -72,11 +72,11 @@ if (mongo.is.connected(mongo)) {
 }
 }
 \seealso{
-  \code{\link{mongo.find}},\cr
-  \code{\link{mongo.find.one}},\cr
-  \code{\link{mongo.insert}},\cr
-  \code{\link{mongo.update}},\cr
-  \code{\link{mongo.remove}},\cr \link{mongo},\cr
-  \link{mongo.bson}.
+\code{\link{mongo.find}},\cr
+\code{\link{mongo.find.one}},\cr
+\code{\link{mongo.insert}},\cr
+\code{\link{mongo.update}},\cr
+\code{\link{mongo.remove}},\cr \link{mongo},\cr
+\link{mongo.bson}.
 }
 
