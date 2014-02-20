@@ -101,6 +101,8 @@ mongo.bson.from.JSON <- function(JSON, simplifyVector=FALSE, ...){
 #' 
 #' 
 #' @param b (\link{mongo.bson}) The mongo.bson object to convert.
+#' @param simplify logical (default: FALSE); should the result be simplified to a vector, matrix 
+#' or higher dimensional array if possible?
 #' @return Best guess at an appropriate R object representing the mongo.bson
 #' object.
 #' @seealso \code{\link{mongo.bson.from.list}},\cr \link{mongo.bson}.
@@ -115,8 +117,16 @@ mongo.bson.from.JSON <- function(JSON, simplifyVector=FALSE, ...){
 #' print(l)
 #' 
 #' @export mongo.bson.to.list
-mongo.bson.to.list <- function(b)
-  .Call(".mongo.bson.to.list", b)
+mongo.bson.to.list <- function(b, simplify=FALSE){
+  
+  res <- as.list( .Call(".mongo.bson.to.list", b) )
+  
+  if( simplify==TRUE && length(res) != 0 ){
+    res <- simplify2array(res)
+  } 
+  
+  return(res)
+}
 
 
 

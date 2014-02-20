@@ -20,7 +20,7 @@
 #include "api_mongo.h"
 #include "api_gridfs.h"
 #include "symbols.h"
-#include "env.h"
+#include "libmongo/env.h"
 
 static const R_CallMethodDef callMethods[] = {
     { ".mongo.create", (DL_FUNC) mmongo_create, 0 },

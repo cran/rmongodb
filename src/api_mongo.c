@@ -13,7 +13,7 @@
    limitations under the License.
 */
 #include <R.h>
-#include "env.h"
+#include "libmongo/env.h"
 #include "api_mongo.h"
 #include "api_bson.h"
 #include "symbols.h"

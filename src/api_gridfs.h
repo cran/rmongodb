@@ -14,7 +14,7 @@
 */
 #include <Rinternals.h>
 
-#include "gridfs.h"
+#include "libmongo/gridfs.h"
 
 SEXP mongo_gridfs_create(SEXP mongo_conn, SEXP db, SEXP prefix);
 SEXP mongo_gridfs_destroy(SEXP gfs);

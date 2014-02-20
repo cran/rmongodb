@@ -1,8 +1,9 @@
 library(rmongodb)
 library(RUnit)
+library(jsonlite)
 
-# 19 tests
-# 22.11.2013
+# 20 tests
+# 29.01.2014
 
 # test create bson object with values
 r <- as.integer(c(1,2,3,4,5,6,7,8))
@@ -184,3 +185,12 @@ checkEquals( class( mongo.bson.value(b, "listWundef.u1") ), "mongo.undefined")
 out <- mongo.bson.to.list(b)
 print(out)
 checkEquals( class(out$Undef), "mongo.undefined")
+
+
+# check mongo.bson.to.list
+json <- '{"state":"AL"}'
+bson <- mongo.bson.from.JSON(json)
+list <- mongo.bson.to.list(bson)
+checkTrue(is.list(list))
+json2 <- toJSON(list)
+# checkEquals(json, json2)

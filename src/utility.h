@@ -13,8 +13,8 @@
    limitations under the License.
 */
 #include <Rinternals.h>
-#include "bson.h"
-#include "mongo.h"
+#include "libmongo/bson.h"
+#include "libmongo/mongo.h"
 
 int    _hasClass(SEXP cls, const char* name);
 int    _objHasClass(SEXP b, const char* name);

@@ -2,11 +2,15 @@
 \alias{mongo.bson.to.list}
 \title{Convert a mongo.bson object to an R object.}
 \usage{
-mongo.bson.to.list(b)
+mongo.bson.to.list(b, simplify = FALSE)
 }
 \arguments{
   \item{b}{(\link{mongo.bson}) The mongo.bson object to
   convert.}
+
+  \item{simplify}{logical (default: FALSE); should the
+  result be simplified to a vector, matrix or higher
+  dimensional array if possible?}
 }
 \value{
 Best guess at an appropriate R object representing the

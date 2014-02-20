@@ -90,6 +90,11 @@ MongoDB server
   * blog post: http://technotip.com/2982/mongodb-getting-started-guide/
   * Video: http://www.youtube.com/watch?v=J2qnq8WI6EU
 
+### Good ressources for working with JSON-Data in R:
+* There are three R packages on CRAN: RJSONIO, jsonlite (used by rmongodb) and rjson
+* jsonlite vignette for using JSON in R: http://cran.r-project.org/web/packages/jsonlite/vignettes/json-mapping.pdf
+
+
 
 Development
 ==================

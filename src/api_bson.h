@@ -14,7 +14,7 @@
 */
 #include <Rinternals.h>
 
-#include "bson.h"
+#include "libmongo/bson.h"
 
 SEXP mongo_sys_time();
 

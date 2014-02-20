@@ -1,1 +1,10 @@
-PKG_CFLAGS+=-D_MONGO_USE_GETADDRINFO -DR_SAFETY_NET
+PKG_CFLAGS += -D_MONGO_USE_GETADDRINFO -DR_SAFETY_NET 
+
+SOURCES = $(wildcard libmongo/*.c *.c)
+
+OBJECTS = $(SOURCES:.c=.o)
+
+all: clean $(SHLIB)
+
+clean:
+	rm -f $(OBJECTS)
