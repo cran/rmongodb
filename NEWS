@@ -1,6 +1,26 @@
 rmongodb NEWS
 ========================================================
 
+March 06, 2014
+* new CRAN submission
+* rmongodb cheat sheet added to package
+
+March 03, 2014
+* rmongodb now provides more support for MongoDB Aggregation Framework: mongo.aggregation() - thanks to "dselivanov"
+
+February 28, 2014
+* vignette fixes and improvements
+* mongo.insert.batch error checks added
+
+February 24, 2014
+* rmongodb now depends on plyr for some tests
+* mongo.bson.to.Robject introduced: this function now holds the old functionality of mongo.bson.to.list
+* mongo.bson.to.list now returns in all cases a list!
+
+February 20, 2014
+* vignette improved and now independent of running MongoDB
+* second vignette with Advanced rmongodb Topics added
+
 February 20, 2014
 * new CRAN submission
 * now in default mongo.bson.to.list returns a list. This can be changed using the simplify=TRUE option

@@ -2,8 +2,7 @@ library(rmongodb)
 library(RUnit)
 library(jsonlite)
 
-# 20 tests
-# 29.01.2014
+# 24.02.2014
 
 # test create bson object with values
 r <- as.integer(c(1,2,3,4,5,6,7,8))
@@ -37,6 +36,16 @@ buf <- mongo.bson.buffer.create()
 mongo.bson.buffer.append(buf, "test", FALSE)
 b <- mongo.bson.from.buffer(buf)
 checkTrue(!mongo.bson.value(b, "test"))
+
+
+# more test for bson.to.list and to.Robject
+b <- mongo.bson.from.JSON('{"First":"Joe Smith", "Last":21.5}')
+l <- mongo.bson.to.Robject(b)
+checkTrue(is.list(l))
+
+b <- mongo.bson.from.JSON('{"First":"Joe", "Last":"Smith"}')
+l <- mongo.bson.to.Robject(b)
+checkTrue(is.vector(l))
 
 
 # test create bson oject with raw data

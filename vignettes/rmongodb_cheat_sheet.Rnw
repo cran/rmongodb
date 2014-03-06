@@ -1,0 +1,343 @@
+% \VignetteIndexEntry{rmongodb Cheat Sheet}
+
+\documentclass[10pt,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage{hyperref}
+
+% following the layout by http://stdout.org/~winston/latex/latexsheet.tex
+
+% This sets page margins to .5 inch if using letter paper, and to 1cm
+% if using A4 paper. (This probably isn't strictly necessary.)
+% If using another size paper, use default 1cm margins.
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+  { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+
+% Turn off header and footer
+\pagestyle{empty}
+ 
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\footnotesize\bfseries}}
+\makeatother
+
+
+
+% Don't print section numbers
+\setcounter{secnumdepth}{0}
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+% -----------------------------------------------------------------------
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\begin{center}
+     \Large{\textbf{rmongodb Cheat Sheet}} \\
+     \small{\href{https://github.com/mongosoup/rmongodb}{https://github.com/mongosoup/rmongodb}}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SweaveOpts{concordance=TRUE, eval=FALSE, results=hide}
+%\SweaveOpts{concordance=TRUE, eval=TRUE}
+
+
+\section{Generall Package Handling}
+install from CRAN
+<<eval=FALSE>>=
+install.packages("rmongodb")
+@
+install dev version from GitHub
+<<eval=FALSE>>=
+library(devtools)
+install_github("rmongodb", "mongosoup")
+@
+load rmongodb package
+<<>>=
+library(rmongodb)
+@
+get help overview
+<<>>=
+??rmongodb
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Connection Handling}
+connect to localhost
+<<>>=
+mongo <- mongo.create()
+@
+connect to external mongoDB
+<<eval=FALSE>>=
+mongo <- mongo.create(host="127.1.1.1:27017", 
+            username="USER", password="XXX", 
+            db="database")
+@
+check for working connection
+<<>>=
+mongo.is.connected(mongo)
+@
+disconnect from mongoDB
+<<eval=FALSE>>=
+mongo.destroy(mongo)
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% insert some example data
+<<echo=FALSE, results=hide>>=
+data(zips)
+# rename _id field. The original zips data set holds duplicate _id values which will fale during the import
+colnames(zips)[5] <- "orig_id"
+# create BSON batch object
+ziplist <- list()
+ziplist <- apply( zips, 1, function(x) c( ziplist, x ) )
+res <- lapply( ziplist, function(x) mongo.bson.from.list(x) )
+if(mongo.is.connected(mongo) == TRUE){
+  mongo.insert.batch(mongo, "rmongodb.zips", res )
+}
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Get Database Information}
+get databases and collections of a database
+<<>>=
+mongo.get.databases(mongo)
+mongo.get.database.collections(mongo, "rmongodb")
+@
+get errors from mongoDB
+<<>>=
+mongo.get.err(mongo)
+mongo.get.server.err(mongo)
+mongo.get.server.err.string(mongo)
+@
+deal with mongoDB replica sets
+<<>>=
+mongo.get.primary(mongo)
+mongo.get.hosts(mongo)
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Get Info about Documents}
+count all elements in collection
+<<>>=
+mongo.count(mongo, "rmongodb.zips")
+@
+Hint: Collection name is a namespace with 'database.collection'.
+
+get all values for one key (in this case "city")
+<<results=hide>>=
+mongo.get.values(mongo, "rmongodb.zips", "city")
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Querying Data}
+count documents of a special query
+<<>>=
+mongo.count(mongo, "rmongodb.zips", 
+            query='{"state":"AL"}')
+@
+
+find one document and returns BSON object. 
+<<>>=
+bson <- mongo.findOne(mongo, "rmongodb.zips", 
+                      query='{"state":"AL"}')
+@
+find all documents and returns mongo cursor
+<<>>=
+cursor <- mongo.find(mongo, "rmongodb.zips", 
+                     query='{"state":"AL"}')
+@
+convert cursor to R object
+<<results=hide>>=
+mongo.cursor.to.list(cursor)
+@
+direct query and create R object
+<<>>=
+mongo.find.all(mongo, "rmongodb.zips", 
+              query='{"state":"AL"}')
+@
+
+
+\subsubsection{more query options}
+skip first 5 documents and limit query to 10 results
+<<>>=
+mongo.find.all(mongo, "rmongodb.zips", 
+              query='{"state":"AL"}',
+              skip=5, limit=10)
+@
+only return special keys / fields (in this case "city" and "pop") and sort by a key (in this case "pop")
+<<>>=
+mongo.find.all(mongo, "rmongodb.zips", 
+              query='{"state":"AL"}',
+              fields='{"city":1, "pop":1, "_id":0}', 
+              sort='{"pop":1}')
+@
+
+
+\subsubsection{more mongoDB query examples}
+an "and" query
+<<>>=
+mongo.find.all(mongo, "rmongodb.zips", 
+              query='{"state":"AL", "city":"ACMAR"}')
+@
+
+a comparing query
+<<>>=
+mongo.find.all(mongo, "rmongodb.zips", 
+              query='{"pop":{"$gte":80000}}')
+@
+
+count documents where key / field exists
+<<>>=
+mongo.count(mongo, "rmongodb.zips", 
+              query='{"loc":{"$exists":1}}')
+@
+
+Hint: a good starting point for more queries are the mongoDB references and tutorials:
+\href{http://docs.mongodb.org/manual/tutorial/query-documents/}{http://docs.mongodb.org/manual/tutorial/query-documents/}
+\href{http://docs.mongodb.org/manual/reference/sql-comparison/}{http://docs.mongodb.org/manual/reference/sql-comparison/}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dealing with BSON objects}
+convert BSON to R object
+<<results=hide>>=
+mongo.bson.to.list(bson)
+@
+get one key (in this case "state") out of BSON object
+<<>>=
+mongo.bson.value(bson, "state")
+@
+\subsubsection{creating BSON objects}
+Hint: due to new JSON to BSON functionality this is no longer required. Since version 1.3 you can directly query with JSON!
+
+convert JSON to BSON
+<<>>=
+mongo.bson.from.JSON('{"state":"AL"}')
+@
+old way to create same BSON object
+<<>>=
+buf <- mongo.bson.buffer.create()
+mongo.bson.buffer.append(buf, "state", "AL")
+b <- mongo.bson.from.buffer(buf)
+@
+old way still available. check help files.momn
+<<>>=
+?mongo.bson
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Importing and Updating Data}
+insert one document to collection
+<<>>=
+mongo.insert(mongo, "rmongodb.insert", 
+             '{"user":"markus", "city":"munich"}')
+@
+insert many documents to collection
+<<>>=
+bson1 <- mongo.bson.from.JSON(
+  '{"user":"markus", "city":"munich"}')
+bson2 <- mongo.bson.from.JSON(
+  '{"user":"peter", "city":"New York"}')
+mongo.insert.batch(mongo, "rmongodb.insert",
+                   list(bson1, bson2))
+@
+add index to collection
+<<>>=
+mongo.index.create(mongo, "rmongodb.insert", '{"user":1}')
+@
+update one document in the collection
+<<>>=
+mongo.update(mongo, "rmongodb.insert", 
+             '{"user":"markus"}', 
+             '{"user":"markus", "city":"berlin"}')
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aggregation Framework}
+grouping and matching on zips example data. Creates BSON output object
+<<>>=
+pipe_1 <- mongo.bson.from.JSON('{"$group":
+                               {"_id":"$state", "totalPop":
+                               {"$sum":"$pop"}}}')
+pipe_2 <- mongo.bson.from.JSON('{"$match":
+                               {"totalPop":
+                               {"$gte":15000000}}}')
+cmd_list <- list(pipe_1, pipe_2)
+bson <- mongo.aggregation(mongo, "rmongodb.zips", cmd_list)
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% remove example db
+<<echo=FALSE, results=hide>>=
+mongo.drop.database(mongo, "rmongodb")
+mongo.destroy(mongo)
+@
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize
+
+Copyright \copyright\ 2014 Markus Schmidberger
+
+powered by:
+
+\includegraphics[width=6cm]{mongosoup.png}
+
+\href{https://www.mongosoup.de/rmongodb.html}{https://www.mongosoup.de/rmongodb.html}
+
+\end{multicols}
+\end{document}

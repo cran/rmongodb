@@ -1,0 +1,115 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Advanced Topics in the rmongodb Package}
+
+Advanced topics in the rmongodb Package
+========================================
+
+MongoDB (www.mongodb.org) is a scalable, high-performance, document-oriented NoSQL database. The **rmongodb** package provides an interface from the statistical software R (www.r-project.org) to MongoDB and back using the mongodb-C library. 
+
+
+This vignette will provide demos for advanced topics in the **rmongodb** package.
+
+
+
+# Connecting R to MongoDB
+First of all we have to load the library and connect to a MongoDB. In this case we connect to our local MongoDB installation.
+```{r connect}
+library(rmongodb)
+mongo <- mongo.create()
+mongo.is.connected(mongo)
+```
+
+
+
+
+# Inserting Big Data
+We will use the "Zip Code Data Set" from MongoDB (http://docs.mongodb.org/manual/tutorial/aggregation-zip-code-data-set/) in the following examples. The data set is included in the **rmongodb** package and can be loaded using the command *data(zips)*. The data set is available as JSON and contains zip code data from the US.
+```{r insertZips}
+# load example data set from rmongodb
+data(zips)
+head(zips)
+zips[1,]$loc
+
+# rename _id field. The original zips data set holds duplicate _id values which will fale during the import
+colnames(zips)[5] <- "orig_id"
+
+# create BSON batch object
+ziplist <- list()
+ziplist <- apply( zips, 1, function(x) c( ziplist, x ) )
+res <- lapply( ziplist, function(x) mongo.bson.from.list(x) )
+
+if(mongo.is.connected(mongo) == TRUE){
+  mongo.insert.batch(mongo, "rmongodb.zips", res )
+}
+```
+Let's check if all the inserted data is available in MongoDB.
+```{r insertCheck}
+dim(zips)
+if(mongo.is.connected(mongo) == TRUE){
+  nr <- mongo.count(mongo, "rmongodb.zips")
+  print( nr )
+  res <- mongo.find.all(mongo, "rmongodb.zips", limit=20)
+  head( res )
+}
+```
+
+
+
+# MongoDB Aggregation Framework
+The MongoDB aggregation framework is one of the top MongoDB features. Aggregation operations process data records and return computed results. They group values from multiple documents together and can perform a variety of operations on the grouped data to return a single result. 
+
+Let's compute the total population of each state and group by state:
+```{r aggregationFramework}
+pipe_1 <- mongo.bson.from.JSON('{"$group":{"_id":"$state", "totalPop":{"$sum":"$pop"}}}')
+cmd_list <- list(pipe_1)
+cmd_list
+if(mongo.is.connected(mongo) == TRUE){
+  res <- mongo.aggregation(mongo, "rmongodb.zips", cmd_list)
+  head( mongo.bson.value(res, "result") )
+}
+```
+Ok, I am only interested in the states with populations above 10 Million:
+```{r aggregationFramework2}
+pipe_1 <- mongo.bson.from.JSON('{"$group":{"_id":"$state", "totalPop":{"$sum":"$pop"}}}')
+pipe_2 <- mongo.bson.from.JSON('{"$match":{"totalPop":{"$gte":15000000}}}')
+cmd_list <- list(pipe_1, pipe_2)
+if(mongo.is.connected(mongo) == TRUE){
+  res <- mongo.aggregation(mongo, "rmongodb.zips", cmd_list)
+  res
+}
+```
+
+
+
+
+# GridFS with rmongodb
+GridFS is a specification for storing and retrieving files that exceed the BSON-document size limit of 16MB. There are several commands in **rmongodb** available to work with gridFS.
+```{r gridfs}
+if(mongo.is.connected(mongo) == TRUE){
+  mgrids <- mongo.gridfs.create(mongo, "rmongodb", prefix = "fs")
+  mongo.gridfs.store.file(mgrids, "faust.txt", "Faust")
+  gf <- mongo.gridfs.find(mgrids, "Faust")
+  mongo.gridfile.get.length(gf)
+  mongo.gridfile.get.chunk.count(gf)
+}
+```
+
+
+
+# Dropping/removing collections and databases and closing the connection to MongoDB
+After you've finished your analysis it's a good idea to destroy the connection to MongoDB and clean up the collections.
+```{r drop}
+if(mongo.is.connected(mongo) == TRUE){
+  mongo.drop(mongo, "rmongodb.zips")
+  mongo.drop.database(mongo, "rmongodb")
+  
+  # close connection
+  mongo.destroy(mongo)
+}
+```
+
+
+# Feedback and Issues
+Please do not hesitate to contact us if there are any issues using **rmongodb**. Issues or pull requests can be submitted via github: https://github.com/mongosoup/rmongodb
+
+

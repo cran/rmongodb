@@ -95,10 +95,10 @@ mongo.cursor.to.data.frame <- function(cursor, nullToNA=TRUE, ...){
     # remove mongo.oid -> data.frame can not deal with that!
     val <- val[sapply(val, class) != 'mongo.oid']
        
-    res <- rbind(res, as.data.frame(val, ... ))
+    res <- rbind.fill(res, as.data.frame(val, ... ))
     
   }
-  as.data.frame(res)
+  return( as.data.frame(res) )
 }
 
 

@@ -18,8 +18,7 @@ mongo.distinct(mongo, ns, key, query = mongo.bson.empty())
   restrict the returned values.}
 }
 \value{
-NULL if the command failed.  \code{\link{mongo.get.err}()}
-may be MONGO_COMMAND_FAILED.
+vector of distinct values or NULL if the command failed.
 
 (vector) The result set of distinct keys.
 }

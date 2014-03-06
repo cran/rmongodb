@@ -123,5 +123,6 @@ We use a three step version number system, e.g. v1.2.1:
 * CRAN submission:
  * http://cran.r-project.org/submit.html
  * create Package tar.gz via RStudio "Build Source Package"
- * run CRAN checks via: R CMD check --as-cran package.tar.gz
+ * run R CRAN checks via: R CMD check --as-cran package.tar.gz
+ * run R CRAN checks without running mongodb installation
  * create a tag / release on github for every CRAN submission

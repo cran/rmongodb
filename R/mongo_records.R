@@ -102,7 +102,13 @@ mongo.insert.batch <- function(mongo, ns, lst){
   if( !mongo.is.connected(mongo))
     stop("No mongoDB connection!")
 
-  .Call(".mongo.insert.batch", mongo, ns, lst)
+  res <- .Call(".mongo.insert.batch", mongo, ns, lst)
+  
+  if( res == FALSE ){
+    warning(mongo.get.server.err.string(mongo))
+  }
+  
+  return(res)
 }
 
 
