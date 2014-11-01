@@ -158,8 +158,12 @@ mongo.destroy <- function(mongo){
 #' }
 #' 
 #' @export mongo.is.connected
-mongo.is.connected <- function(mongo)
-    .Call(".mongo.is.connected", mongo)
+mongo.is.connected <- function(mongo) {
+  res <- try(.Call(".mongo.is.connected", mongo), silent = TRUE)
+  if(inherits(res, what = 'try-error')) return(FALSE)
+  else return(res);
+}
+    
 
 
 

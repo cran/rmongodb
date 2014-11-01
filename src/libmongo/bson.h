@@ -523,7 +523,7 @@ MONGO_EXPORT void bson_oid_from_string( bson_oid_t *oid, const char *str );
  * @param oid the bson_oid_t source.
  * @param str the string representation destination.
  */
-MONGO_EXPORT void bson_oid_to_string( const bson_oid_t *oid, char *str );
+MONGO_EXPORT void bson_oid_to_string_old( const bson_oid_t *oid, char *str );
 
 /**
  * Create a bson_oid object.
@@ -568,7 +568,7 @@ MONGO_EXPORT time_t bson_oid_generated_time( bson_oid_t *oid ); /* Gives the tim
  *  @note When finished, you must pass the bson object to
  *      bson_destroy( ).
  */
-MONGO_EXPORT void bson_init( bson *b );
+MONGO_EXPORT void bson_init_old( bson *b );
 
 /**
  * Initialize a BSON object, and point its data
@@ -620,7 +620,7 @@ MONGO_EXPORT int bson_finish( bson *b );
  * @param b the bson object to destroy.
  *
  */
-MONGO_EXPORT void bson_destroy( bson *b );
+MONGO_EXPORT void bson_destroy_old( bson *b );
 
 /**
  * Returns a pointer to a static empty BSON object.
@@ -640,7 +640,7 @@ MONGO_EXPORT bson *bson_empty( bson *obj );
  * @param out the copy destination BSON object.
  * @param in the copy source BSON object.
  */
-MONGO_EXPORT int bson_copy( bson *out, const bson *in ); /* puts data in new buffer. NOOP if out==NULL */
+MONGO_EXPORT int bson_copy_old( bson *out, const bson *in ); /* puts data in new buffer. NOOP if out==NULL */
 
 /**
  * Append a previously created bson_oid_t to a bson object.
@@ -651,7 +651,7 @@ MONGO_EXPORT int bson_copy( bson *out, const bson *in ); /* puts data in new buf
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_oid( bson *b, const char *name, const bson_oid_t *oid );
+MONGO_EXPORT int bson_append_oid_old( bson *b, const char *name, const bson_oid_t *oid );
 
 /**
  * Append a bson_oid_t to a bson.
@@ -694,7 +694,7 @@ MONGO_EXPORT int bson_append_long( bson *b, const char *name, const int64_t i );
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_double( bson *b, const char *name, const double d );
+MONGO_EXPORT int bson_append_double_old( bson *b, const char *name, const double d );
 
 /**
  * Append a string to a bson.
@@ -728,7 +728,7 @@ MONGO_EXPORT int bson_append_string_n( bson *b, const char *name, const char *st
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_symbol( bson *b, const char *name, const char *str );
+MONGO_EXPORT int bson_append_symbol_old( bson *b, const char *name, const char *str );
 
 /**
  * Append len bytes of a symbol to a bson.
@@ -752,7 +752,7 @@ MONGO_EXPORT int bson_append_symbol_n( bson *b, const char *name, const char *st
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_code( bson *b, const char *name, const char *str );
+MONGO_EXPORT int bson_append_code_old( bson *b, const char *name, const char *str );
 
 /**
  * Append len bytes of code to a bson.
@@ -802,7 +802,7 @@ MONGO_EXPORT int bson_append_code_w_scope_n( bson *b, const char *name, const ch
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_binary( bson *b, const char *name, char type, const char *str, int len );
+MONGO_EXPORT int bson_append_binary_old( bson *b, const char *name, char type, const char *str, int len );
 
 /**
  * Append a bson_bool_t to a bson.
@@ -813,7 +813,7 @@ MONGO_EXPORT int bson_append_binary( bson *b, const char *name, char type, const
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_bool( bson *b, const char *name, const bson_bool_t v );
+MONGO_EXPORT int bson_append_bool_old( bson *b, const char *name, const bson_bool_t v );
 
 /**
  * Append a null value to a bson.
@@ -823,7 +823,7 @@ MONGO_EXPORT int bson_append_bool( bson *b, const char *name, const bson_bool_t 
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_null( bson *b, const char *name );
+MONGO_EXPORT int bson_append_null_old( bson *b, const char *name );
 
 /**
  * Append an undefined value to a bson.
@@ -833,7 +833,7 @@ MONGO_EXPORT int bson_append_null( bson *b, const char *name );
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_undefined( bson *b, const char *name );
+MONGO_EXPORT int bson_append_undefined_old( bson *b, const char *name );
 
 /**
  * Append a regex value to a bson.
@@ -845,7 +845,7 @@ MONGO_EXPORT int bson_append_undefined( bson *b, const char *name );
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_regex( bson *b, const char *name, const char *pattern, const char *opts );
+MONGO_EXPORT int bson_append_regex_old( bson *b, const char *name, const char *pattern, const char *opts );
 
 /**
  * Append bson data to a bson.
@@ -878,7 +878,7 @@ MONGO_EXPORT int bson_append_element( bson *b, const char *name_or_null, const b
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_timestamp( bson *b, const char *name, bson_timestamp_t *ts );
+MONGO_EXPORT int bson_append_timestamp_old( bson *b, const char *name, bson_timestamp_t *ts );
 MONGO_EXPORT int bson_append_timestamp2( bson *b, const char *name, int time, int increment );
 
 /* these both append a bson_date */
@@ -902,7 +902,7 @@ MONGO_EXPORT int bson_append_date( bson *b, const char *name, bson_date_t millis
  *
  * @return BSON_OK or BSON_ERROR.
  */
-MONGO_EXPORT int bson_append_time_t( bson *b, const char *name, time_t secs );
+MONGO_EXPORT int bson_append_time_t_old( bson *b, const char *name, time_t secs );
 
 /**
  * Start appending a new object to a bson.
@@ -966,7 +966,7 @@ extern bson_fprintf_func bson_fprintf;
 extern bson_sprintf_func bson_sprintf;
 extern bson_printf_func bson_errprintf;
 
-MONGO_EXPORT void bson_free( void *ptr );
+MONGO_EXPORT void bson_free_old( void *ptr );
 
 /**
  * Allocates memory and checks return value, exiting fatally if malloc() fails.
@@ -977,7 +977,7 @@ MONGO_EXPORT void bson_free( void *ptr );
  *
  * @sa malloc(3)
  */
-MONGO_EXPORT void *bson_malloc( int size );
+MONGO_EXPORT void *bson_malloc_old( int size );
 
 /**
  * Changes the size of allocated memory and checks return value,
@@ -990,7 +990,7 @@ MONGO_EXPORT void *bson_malloc( int size );
  *
  * @sa realloc()
  */
-void *bson_realloc( void *ptr, int size );
+void *bson_realloc_old( void *ptr, int size );
 
 /**
  * Set a function for error handling.

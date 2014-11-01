@@ -1,6 +1,6 @@
 PKG_CFLAGS += -D_MONGO_USE_GETADDRINFO -DR_SAFETY_NET 
 
-SOURCES = $(wildcard libmongo/*.c *.c)
+SOURCES = $(wildcard libbson/yajl/*.c libbson/bson/*.c libmongo/*.c *.c)
 
 OBJECTS = $(SOURCES:.c=.o)
 

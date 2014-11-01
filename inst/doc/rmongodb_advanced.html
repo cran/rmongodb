@@ -5,6 +5,18 @@
 
 <title>Advanced topics in the rmongodb Package</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -45,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -60,6 +69,7 @@ body, td {
 body {
   max-width: 800px;
   margin: auto;
+  padding: 1em;
   line-height: 20px;
 }
 
@@ -67,28 +77,28 @@ tt, code, pre {
    font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
-h1 { 
-   font-size:2.2em; 
+h1 {
+   font-size:2.2em;
 }
 
-h2 { 
-   font-size:1.8em; 
+h2 {
+   font-size:1.8em;
 }
 
-h3 { 
-   font-size:1.4em; 
+h3 {
+   font-size:1.4em;
 }
 
-h4 { 
-   font-size:1.0em; 
+h4 {
+   font-size:1.0em;
 }
 
-h5 { 
-   font-size:0.9em; 
+h5 {
+   font-size:0.9em;
 }
 
-h6 { 
-   font-size:0.8em; 
+h6 {
+   font-size:0.8em;
 }
 
 a:visited {
@@ -98,7 +108,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -132,54 +144,54 @@ hr {
 }
 
 @media print {
-   * { 
-      background: transparent !important; 
-      color: black !important; 
-      filter:none !important; 
-      -ms-filter: none !important; 
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
    }
 
-   body { 
-      font-size:12pt; 
-      max-width:100%; 
-   }
-       
-   a, a:visited { 
-      text-decoration: underline; 
+   body {
+      font-size:12pt;
+      max-width:100%;
    }
 
-   hr { 
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
       visibility: hidden;
       page-break-before: always;
    }
 
-   pre, blockquote { 
-      padding-right: 1em; 
-      page-break-inside: avoid; 
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
    }
 
-   tr, img { 
-      page-break-inside: avoid; 
+   tr, img {
+      page-break-inside: avoid;
    }
 
-   img { 
-      max-width: 100% !important; 
+   img {
+      max-width: 100% !important;
    }
 
-   @page :left { 
-      margin: 15mm 20mm 15mm 10mm; 
-   }
-     
-   @page :right { 
-      margin: 15mm 10mm 15mm 20mm; 
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
    }
 
-   p, h2, h3 { 
-      orphans: 3; widows: 3; 
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
    }
 
-   h2, h3 { 
-      page-break-after: avoid; 
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
    }
 }
 </style>
@@ -201,15 +213,10 @@ hr {
 
 <pre><code class="r">library(rmongodb)
 mongo &lt;- mongo.create()
+mongo.is.connected(mongo)
 </code></pre>
 
-<pre><code>## Unable to connect to 127.0.0.1:27017, error code = 2
-</code></pre>
-
-<pre><code class="r">mongo.is.connected(mongo)
-</code></pre>
-
-<pre><code>## [1] FALSE
+<pre><code>## [1] TRUE
 </code></pre>
 
 <h1>Inserting Big Data</h1>
@@ -230,25 +237,26 @@ head(zips)
 ## [6,] &quot;ALPINE&quot;     Numeric,2 3062  &quot;AL&quot;  &quot;35014&quot;
 </code></pre>
 
-<pre><code class="r">zips[1, ]$loc
+<pre><code class="r">zips[1,]$loc
 </code></pre>
 
 <pre><code>## [1] -86.52  33.58
 </code></pre>
 
-<pre><code class="r">
-# rename _id field. The original zips data set holds duplicate _id values
-# which will fale during the import
+<pre><code class="r"># rename _id field. The original zips data set holds duplicate _id values which will fale during the import
 colnames(zips)[5] &lt;- &quot;orig_id&quot;
 
 # create BSON batch object
 ziplist &lt;- list()
-ziplist &lt;- apply(zips, 1, function(x) c(ziplist, x))
-res &lt;- lapply(ziplist, function(x) mongo.bson.from.list(x))
+ziplist &lt;- apply( zips, 1, function(x) c( ziplist, x ) )
+res &lt;- lapply( ziplist, function(x) mongo.bson.from.list(x) )
 
-if (mongo.is.connected(mongo) == TRUE) {
-    mongo.insert.batch(mongo, &quot;rmongodb.zips&quot;, res)
+if(mongo.is.connected(mongo) == TRUE){
+  mongo.insert.batch(mongo, &quot;rmongodb.zips&quot;, res )
 }
+</code></pre>
+
+<pre><code>## [1] TRUE
 </code></pre>
 
 <p>Let&#39;s check if all the inserted data is available in MongoDB.</p>
@@ -259,12 +267,135 @@ if (mongo.is.connected(mongo) == TRUE) {
 <pre><code>## [1] 29470     5
 </code></pre>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    nr &lt;- mongo.count(mongo, &quot;rmongodb.zips&quot;)
-    print(nr)
-    res &lt;- mongo.find.all(mongo, &quot;rmongodb.zips&quot;, limit = 20)
-    head(res)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE){
+  nr &lt;- mongo.count(mongo, &quot;rmongodb.zips&quot;)
+  print( nr )
+  res &lt;- mongo.find.all(mongo, &quot;rmongodb.zips&quot;, limit=20)
+  head( res )
 }
+</code></pre>
+
+<pre><code>## [1] 58940
+</code></pre>
+
+<pre><code>## [[1]]
+## [[1]]$`_id`
+## [1] &quot;545a7aa908a841baf228108a&quot;
+## 
+## [[1]]$city
+## [1] &quot;ACMAR&quot;
+## 
+## [[1]]$loc
+## [1] -86.52  33.58
+## 
+## [[1]]$pop
+## [1] 6055
+## 
+## [[1]]$state
+## [1] &quot;AL&quot;
+## 
+## [[1]]$orig_id
+## [1] &quot;35004&quot;
+## 
+## 
+## [[2]]
+## [[2]]$`_id`
+## [1] &quot;545a7aa908a841baf228108b&quot;
+## 
+## [[2]]$city
+## [1] &quot;ADAMSVILLE&quot;
+## 
+## [[2]]$loc
+## [1] -86.96  33.59
+## 
+## [[2]]$pop
+## [1] 10616
+## 
+## [[2]]$state
+## [1] &quot;AL&quot;
+## 
+## [[2]]$orig_id
+## [1] &quot;35005&quot;
+## 
+## 
+## [[3]]
+## [[3]]$`_id`
+## [1] &quot;545a7aa908a841baf228108c&quot;
+## 
+## [[3]]$city
+## [1] &quot;ADGER&quot;
+## 
+## [[3]]$loc
+## [1] -87.17  33.43
+## 
+## [[3]]$pop
+## [1] 3205
+## 
+## [[3]]$state
+## [1] &quot;AL&quot;
+## 
+## [[3]]$orig_id
+## [1] &quot;35006&quot;
+## 
+## 
+## [[4]]
+## [[4]]$`_id`
+## [1] &quot;545a7aa908a841baf228108d&quot;
+## 
+## [[4]]$city
+## [1] &quot;KEYSTONE&quot;
+## 
+## [[4]]$loc
+## [1] -86.81  33.24
+## 
+## [[4]]$pop
+## [1] 14218
+## 
+## [[4]]$state
+## [1] &quot;AL&quot;
+## 
+## [[4]]$orig_id
+## [1] &quot;35007&quot;
+## 
+## 
+## [[5]]
+## [[5]]$`_id`
+## [1] &quot;545a7aa908a841baf228108e&quot;
+## 
+## [[5]]$city
+## [1] &quot;NEW SITE&quot;
+## 
+## [[5]]$loc
+## [1] -85.95  32.94
+## 
+## [[5]]$pop
+## [1] 19942
+## 
+## [[5]]$state
+## [1] &quot;AL&quot;
+## 
+## [[5]]$orig_id
+## [1] &quot;35010&quot;
+## 
+## 
+## [[6]]
+## [[6]]$`_id`
+## [1] &quot;545a7aa908a841baf228108f&quot;
+## 
+## [[6]]$city
+## [1] &quot;ALPINE&quot;
+## 
+## [[6]]$loc
+## [1] -86.21  33.33
+## 
+## [[6]]$pop
+## [1] 3062
+## 
+## [[6]]$state
+## [1] &quot;AL&quot;
+## 
+## [[6]]$orig_id
+## [1] &quot;35014&quot;
 </code></pre>
 
 <h1>MongoDB Aggregation Framework</h1>
@@ -273,7 +404,7 @@ if (mongo.is.connected(mongo) == TRUE) {
 
 <p>Let&#39;s compute the total population of each state and group by state:</p>
 
-<pre><code class="r">pipe_1 &lt;- mongo.bson.from.JSON(&quot;{\&quot;$group\&quot;:{\&quot;_id\&quot;:\&quot;$state\&quot;, \&quot;totalPop\&quot;:{\&quot;$sum\&quot;:\&quot;$pop\&quot;}}}&quot;)
+<pre><code class="r">pipe_1 &lt;- mongo.bson.from.JSON(&#39;{&quot;$group&quot;:{&quot;_id&quot;:&quot;$state&quot;, &quot;totalPop&quot;:{&quot;$sum&quot;:&quot;$pop&quot;}}}&#39;)
 cmd_list &lt;- list(pipe_1)
 cmd_list
 </code></pre>
@@ -285,47 +416,142 @@ cmd_list
 ##          $sum : 2     $pop
 </code></pre>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    res &lt;- mongo.aggregation(mongo, &quot;rmongodb.zips&quot;, cmd_list)
-    head(mongo.bson.value(res, &quot;result&quot;))
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE){
+  res &lt;- mongo.aggregation(mongo, &quot;rmongodb.zips&quot;, cmd_list)
+  head( mongo.bson.value(res, &quot;result&quot;) )
 }
+</code></pre>
+
+<pre><code>## $`0`
+## $`0`$`_id`
+## [1] &quot;WV&quot;
+## 
+## $`0`$totalPop
+## [1] 3586954
+## 
+## 
+## $`1`
+## $`1`$`_id`
+## [1] &quot;WA&quot;
+## 
+## $`1`$totalPop
+## [1] 9733384
+## 
+## 
+## $`2`
+## $`2`$`_id`
+## [1] &quot;VA&quot;
+## 
+## $`2`$totalPop
+## [1] 12374716
+## 
+## 
+## $`3`
+## $`3`$`_id`
+## [1] &quot;VT&quot;
+## 
+## $`3`$totalPop
+## [1] 1125516
+## 
+## 
+## $`4`
+## $`4`$`_id`
+## [1] &quot;UT&quot;
+## 
+## $`4`$totalPop
+## [1] 3445700
+## 
+## 
+## $`5`
+## $`5`$`_id`
+## [1] &quot;TN&quot;
+## 
+## $`5`$totalPop
+## [1] 9754370
 </code></pre>
 
 <p>Ok, I am only interested in the states with populations above 10 Million:</p>
 
-<pre><code class="r">pipe_1 &lt;- mongo.bson.from.JSON(&quot;{\&quot;$group\&quot;:{\&quot;_id\&quot;:\&quot;$state\&quot;, \&quot;totalPop\&quot;:{\&quot;$sum\&quot;:\&quot;$pop\&quot;}}}&quot;)
-pipe_2 &lt;- mongo.bson.from.JSON(&quot;{\&quot;$match\&quot;:{\&quot;totalPop\&quot;:{\&quot;$gte\&quot;:15000000}}}&quot;)
+<pre><code class="r">pipe_1 &lt;- mongo.bson.from.JSON(&#39;{&quot;$group&quot;:{&quot;_id&quot;:&quot;$state&quot;, &quot;totalPop&quot;:{&quot;$sum&quot;:&quot;$pop&quot;}}}&#39;)
+pipe_2 &lt;- mongo.bson.from.JSON(&#39;{&quot;$match&quot;:{&quot;totalPop&quot;:{&quot;$gte&quot;:15000000}}}&#39;)
 cmd_list &lt;- list(pipe_1, pipe_2)
-if (mongo.is.connected(mongo) == TRUE) {
-    res &lt;- mongo.aggregation(mongo, &quot;rmongodb.zips&quot;, cmd_list)
-    res
+if(mongo.is.connected(mongo) == TRUE){
+  res &lt;- mongo.aggregation(mongo, &quot;rmongodb.zips&quot;, cmd_list)
+  res
 }
+</code></pre>
+
+<pre><code>##  result : 4   
+##      0 : 3    
+##          _id : 2      PA
+##          totalPop : 1     23763286.000000
+## 
+##      1 : 3    
+##          _id : 2      OH
+##          totalPop : 1     21694230.000000
+## 
+##      2 : 3    
+##          _id : 2      NY
+##          totalPop : 1     35980910.000000
+## 
+##      3 : 3    
+##          _id : 2      TX
+##          totalPop : 1     33973020.000000
+## 
+##      4 : 3    
+##          _id : 2      MI
+##          totalPop : 1     18590594.000000
+## 
+##      5 : 3    
+##          _id : 2      FL
+##          totalPop : 1     25875852.000000
+## 
+##      6 : 3    
+##          _id : 2      NJ
+##          totalPop : 1     15460376.000000
+## 
+##      7 : 3    
+##          _id : 2      IL
+##          totalPop : 1     22861204.000000
+## 
+##      8 : 3    
+##          _id : 2      CA
+##          totalPop : 1     59520042.000000
+## 
+## 
+##  ok : 1   1.000000
 </code></pre>
 
 <h1>GridFS with rmongodb</h1>
 
 <p>GridFS is a specification for storing and retrieving files that exceed the BSON-document size limit of 16MB. There are several commands in <strong>rmongodb</strong> available to work with gridFS.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mgrids &lt;- mongo.gridfs.create(mongo, &quot;rmongodb&quot;, prefix = &quot;fs&quot;)
-    mongo.gridfs.store.file(mgrids, &quot;faust.txt&quot;, &quot;Faust&quot;)
-    gf &lt;- mongo.gridfs.find(mgrids, &quot;Faust&quot;)
-    mongo.gridfile.get.length(gf)
-    mongo.gridfile.get.chunk.count(gf)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE){
+  mgrids &lt;- mongo.gridfs.create(mongo, &quot;rmongodb&quot;, prefix = &quot;fs&quot;)
+  mongo.gridfs.store.file(mgrids, &quot;faust.txt&quot;, &quot;Faust&quot;)
+  gf &lt;- mongo.gridfs.find(mgrids, &quot;Faust&quot;)
+  mongo.gridfile.get.length(gf)
+  mongo.gridfile.get.chunk.count(gf)
 }
+</code></pre>
+
+<pre><code>## [1] 1
 </code></pre>
 
 <h1>Dropping/removing collections and databases and closing the connection to MongoDB</h1>
 
 <p>After you&#39;ve finished your analysis it&#39;s a good idea to destroy the connection to MongoDB and clean up the collections.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mongo.drop(mongo, &quot;rmongodb.zips&quot;)
-    mongo.drop.database(mongo, &quot;rmongodb&quot;)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE){
+  mongo.drop(mongo, &quot;rmongodb.zips&quot;)
+  mongo.drop.database(mongo, &quot;rmongodb&quot;)
 
-    # close connection
-    mongo.destroy(mongo)
+  # close connection
+  mongo.destroy(mongo)
 }
+</code></pre>
+
+<pre><code>## NULL
 </code></pre>
 
 <h1>Feedback and Issues</h1>

@@ -75,3 +75,4 @@ SEXP mongo_bson_buffer_finish_object(SEXP buf);
 SEXP mongo_bson_buffer_size(SEXP buf);
 
 SEXP _mongo_bson_create(bson* b);
+SEXP _mongo_bson_value(bson_iterator* _iter);

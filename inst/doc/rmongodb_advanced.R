@@ -1,9 +1,7 @@
-
 ## ----connect-------------------------------------------------------------
 library(rmongodb)
 mongo <- mongo.create()
 mongo.is.connected(mongo)
-
 
 ## ----insertZips----------------------------------------------------------
 # load example data set from rmongodb
@@ -23,7 +21,6 @@ if(mongo.is.connected(mongo) == TRUE){
   mongo.insert.batch(mongo, "rmongodb.zips", res )
 }
 
-
 ## ----insertCheck---------------------------------------------------------
 dim(zips)
 if(mongo.is.connected(mongo) == TRUE){
@@ -32,7 +29,6 @@ if(mongo.is.connected(mongo) == TRUE){
   res <- mongo.find.all(mongo, "rmongodb.zips", limit=20)
   head( res )
 }
-
 
 ## ----aggregationFramework------------------------------------------------
 pipe_1 <- mongo.bson.from.JSON('{"$group":{"_id":"$state", "totalPop":{"$sum":"$pop"}}}')
@@ -43,7 +39,6 @@ if(mongo.is.connected(mongo) == TRUE){
   head( mongo.bson.value(res, "result") )
 }
 
-
 ## ----aggregationFramework2-----------------------------------------------
 pipe_1 <- mongo.bson.from.JSON('{"$group":{"_id":"$state", "totalPop":{"$sum":"$pop"}}}')
 pipe_2 <- mongo.bson.from.JSON('{"$match":{"totalPop":{"$gte":15000000}}}')
@@ -52,7 +47,6 @@ if(mongo.is.connected(mongo) == TRUE){
   res <- mongo.aggregation(mongo, "rmongodb.zips", cmd_list)
   res
 }
-
 
 ## ----gridfs--------------------------------------------------------------
 if(mongo.is.connected(mongo) == TRUE){
@@ -63,7 +57,6 @@ if(mongo.is.connected(mongo) == TRUE){
   mongo.gridfile.get.chunk.count(gf)
 }
 
-
 ## ----drop----------------------------------------------------------------
 if(mongo.is.connected(mongo) == TRUE){
   mongo.drop(mongo, "rmongodb.zips")
@@ -72,5 +65,4 @@ if(mongo.is.connected(mongo) == TRUE){
   # close connection
   mongo.destroy(mongo)
 }
-
 

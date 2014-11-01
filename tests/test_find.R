@@ -94,19 +94,22 @@ if( mongo.is.connected(mongo) ){
   checkIdentical( sort(unlist(res[, "city"])) , unlist(res[, "city"]))
   
   # good query with find and sort and JSON
-  res <- mongo.find.batch(mongo, ns, '{"age":{"$gt":21}}', sort='{"age":1}', data.frame=TRUE)
+  res <- mongo.find.batch(mongo, ns, '{"age":{"$gt":21}}', sort='{"age":1}', 
+                          data.frame=TRUE, mongo.oid2character=TRUE)
   checkEquals( class(res), "data.frame")
   checkTrue( !is.unsorted( res[,"age"] ) )
   
   # good query with find and sort and fields and JSON
   res <- mongo.find.batch(mongo, ns, '{"age":{"$lt":30}}', 
-                          sort='{"age":1}', fields='{"city":0}', data.frame=TRUE)
+                          sort='{"age":1}', fields='{"city":0}', 
+                          data.frame=TRUE, mongo.oid2character=TRUE)
   checkEquals( class(res), "data.frame")
   checkTrue( !is.unsorted( res[,"age"] ) )
-  checkEquals( colnames(res), c("name", "age"))
+  checkEquals( colnames(res), c("_id", "name", "age"))
   
   # good query with find.all
-  res <- mongo.find.all(mongo, ns)  
+  res <- mongo.find.all(mongo, ns, 
+                        data.frame=TRUE, mongo.oid2character=TRUE)  
   checkEquals( dim(res), c(4,4) )
   checkTrue( is.list(res) )
   

@@ -5,6 +5,18 @@
 
 <title>Introduction to the rmongodb Package</title>
 
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
    pre .operator,
@@ -45,9 +57,6 @@ var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/<
 hljs.initHighlightingOnLoad();
 </script>
 
-<!-- MathJax scripts -->
-<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 <style type="text/css">
@@ -60,6 +69,7 @@ body, td {
 body {
   max-width: 800px;
   margin: auto;
+  padding: 1em;
   line-height: 20px;
 }
 
@@ -67,28 +77,28 @@ tt, code, pre {
    font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
 }
 
-h1 { 
-   font-size:2.2em; 
+h1 {
+   font-size:2.2em;
 }
 
-h2 { 
-   font-size:1.8em; 
+h2 {
+   font-size:1.8em;
 }
 
-h3 { 
-   font-size:1.4em; 
+h3 {
+   font-size:1.4em;
 }
 
-h4 { 
-   font-size:1.0em; 
+h4 {
+   font-size:1.0em;
 }
 
-h5 { 
-   font-size:0.9em; 
+h5 {
+   font-size:0.9em;
 }
 
-h6 { 
-   font-size:0.8em; 
+h6 {
+   font-size:0.8em;
 }
 
 a:visited {
@@ -98,7 +108,9 @@ a:visited {
 pre, img {
   max-width: 100%;
 }
-
+pre {
+  overflow-x: auto;
+}
 pre code {
    display: block; padding: 0.5em;
 }
@@ -132,54 +144,54 @@ hr {
 }
 
 @media print {
-   * { 
-      background: transparent !important; 
-      color: black !important; 
-      filter:none !important; 
-      -ms-filter: none !important; 
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
    }
 
-   body { 
-      font-size:12pt; 
-      max-width:100%; 
-   }
-       
-   a, a:visited { 
-      text-decoration: underline; 
+   body {
+      font-size:12pt;
+      max-width:100%;
    }
 
-   hr { 
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
       visibility: hidden;
       page-break-before: always;
    }
 
-   pre, blockquote { 
-      padding-right: 1em; 
-      page-break-inside: avoid; 
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
    }
 
-   tr, img { 
-      page-break-inside: avoid; 
+   tr, img {
+      page-break-inside: avoid;
    }
 
-   img { 
-      max-width: 100% !important; 
+   img {
+      max-width: 100% !important;
    }
 
-   @page :left { 
-      margin: 15mm 20mm 15mm 10mm; 
-   }
-     
-   @page :right { 
-      margin: 15mm 10mm 15mm 20mm; 
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
    }
 
-   p, h2, h3 { 
-      orphans: 3; widows: 3; 
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
    }
 
-   h2, h3 { 
-      page-break-after: avoid; 
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
    }
 }
 </style>
@@ -205,7 +217,7 @@ hr {
 <p>You can also install the latest development version from the GitHub repository:</p>
 
 <pre><code class="r">library(devtools)
-install_github(&quot;rmongodb&quot;, &quot;mongosoup&quot;)
+install_github(repo = &quot;mongosoup/rmongodb&quot;)
 </code></pre>
 
 <p>The installation should be very simple and straightforward. No local MongoDB installation is required. Only if you install from source, the RUnit tests will need a local MongoDB installation.</p>
@@ -221,17 +233,12 @@ install_github(&quot;rmongodb&quot;, &quot;mongosoup&quot;)
 
 <pre><code class="r">help(&quot;mongo.create&quot;)
 mongo &lt;- mongo.create()
-</code></pre>
-
-<pre><code>## Unable to connect to 127.0.0.1:27017, error code = 2
-</code></pre>
-
-<pre><code class="r">mongo
+mongo
 </code></pre>
 
 <pre><code>## [1] 0
 ## attr(,&quot;mongo&quot;)
-## &lt;pointer: 0x10be2e160&gt;
+## &lt;pointer: 0x58df750&gt;
 ## attr(,&quot;class&quot;)
 ## [1] &quot;mongo&quot;
 ## attr(,&quot;host&quot;)
@@ -251,27 +258,43 @@ mongo &lt;- mongo.create()
 <pre><code class="r">mongo.is.connected(mongo)
 </code></pre>
 
-<pre><code>## [1] FALSE
+<pre><code>## [1] TRUE
 </code></pre>
 
 <p>It&#39;s always a good idea to check if there is a working connection to your MongoDB to avoid errors.</p>
+
+<pre><code>## 
+## Attaching package: &#39;jsonlite&#39;
+## 
+## The following object is masked from &#39;package:utils&#39;:
+## 
+##     View
+</code></pre>
 
 <h1>Getting databases and collections</h1>
 
 <p>Get all databases of your MongoDB connection:</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mongo.get.databases(mongo)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  mongo.get.databases(mongo)
 }
+</code></pre>
+
+<pre><code>## [1] &quot;grid&quot;     &quot;rmongodb&quot; &quot;scorr&quot;    &quot;test&quot;
 </code></pre>
 
 <p>Get all collections in a specific database of your MongoDB (in this case, the &ldquo;rmongodb&rdquo; database)</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    db &lt;- &quot;rmongodb&quot;
-    mongo.get.database.collections(mongo, db)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  db &lt;- &quot;rmongodb&quot;
+  mongo.get.database.collections(mongo, db)
 }
-coll &lt;- &quot;rmongodb.zips&quot;
+</code></pre>
+
+<pre><code>## [1] &quot;rmongodb.zips&quot;
+</code></pre>
+
+<pre><code class="r">coll &lt;- &quot;rmongodb.zips&quot;
 </code></pre>
 
 <p>We will use the &#39;zips&#39; collection in the following examples. The &#39;zips&#39; collection holds the MongoDB example data set called &ldquo;Zip Code Data Set&rdquo; (<a href="http://docs.mongodb.org/manual/tutorial/aggregation-zip-code-data-set/">http://docs.mongodb.org/manual/tutorial/aggregation-zip-code-data-set/</a>). This data set is available as JSON and contains zip code data from the US.</p>
@@ -280,41 +303,110 @@ coll &lt;- &quot;rmongodb.zips&quot;
 
 <p>Using the command <em>mongo.count</em>, we can check how many documents are in the collection or in the result of a specific query. More information for all functions can be found in the help files.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    help(&quot;mongo.count&quot;)
-    mongo.count(mongo, coll)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  help(&quot;mongo.count&quot;)
+  mongo.count(mongo, coll)
 }
 </code></pre>
 
-<p>In order to run queries it is important to know some details about the available data. First of all you can run the command <em>mongo.find.one</em> to get one document from your collection.</p>
+<pre><code>## [1] 29470
+</code></pre>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mongo.find.one(mongo, coll)
+<p>In order to run queries it is important to know some details about the available data. First of all you can run the command <code>mongo.find.one</code> to get one document from your collection.</p>
+
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  mongo.find.one(mongo, coll)
 }
 </code></pre>
 
-<p>The command <em>mongo.distinct</em> is going to provide a list of all values for a specific key.</p>
+<pre><code>##  _id : 7      545a7c2e08a841baf228f6cd
+##  city : 2     ACMAR
+##  loc : 4      
+##      0 : 1    -86.515570
+##      1 : 1    33.584132
+## 
+##  pop : 1      6055.000000
+##  state : 2    AL
+##  orig_id : 2      35004
+</code></pre>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    res &lt;- mongo.distinct(mongo, coll, &quot;city&quot;)
-    head(res)
+<p>The command <code>mongo.distinct</code> is going to provide a list of all values for a specific key.</p>
+
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  res &lt;- mongo.distinct(mongo, coll, &quot;city&quot;)
+  head(res, 2)
 }
+</code></pre>
+
+<pre><code>## [1] &quot;ACMAR&quot;      &quot;ADAMSVILLE&quot;
 </code></pre>
 
 <h1>Finding some first data</h1>
 
-<p>Now we can run the first queries on our MongoDB. In this case we ask for one document providing zip code data for the city &ldquo;COLORADO CITY&rdquo;. Please be aware that the output of <em>mongo.find.one</em> is a BSON object, which can not be used directly for further analysis in R. Using the command <em>mongo.bson.to.list</em>, an R list object will be created from the BSON object.</p>
+<p>Now we can run the first queries on our MongoDB. In this case we ask for one document providing zip code data for the city &ldquo;COLORADO CITY&rdquo;. Please be aware that the output of <code>mongo.find.one</code> is a BSON object, which can not be used directly for further analysis in R. Using the command <code>mongo.bson.to.list</code>, an R list object will be created from the BSON object.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    cityone &lt;- mongo.find.one(mongo, coll, &quot;{\&quot;city\&quot;:\&quot;COLORADO CITY\&quot;}&quot;)
-    print(cityone)
-    mongo.bson.to.list(cityone)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  cityone &lt;- mongo.find.one(mongo, coll, &#39;{&quot;city&quot;:&quot;COLORADO CITY&quot;}&#39;)
+  print( cityone )
+  mongo.bson.to.list(cityone)
 }
+</code></pre>
+
+<pre><code>##  _id : 7      545a7c2e08a841baf228fa9b
+##  city : 2     COLORADO CITY
+##  loc : 4      
+##      0 : 1    -112.952427
+##      1 : 1    36.976266
+## 
+##  pop : 1      3065.000000
+##  state : 2    AZ
+##  orig_id : 2      86021
+</code></pre>
+
+<pre><code>## $`_id`
+## { $oid : &quot;545a7c2e08a841baf228fa9b&quot; }
+## 
+## $city
+## [1] &quot;COLORADO CITY&quot;
+## 
+## $loc
+## [1] -112.95   36.98
+## 
+## $pop
+## [1] 3065
+## 
+## $state
+## [1] &quot;AZ&quot;
+## 
+## $orig_id
+## [1] &quot;86021&quot;
 </code></pre>
 
 <h1>Creating BSON objects</h1>
 
-<p>Until recently, working with <strong>rmonbodb</strong> was all about creating BSON objects in R. This was a very difficult and error-prone task. Since <strong>rmongodb</strong> version 1.2 you can use JSON directly, and the syntax of the <strong>rmongodb</strong> package is much more similar to the MongoDB shell.</p>
+<p>The most convinient way to construct bson objects is to to use <code>mongo.bson.from.list</code> function. 
+It is very natural, because R lists are very similar to JSON objects - each level of JSON object 
+can be represented by <strong>named</strong> list and each array can be represented by <strong>unnamed</strong> list:</p>
+
+<pre><code class="r">query &lt;- mongo.bson.from.list(list(&#39;city&#39; = &#39;COLORADO CITY&#39;))
+query
+</code></pre>
+
+<pre><code>##  city : 2     COLORADO CITY
+</code></pre>
+
+<pre><code class="r">query &lt;- mongo.bson.from.list(list(&#39;city&#39; = &#39;COLORADO CITY&#39;, &#39;loc&#39; = list(-112.952427, 36.976266)))
+query
+</code></pre>
+
+<pre><code>##  city : 2     COLORADO CITY
+##  loc : 4      
+##      0 : 1    -112.952427
+##      1 : 1    36.976266
+</code></pre>
+
+<p>Internally <code>mongo.bson.from.list</code> calls 
+<code>mongo.bson.buffer.create</code>, <code>mongo.bson.buffer.append</code>, <code>mongo.bson.from.buffer</code> functions. But in most cases you really don&#39;t need to know anything about these internals:</p>
 
 <pre><code class="r">buf &lt;- mongo.bson.buffer.create()
 mongo.bson.buffer.append(buf, &quot;city&quot;, &quot;COLORADO CITY&quot;)
@@ -330,47 +422,157 @@ query
 <pre><code>##  city : 2     COLORADO CITY
 </code></pre>
 
-<p>The same BSON object can be created using one line of code and JSON:</p>
+<p>Alternatively same BSON object can be created using one line of code and JSON:</p>
 
-<pre><code class="r">mongo.bson.from.JSON(&quot;{\&quot;city\&quot;:\&quot;COLORADO CITY\&quot;}&quot;)
+<pre><code class="r">mongo.bson.from.JSON(&#39;{&quot;city&quot;:&quot;COLORADO CITY&quot;, &quot;loc&quot;:[-112.952427, 36.976266]}&#39;)
 </code></pre>
 
 <pre><code>##  city : 2     COLORADO CITY
+##  loc : 4      
+##      0 : 1    -112.952427
+##      1 : 1    36.976266
 </code></pre>
+
+<p><code>mongo.bson.from.list</code> automatically converts R primitive data types (integer, numeric, logical, character) into MongoDB data types. You have to make some extra job for <code>Date</code> types. To build bson with <code>ISODate</code> data you should pass it as <code>POSIXct</code> object:</p>
+
+<pre><code class="r">date_string &lt;- &quot;2014-10-11 12:01:06&quot;
+# Pay attention to timezone argument
+query &lt;- mongo.bson.from.list(list(date = as.POSIXct(date_string, tz=&#39;MSK&#39;)))
+# Note, that internall MongoDB strores dates in unixtime format:
+query
+</code></pre>
+
+<pre><code>##  date : 9     1413028866000
+</code></pre>
+
+<p>You should construct bsons manually using <code>mongo.bson.buffer.create</code>, <code>mongo.bson.buffer.append</code>, <code>mongo.bson.from.buffer</code> if it contains MongoDB specific data types such as <code>BSON_OID</code>, <code>BSON_REGEX</code>, etc.</p>
 
 <h1>Finding more data</h1>
 
-<p>For real analyses it is important to get more than one document of data from MongoDB. As an example, we first use the command <em>mongo.distict</em> to get an overview about the population distribution. Then we check for all cities with less than two inhabitants (errors in the data set?). </p>
+<p>For real analyses it is important to get more than one document of data from MongoDB. As an example, we first use the command <code>mongo.distict</code> to get an overview about the population distribution. Then we check for all cities with less than two inhabitants (errors in the data set?). </p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    pop &lt;- mongo.distinct(mongo, coll, &quot;pop&quot;)
-    hist(pop)
-    boxplot(pop)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  pop &lt;- mongo.distinct(mongo, coll, &quot;pop&quot;)
+  hist(pop)
+  boxplot(pop)
 
-    nr &lt;- mongo.count(mongo, coll, &quot;{\&quot;pop\&quot;:{\&quot;$lte\&quot;:2}}&quot;)
-    print(nr)
-    pops &lt;- mongo.find.all(mongo, coll, &quot;{\&quot;pop\&quot;:{\&quot;$lte\&quot;:2}}&quot;)
-    print(dim(pops))
-    head(pops)
+  nr &lt;- mongo.count(mongo, coll, list(&#39;pop&#39; = list(&#39;$lte&#39; = 2)))
+  print( nr )
+  pops &lt;- mongo.find.all(mongo, coll, list(&#39;pop&#39; = list(&#39;$lte&#39; = 2)))
+  head(pops, 2)
 }
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk findMore"/> <img src="data:image/png;base64,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" alt="plot of chunk findMore"/> </p>
+
+<pre><code>## [1] 87
+</code></pre>
+
+<pre><code>## [[1]]
+## [[1]]$`_id`
+## [1] &quot;545a7c2e08a841baf228f85a&quot;
+## 
+## [[1]]$city
+## [1] &quot;ALLEN&quot;
+## 
+## [[1]]$loc
+## [1] -87.67  31.62
+## 
+## [[1]]$pop
+## [1] 0
+## 
+## [[1]]$state
+## [1] &quot;AL&quot;
+## 
+## [[1]]$orig_id
+## [1] &quot;36419&quot;
+## 
+## 
+## [[2]]
+## [[2]]$`_id`
+## [1] &quot;545a7c2e08a841baf228f91c&quot;
+## 
+## [[2]]$city
+## [1] &quot;CHEVAK&quot;
+## 
+## [[2]]$loc
+## [1] -164.78   61.58
+## 
+## [[2]]$pop
+## [1] 0
+## 
+## [[2]]$state
+## [1] &quot;AK&quot;
+## 
+## [[2]]$orig_id
+## [1] &quot;99563&quot;
 </code></pre>
 
 <h1>Finding more data with a more complex query</h1>
 
-<p>The analysis gets more interesting when creating a more complex query with two arguments. Using the package <strong>jsonlite</strong> you can check and visualize your JSON syntax first. Afterwards we query MongoDB with this JSON query.</p>
+<p>The analysis gets more interesting when creating a more complex query with two arguments.</p>
+
+<pre><code class="r"># or do it R way, as recommended above:
+if(mongo.is.connected(mongo) == TRUE) {
+  pops1 &lt;- mongo.find.all(mongo, coll, query = list(&#39;pop&#39; = list(&#39;$lte&#39; = 2), &#39;pop&#39; = list(&#39;$gte&#39; = 1)))
+  head(pops1, 2)
+}
+</code></pre>
+
+<pre><code>## [[1]]
+## [[1]]$`_id`
+## [1] &quot;545a7c2e08a841baf228f926&quot;
+## 
+## [[1]]$city
+## [1] &quot;CROOKED CREEK&quot;
+## 
+## [[1]]$loc
+## [1] -158.00   61.82
+## 
+## [[1]]$pop
+## [1] 1
+## 
+## [[1]]$state
+## [1] &quot;AK&quot;
+## 
+## [[1]]$orig_id
+## [1] &quot;99575&quot;
+## 
+## 
+## [[2]]
+## [[2]]$`_id`
+## [1] &quot;545a7c2e08a841baf228fac2&quot;
+## 
+## [[2]]$city
+## [1] &quot;HUALAPAI&quot;
+## 
+## [[2]]$loc
+## [1] -113.30   35.54
+## 
+## [[2]]$pop
+## [1] 2
+## 
+## [[2]]$state
+## [1] &quot;AZ&quot;
+## 
+## [[2]]$orig_id
+## [1] &quot;86412&quot;
+</code></pre>
+
+<p>Using the package <strong>jsonlite</strong> you can check and visualize your JSON syntax first. Afterwards we query MongoDB with this JSON query.</p>
 
 <pre><code class="r">library(jsonlite)
-json &lt;- &quot;{\&quot;pop\&quot;:{\&quot;$lte\&quot;:2}, \&quot;pop\&quot;:{\&quot;$gte\&quot;:1}}&quot;
+json &lt;- &#39;{&quot;pop&quot;:{&quot;$lte&quot;:2}, &quot;pop&quot;:{&quot;$gte&quot;:1}}&#39;
 cat(prettify(json))
 </code></pre>
 
 <pre><code>## {
-##  &quot;pop&quot; : {
-##      &quot;$lte&quot; : 2
-##  },
-##  &quot;pop&quot; : {
-##      &quot;$gte&quot; : 1
-##  }
+##     &quot;pop&quot;: {
+##         &quot;$lte&quot;: 2
+##     },
+##     &quot;pop&quot;: {
+##         &quot;$gte&quot;: 1
+##     }
 ## }
 </code></pre>
 
@@ -380,32 +582,14 @@ cat(prettify(json))
 <pre><code>## [1] TRUE
 </code></pre>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    pops &lt;- mongo.find.all(mongo, coll, json)
-    print(dim(pops))
-    head(pops)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  pops1 &lt;- mongo.find.all(mongo, coll, query = list(&#39;pop&#39; = list(&#39;$lte&#39; = 2), &#39;pop&#39; = list(&#39;$gte&#39; = 1)))
+  pops2 &lt;- mongo.find.all(mongo, coll, json)
+  identical(pops1, pops2)
 }
 </code></pre>
 
-<p>In this case you will get a warning because the construction of the data.frame object is still inefficient and error-prone due to the NoSQL data structure. We are currently working on a solution.</p>
-
-<pre><code class="r">mongo.cursor.to.data.frame
-</code></pre>
-
-<pre><code>## function (cursor, nullToNA = TRUE, ...) 
-## {
-##     warning(&quot;This fails for most NoSQL data structures. I am working on a new solution&quot;)
-##     res &lt;- data.frame()
-##     while (mongo.cursor.next(cursor)) {
-##         val &lt;- mongo.bson.to.list(mongo.cursor.value(cursor))
-##         if (nullToNA == TRUE) 
-##             val[sapply(val, is.null)] &lt;- NA
-##         val &lt;- val[sapply(val, class) != &quot;mongo.oid&quot;]
-##         res &lt;- rbind.fill(res, as.data.frame(val, ...))
-##     }
-##     return(as.data.frame(res))
-## }
-## &lt;environment: namespace:rmongodb&gt;
+<pre><code>## [1] TRUE
 </code></pre>
 
 <h1>Inserting some data into MongoDB</h1>
@@ -413,49 +597,145 @@ cat(prettify(json))
 <p>Another interesting point is inserting data into MongoDB.</p>
 
 <pre><code class="r"># insert data
-a &lt;- mongo.bson.from.JSON(&quot;{\&quot;ident\&quot;:\&quot;a\&quot;, \&quot;name\&quot;:\&quot;Markus\&quot;, \&quot;age\&quot;:33}&quot;)
-b &lt;- mongo.bson.from.JSON(&quot;{\&quot;ident\&quot;:\&quot;b\&quot;, \&quot;name\&quot;:\&quot;MongoSoup\&quot;, \&quot;age\&quot;:1}&quot;)
-c &lt;- mongo.bson.from.JSON(&quot;{\&quot;ident\&quot;:\&quot;c\&quot;, \&quot;name\&quot;:\&quot;UseR\&quot;, \&quot;age\&quot;:18}&quot;)
+a &lt;- mongo.bson.from.JSON( &#39;{&quot;ident&quot;:&quot;a&quot;, &quot;name&quot;:&quot;Markus&quot;, &quot;age&quot;:33}&#39; )
+b &lt;- mongo.bson.from.JSON( &#39;{&quot;ident&quot;:&quot;b&quot;, &quot;name&quot;:&quot;MongoSoup&quot;, &quot;age&quot;:1}&#39; )
+c &lt;- mongo.bson.from.JSON( &#39;{&quot;ident&quot;:&quot;c&quot;, &quot;name&quot;:&quot;UseR&quot;, &quot;age&quot;:18}&#39; )
 
-if (mongo.is.connected(mongo) == TRUE) {
-    icoll &lt;- paste(db, &quot;test&quot;, sep = &quot;.&quot;)
-    mongo.insert.batch(mongo, icoll, list(a, b, c))
+if(mongo.is.connected(mongo) == TRUE) {
+  icoll &lt;- paste(db, &quot;test&quot;, sep=&quot;.&quot;)
+  mongo.insert.batch(mongo, icoll, list(a,b,c) )
 
-    dbs &lt;- mongo.get.database.collections(mongo, db)
-    print(dbs)
-    mongo.find.all(mongo, icoll)
+  dbs &lt;- mongo.get.database.collections(mongo, db)
+  print(dbs)
+  mongo.find.all(mongo, icoll)
 }
+</code></pre>
+
+<pre><code>## [1] &quot;rmongodb.zips&quot; &quot;rmongodb.test&quot;
+</code></pre>
+
+<pre><code>## [[1]]
+## [[1]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969eb&quot;
+## 
+## [[1]]$ident
+## [1] &quot;a&quot;
+## 
+## [[1]]$name
+## [1] &quot;Markus&quot;
+## 
+## [[1]]$age
+## [1] 33
+## 
+## 
+## [[2]]
+## [[2]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969ec&quot;
+## 
+## [[2]]$ident
+## [1] &quot;b&quot;
+## 
+## [[2]]$name
+## [1] &quot;MongoSoup&quot;
+## 
+## [[2]]$age
+## [1] 1
+## 
+## 
+## [[3]]
+## [[3]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969ed&quot;
+## 
+## [[3]]$ident
+## [1] &quot;c&quot;
+## 
+## [[3]]$name
+## [1] &quot;UseR&quot;
+## 
+## [[3]]$age
+## [1] 18
 </code></pre>
 
 <h1>Updating documents and creating indices for efficient queries</h1>
 
 <p>You can also update your data in MongoDB from R and add indices for more efficient queries.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mongo.update(mongo, icoll, &quot;{\&quot;ident\&quot;:\&quot;b\&quot;}&quot;, &quot;{\&quot;$inc\&quot;:{\&quot;age\&quot;:3}}&quot;)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  mongo.update(mongo, icoll, list(&#39;ident&#39; = &#39;b&#39;), list(&#39;$inc&#39; = list(&#39;age&#39; = 3)))
 
-    res &lt;- mongo.find.all(mongo, icoll)
-    print(res)
+  res &lt;- mongo.find.all(mongo, icoll)
+  print(res)
 
-    # Creating an index for the field &#39;ident&#39;
-    mongo.index.create(mongo, icoll, &quot;{\&quot;ident\&quot;:1}&quot;)
-    # check mongoshell!
+  # Creating an index for the field &#39;ident&#39;
+  mongo.index.create(mongo, icoll, list(&#39;ident&#39; = 1))
+  # check mongoshell!
 }
+</code></pre>
+
+<pre><code>## [[1]]
+## [[1]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969eb&quot;
+## 
+## [[1]]$ident
+## [1] &quot;a&quot;
+## 
+## [[1]]$name
+## [1] &quot;Markus&quot;
+## 
+## [[1]]$age
+## [1] 33
+## 
+## 
+## [[2]]
+## [[2]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969ec&quot;
+## 
+## [[2]]$ident
+## [1] &quot;b&quot;
+## 
+## [[2]]$name
+## [1] &quot;MongoSoup&quot;
+## 
+## [[2]]$age
+## [1] 4
+## 
+## 
+## [[3]]
+## [[3]]$`_id`
+## [1] &quot;545a7c2f08a841baf22969ed&quot;
+## 
+## [[3]]$ident
+## [1] &quot;c&quot;
+## 
+## [[3]]$name
+## [1] &quot;UseR&quot;
+## 
+## [[3]]$age
+## [1] 18
+</code></pre>
+
+<pre><code>## NULL
 </code></pre>
 
 <h1>Dropping/removing collections and databases and closing the connection to MongoDB</h1>
 
 <p>Of course there are also commands to drop databases and collections in MongoDB. After you finished all your analyses it&#39;s a good idea to destroy the connection to your MongoDB.</p>
 
-<pre><code class="r">if (mongo.is.connected(mongo) == TRUE) {
-    mongo.drop(mongo, icoll)
-    mongo.drop.database(mongo, db)
-    res &lt;- mongo.get.database.collections(mongo, db)
-    print(res)
+<pre><code class="r">if(mongo.is.connected(mongo) == TRUE) {
+  mongo.drop(mongo, icoll)
+  #mongo.drop.database(mongo, db)
+  res &lt;- mongo.get.database.collections(mongo, db)
+  print(res)
 
-    # close connection
-    mongo.destroy(mongo)
+  # close connection
+  mongo.destroy(mongo)
 }
+</code></pre>
+
+<pre><code>## [1] &quot;rmongodb.zips&quot;
+</code></pre>
+
+<pre><code>## NULL
 </code></pre>
 
 <h1>Feedback and Issues</h1>

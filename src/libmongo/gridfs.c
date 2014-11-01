@@ -22,7 +22,7 @@
 #include <assert.h>
 
 MONGO_EXPORT gridfs* gridfs_create( void ) {
-    return (gridfs*)bson_malloc(sizeof(gridfs));
+    return (gridfs*)bson_malloc_old(sizeof(gridfs));
 }
 
 MONGO_EXPORT void gridfs_dispose(gridfs* gfs) {
@@ -30,7 +30,7 @@ MONGO_EXPORT void gridfs_dispose(gridfs* gfs) {
 }
 
 MONGO_EXPORT gridfile* gridfile_create( void ) {
-    return (gridfile*)bson_malloc(sizeof(gridfile));
+    return (gridfile*)bson_malloc_old(sizeof(gridfile));
 }
 
 MONGO_EXPORT void gridfile_dispose(gridfile* gf) {
@@ -44,19 +44,19 @@ MONGO_EXPORT void gridfile_get_descriptor(gridfile* gf, bson* out) {
 
 static bson *chunk_new( bson_oid_t id, int chunkNumber,
                         const char *data, int len ) {
-    bson *b = bson_malloc( sizeof( bson ) );
+    bson *b = bson_malloc_old( sizeof( bson ) );
 
-    bson_init( b );
-    bson_append_oid( b, "files_id", &id );
+    bson_init_old( b );
+    bson_append_oid_old( b, "files_id", &id );
     bson_append_int( b, "n", chunkNumber );
-    bson_append_binary( b, "data", BSON_BIN_BINARY, data, len );
+    bson_append_binary_old( b, "data", BSON_BIN_BINARY, data, len );
     bson_finish( b );
     return  b;
 }
 
 static void chunk_free( bson *oChunk ) {
-    bson_destroy( oChunk );
-    bson_free( oChunk );
+    bson_destroy_old( oChunk );
+    bson_free_old( oChunk );
 }
 
 int gridfs_init( mongo *client, const char *dbname, const char *prefix,
@@ -69,56 +69,56 @@ int gridfs_init( mongo *client, const char *dbname, const char *prefix,
     gfs->client = client;
 
     /* Allocate space to own the dbname */
-    gfs->dbname = ( const char * )bson_malloc( strlen( dbname )+1 );
+    gfs->dbname = ( const char * )bson_malloc_old( strlen( dbname )+1 );
     strcpy( ( char * )gfs->dbname, dbname );
 
     /* Allocate space to own the prefix */
     if ( prefix == NULL ) prefix = "fs";
-    gfs->prefix = ( const char * )bson_malloc( strlen( prefix )+1 );
+    gfs->prefix = ( const char * )bson_malloc_old( strlen( prefix )+1 );
     strcpy( ( char * )gfs->prefix, prefix );
 
     /* Allocate space to own files_ns */
     gfs->files_ns =
-        ( const char * ) bson_malloc ( strlen( prefix )+strlen( dbname )+strlen( ".files" )+2 );
+        ( const char * ) bson_malloc_old ( strlen( prefix )+strlen( dbname )+strlen( ".files" )+2 );
     strcpy( ( char * )gfs->files_ns, dbname );
     strcat( ( char * )gfs->files_ns, "." );
     strcat( ( char * )gfs->files_ns, prefix );
     strcat( ( char * )gfs->files_ns, ".files" );
 
     /* Allocate space to own chunks_ns */
-    gfs->chunks_ns = ( const char * ) bson_malloc( strlen( prefix ) + strlen( dbname )
+    gfs->chunks_ns = ( const char * ) bson_malloc_old( strlen( prefix ) + strlen( dbname )
                      + strlen( ".chunks" ) + 2 );
     strcpy( ( char * )gfs->chunks_ns, dbname );
     strcat( ( char * )gfs->chunks_ns, "." );
     strcat( ( char * )gfs->chunks_ns, prefix );
     strcat( ( char * )gfs->chunks_ns, ".chunks" );
 
-    bson_init( &b );
+    bson_init_old( &b );
     bson_append_int( &b, "filename", 1 );
     bson_finish( &b );
     options = 0;
     success = ( mongo_create_index( gfs->client, gfs->files_ns, &b, options, NULL ) == MONGO_OK );
-    bson_destroy( &b );
+    bson_destroy_old( &b );
     if ( !success ) {
-        bson_free( ( char * )gfs->dbname );
-        bson_free( ( char * )gfs->prefix );
-        bson_free( ( char * )gfs->files_ns );
-        bson_free( ( char * )gfs->chunks_ns );
+        bson_free_old( ( char * )gfs->dbname );
+        bson_free_old( ( char * )gfs->prefix );
+        bson_free_old( ( char * )gfs->files_ns );
+        bson_free_old( ( char * )gfs->chunks_ns );
         return MONGO_ERROR;
     }
 
-    bson_init( &b );
+    bson_init_old( &b );
     bson_append_int( &b, "files_id", 1 );
     bson_append_int( &b, "n", 1 );
     bson_finish( &b );
     options = MONGO_INDEX_UNIQUE;
     success = ( mongo_create_index( gfs->client, gfs->chunks_ns, &b, options, NULL ) == MONGO_OK );
-    bson_destroy( &b );
+    bson_destroy_old( &b );
     if ( !success ) {
-        bson_free( ( char * )gfs->dbname );
-        bson_free( ( char * )gfs->prefix );
-        bson_free( ( char * )gfs->files_ns );
-        bson_free( ( char * )gfs->chunks_ns );
+        bson_free_old( ( char * )gfs->dbname );
+        bson_free_old( ( char * )gfs->prefix );
+        bson_free_old( ( char * )gfs->files_ns );
+        bson_free_old( ( char * )gfs->chunks_ns );
         return MONGO_ERROR;
     }
 
@@ -127,10 +127,10 @@ int gridfs_init( mongo *client, const char *dbname, const char *prefix,
 
 MONGO_EXPORT void gridfs_destroy( gridfs *gfs ) {
     if ( gfs == NULL ) return;
-    if ( gfs->dbname ) bson_free( ( char * )gfs->dbname );
-    if ( gfs->prefix ) bson_free( ( char * )gfs->prefix );
-    if ( gfs->files_ns ) bson_free( ( char * )gfs->files_ns );
-    if ( gfs->chunks_ns ) bson_free( ( char * )gfs->chunks_ns );
+    if ( gfs->dbname ) bson_free_old( ( char * )gfs->dbname );
+    if ( gfs->prefix ) bson_free_old( ( char * )gfs->prefix );
+    if ( gfs->files_ns ) bson_free_old( ( char * )gfs->files_ns );
+    if ( gfs->chunks_ns ) bson_free_old( ( char * )gfs->chunks_ns );
 }
 
 static int gridfs_insert_file( gridfs *gfs, const char *name,
@@ -144,18 +144,18 @@ static int gridfs_insert_file( gridfs *gfs, const char *name,
     int64_t d;
 
     /* Check run md5 */
-    bson_init( &command );
-    bson_append_oid( &command, "filemd5", &id );
+    bson_init_old( &command );
+    bson_append_oid_old( &command, "filemd5", &id );
     bson_append_string( &command, "root", gfs->prefix );
     bson_finish( &command );
     result = mongo_run_command( gfs->client, gfs->dbname, &command, &res );
-    bson_destroy( &command );
+    bson_destroy_old( &command );
     if (result != MONGO_OK)
         return result;
 
     /* Create and insert BSON for file metadata */
-    bson_init( &ret );
-    bson_append_oid( &ret, "_id", &id );
+    bson_init_old( &ret );
+    bson_append_oid_old( &ret, "_id", &id );
     if ( name != NULL && *name != '\0' ) {
         bson_append_string( &ret, "filename", name );
     }
@@ -165,13 +165,13 @@ static int gridfs_insert_file( gridfs *gfs, const char *name,
     bson_append_date( &ret, "uploadDate", d);
     bson_find( &it, &res, "md5" );
     bson_append_string( &ret, "md5", bson_iterator_string( &it ) );
-    bson_destroy( &res );
+    bson_destroy_old( &res );
     if ( contenttype != NULL && *contenttype != '\0' ) {
         bson_append_string( &ret, "contentType", contenttype );
     }
     bson_finish( &ret );
     result = mongo_insert( gfs->client, gfs->files_ns, &ret, NULL );
-    bson_destroy( &ret );
+    bson_destroy_old( &ret );
 
     return result;
 }
@@ -218,10 +218,10 @@ MONGO_EXPORT void gridfile_writer_init( gridfile *gfile, gridfs *gfs,
     gfile->pending_len = 0;
     gfile->pending_data = NULL;
 
-    gfile->remote_name = ( char * )bson_malloc( strlen( remote_name ) + 1 );
+    gfile->remote_name = ( char * )bson_malloc_old( strlen( remote_name ) + 1 );
     strcpy( ( char * )gfile->remote_name, remote_name );
 
-    gfile->content_type = ( char * )bson_malloc( strlen( content_type ) + 1 );
+    gfile->content_type = ( char * )bson_malloc_old( strlen( content_type ) + 1 );
     strcpy( ( char * )gfile->content_type, content_type );
 }
 
@@ -237,11 +237,11 @@ MONGO_EXPORT void gridfile_write_buffer( gridfile *gfile, const char *data,
 
     if ( to_write < DEFAULT_CHUNK_SIZE ) { /* Less than one chunk to write */
         if( gfile->pending_data ) {
-            gfile->pending_data = ( char * )bson_realloc( ( void * )gfile->pending_data, gfile->pending_len + to_write );
+            gfile->pending_data = ( char * )bson_realloc_old( ( void * )gfile->pending_data, gfile->pending_len + to_write );
             memcpy( gfile->pending_data + gfile->pending_len, data, length );
         }
         else if ( to_write > 0 ) {
-            gfile->pending_data = ( char * )bson_malloc( to_write );
+            gfile->pending_data = ( char * )bson_malloc_old( to_write );
             memcpy( gfile->pending_data, data, length );
         }
         gfile->pending_len += length;
@@ -256,7 +256,7 @@ MONGO_EXPORT void gridfile_write_buffer( gridfile *gfile, const char *data,
          */
         if ( gfile->pending_len > 0 ) {
             data_partial_len = DEFAULT_CHUNK_SIZE - gfile->pending_len;
-            buffer = ( char * )bson_malloc( DEFAULT_CHUNK_SIZE );
+            buffer = ( char * )bson_malloc_old( DEFAULT_CHUNK_SIZE );
             memcpy( buffer, gfile->pending_data, gfile->pending_len );
             memcpy( buffer + gfile->pending_len, data, data_partial_len );
 
@@ -269,7 +269,7 @@ MONGO_EXPORT void gridfile_write_buffer( gridfile *gfile, const char *data,
 
             chunks_to_write--;
 
-            bson_free( buffer );
+            bson_free_old( buffer );
         }
 
         while( chunks_to_write > 0 ) {
@@ -282,13 +282,13 @@ MONGO_EXPORT void gridfile_write_buffer( gridfile *gfile, const char *data,
             data += DEFAULT_CHUNK_SIZE;
         }
 
-        bson_free( gfile->pending_data );
+        bson_free_old( gfile->pending_data );
 
         /* If there are any leftover bytes, store them as pending data. */
         if( bytes_left == 0 )
             gfile->pending_data = NULL;
         else {
-            gfile->pending_data = ( char * )bson_malloc( bytes_left );
+            gfile->pending_data = ( char * )bson_malloc_old( bytes_left );
             memcpy( gfile->pending_data, data, bytes_left );
         }
 
@@ -306,7 +306,7 @@ MONGO_EXPORT int gridfile_writer_done( gridfile *gfile ) {
         oChunk = chunk_new( gfile->id, gfile->chunk_num, gfile->pending_data, gfile->pending_len );
         mongo_insert( gfile->gfs->client, gfile->gfs->chunks_ns, oChunk, NULL );
         chunk_free( oChunk );
-        bson_free( gfile->pending_data );
+        bson_free_old( gfile->pending_data );
         gfile->length += gfile->pending_len;
     }
 
@@ -314,8 +314,8 @@ MONGO_EXPORT int gridfile_writer_done( gridfile *gfile ) {
     response = gridfs_insert_file( gfile->gfs, gfile->remote_name, gfile->id,
                                    gfile->length, gfile->content_type );
 
-    bson_free( gfile->remote_name );
-    bson_free( gfile->content_type );
+    bson_free_old( gfile->remote_name );
+    bson_free_old( gfile->content_type );
 
     return response;
 }
@@ -377,11 +377,11 @@ MONGO_EXPORT void gridfs_remove_filename( gridfs *gfs, const char *filename ) {
     bson_oid_t id;
     bson b;
 
-    bson_init( &query );
+    bson_init_old( &query );
     bson_append_string( &query, "filename", filename );
     bson_finish( &query );
     files = mongo_find( gfs->client, gfs->files_ns, &query, NULL, 0, 0, 0 );
-    bson_destroy( &query );
+    bson_destroy_old( &query );
 
     /* Remove each file and it's chunks from files named filename */
     while ( mongo_cursor_next( files ) == MONGO_OK ) {
@@ -390,18 +390,18 @@ MONGO_EXPORT void gridfs_remove_filename( gridfs *gfs, const char *filename ) {
         id = *bson_iterator_oid( &it );
 
         /* Remove the file with the specified id */
-        bson_init( &b );
-        bson_append_oid( &b, "_id", &id );
+        bson_init_old( &b );
+        bson_append_oid_old( &b, "_id", &id );
         bson_finish( &b );
         mongo_remove( gfs->client, gfs->files_ns, &b, NULL );
-        bson_destroy( &b );
+        bson_destroy_old( &b );
 
         /* Remove all chunks from the file with the specified id */
-        bson_init( &b );
-        bson_append_oid( &b, "files_id", &id );
+        bson_init_old( &b );
+        bson_append_oid_old( &b, "files_id", &id );
         bson_finish( &b );
         mongo_remove( gfs->client, gfs->chunks_ns, &b, NULL );
-        bson_destroy( &b );
+        bson_destroy_old( &b );
     }
 
     mongo_cursor_destroy( files );
@@ -415,24 +415,24 @@ int gridfs_find_query( gridfs *gfs, bson *query,
     bson out;
     int i;
 
-    bson_init( &uploadDate );
+    bson_init_old( &uploadDate );
     bson_append_int( &uploadDate, "uploadDate", -1 );
     bson_finish( &uploadDate );
 
-    bson_init( &finalQuery );
+    bson_init_old( &finalQuery );
     bson_append_bson( &finalQuery, "query", query );
     bson_append_bson( &finalQuery, "orderby", &uploadDate );
     bson_finish( &finalQuery );
 
     i = ( mongo_find_one( gfs->client, gfs->files_ns,
                           &finalQuery, NULL, &out ) == MONGO_OK );
-    bson_destroy( &uploadDate );
-    bson_destroy( &finalQuery );
+    bson_destroy_old( &uploadDate );
+    bson_destroy_old( &finalQuery );
     if ( !i )
         return MONGO_ERROR;
     else {
         gridfile_init( gfs, &out, gfile );
-        bson_destroy( &out );
+        bson_destroy_old( &out );
         return MONGO_OK;
     }
 }
@@ -444,11 +444,11 @@ int gridfs_find_filename( gridfs *gfs, const char *filename,
     bson query;
     int i;
 
-    bson_init( &query );
+    bson_init_old( &query );
     bson_append_string( &query, "filename", filename );
     bson_finish( &query );
     i = gridfs_find_query( gfs, &query, gfile );
-    bson_destroy( &query );
+    bson_destroy_old( &query );
     return i;
 }
 
@@ -457,17 +457,17 @@ int gridfile_init( gridfs *gfs, bson *meta, gridfile *gfile )
 {
     gfile->gfs = gfs;
     gfile->pos = 0;
-    gfile->meta = ( bson * )bson_malloc( sizeof( bson ) );
+    gfile->meta = ( bson * )bson_malloc_old( sizeof( bson ) );
     if ( gfile->meta == NULL ) return MONGO_ERROR;
-    bson_copy( gfile->meta, meta );
+    bson_copy_old( gfile->meta, meta );
     return MONGO_OK;
 }
 
 MONGO_EXPORT void gridfile_destroy( gridfile *gfile )
 
 {
-    bson_destroy( gfile->meta );
-    bson_free( gfile->meta );
+    bson_destroy_old( gfile->meta );
+    bson_free_old( gfile->meta );
 }
 
 bson_bool_t gridfile_exists( gridfile *gfile ) {
@@ -572,21 +572,21 @@ MONGO_EXPORT void gridfile_get_chunk( gridfile *gfile, int n, bson* out ) {
     bson_oid_t id;
     int result;
 
-    bson_init( &query );
+    bson_init_old( &query );
     bson_find( &it, gfile->meta, "_id" );
     id = *bson_iterator_oid( &it );
-    bson_append_oid( &query, "files_id", &id );
+    bson_append_oid_old( &query, "files_id", &id );
     bson_append_int( &query, "n", n );
     bson_finish( &query );
 
     result = (mongo_find_one(gfile->gfs->client,
                              gfile->gfs->chunks_ns,
                              &query, NULL, out ) == MONGO_OK );
-    bson_destroy( &query );
+    bson_destroy_old( &query );
     if (!result) {
         bson empty;
         bson_empty(&empty);
-        bson_copy(out, &empty);
+        bson_copy_old(out, &empty);
     }
 }
 
@@ -602,25 +602,25 @@ MONGO_EXPORT mongo_cursor *gridfile_get_chunks( gridfile *gfile, int start, int 
     bson_find( &it, gfile->meta, "_id" );
     id = *bson_iterator_oid( &it );
 
-    bson_init( &query );
-    bson_append_oid( &query, "files_id", &id );
+    bson_init_old( &query );
+    bson_append_oid_old( &query, "files_id", &id );
     if ( size == 1 ) {
         bson_append_int( &query, "n", start );
     }
     else {
-        bson_init( &gte );
+        bson_init_old( &gte );
         bson_append_int( &gte, "$gte", start );
         bson_finish( &gte );
         bson_append_bson( &query, "n", &gte );
-        bson_destroy( &gte );
+        bson_destroy_old( &gte );
     }
     bson_finish( &query );
 
-    bson_init( &orderby );
+    bson_init_old( &orderby );
     bson_append_int( &orderby, "n", 1 );
     bson_finish( &orderby );
 
-    bson_init( &command );
+    bson_init_old( &command );
     bson_append_bson( &command, "query", &query );
     bson_append_bson( &command, "orderby", &orderby );
     bson_finish( &command );
@@ -628,9 +628,9 @@ MONGO_EXPORT mongo_cursor *gridfile_get_chunks( gridfile *gfile, int start, int 
     cursor = mongo_find( gfile->gfs->client, gfile->gfs->chunks_ns,
                          &command, NULL, size, 0, 0 );
 
-    bson_destroy( &command );
-    bson_destroy( &query );
-    bson_destroy( &orderby );
+    bson_destroy_old( &command );
+    bson_destroy_old( &query );
+    bson_destroy_old( &orderby );
 
     return cursor;
 }
@@ -649,7 +649,7 @@ gridfs_offset gridfile_write_file( gridfile *gfile, FILE *stream ) {
         len = bson_iterator_bin_len( &it );
         data = bson_iterator_bin_data( &it );
         fwrite( data, sizeof( char ), len, stream );
-        bson_destroy( &chunk );
+        bson_destroy_old( &chunk );
     }
 
     return gridfile_get_contentlength( gfile );

@@ -76,7 +76,7 @@
 %\SweaveOpts{concordance=TRUE, eval=TRUE}
 
 
-\section{Generall Package Handling}
+\section{General Package Handling}
 install from CRAN
 <<eval=FALSE>>=
 install.packages("rmongodb")
@@ -266,7 +266,7 @@ buf <- mongo.bson.buffer.create()
 mongo.bson.buffer.append(buf, "state", "AL")
 b <- mongo.bson.from.buffer(buf)
 @
-old way still available. check help files.momn
+old way still available. check help files.
 <<>>=
 ?mongo.bson
 @

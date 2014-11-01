@@ -1,27 +1,11 @@
-mongo.parse.ns <- function(ns)
-{
-  pos <- regexpr('\\.', ns)
-  if (pos == 0 || pos == -1) {
-    warning("mongo.parse.ns: No '.' in namespace")
-    return(NULL)
-  } else {
-    db <- substr(ns, 1, pos-1)
-    collection <- substr(ns, pos+1, nchar(ns))
-    return(list(db=db, collection=collection))
-  }
-}
-
-
-
-
 #' Get a vector of distinct values for keys in a collection
-#' 
+#'
 #' Get a vector of distinct values for keys in a collection.
-#' 
+#'
 #' See
 #' \url{http://www.mongodb.org/display/DOCS/Aggregation#Aggregation-Distinct}.
-#' 
-#' 
+#'
+#'
 #' @param mongo (\link{mongo}) A mongo connection object.
 #' @param ns (string) The namespace of the collection in which to find distinct
 #' keys.
@@ -29,35 +13,35 @@ mongo.parse.ns <- function(ns)
 #' values.
 #' @param query \link{mongo.bson} An optional query to restrict the returned
 #' values.
-#' 
+#'
 #' @return vector of distinct values or NULL if the command failed.
-#' 
+#'
 #' (vector) The result set of distinct keys.
 #' @seealso \code{\link{mongo.command}},\cr
 #' \code{\link{mongo.simple.command}},\cr \code{\link{mongo.find}},\cr
 #' \link{mongo}.
-#' 
+#'
 #' @examples
 #' mongo <- mongo.create()
 #' if (mongo.is.connected(mongo)) {
 #'     keys <- mongo.distinct(mongo, "test.people", "name")
 #'     print(keys)
 #' }
-#' 
+#'
 #' @aliases mongo.get.values
 #' @export mongo.get.values
 #' @export mongo.distinct
 mongo.distinct <- function(mongo, ns, key, query=mongo.bson.empty()) {
-  
+
   ns_parsed <- mongo.parse.ns(ns)
   db <- ns_parsed$db
   collection <- ns_parsed$collection
   if( is.null(db) || is.null(collection) ){
     stop("Wrong namespace (ns).")
   }
-  
+
   b <- mongo.command(mongo, db, list(distinct=collection, key=key, query=query))
-  
+
   if (!is.null(b)){
     b <- mongo.bson.value(b, "values")
     if(length(b)==0)
@@ -76,26 +60,41 @@ mongo.get.values <- mongo.distinct
 
 
 #' Aggregation pipeline
-#' 
+#'
 #' Aggregation pipeline
-#' 
+#'
 #' See
+#' \url{http://docs.mongodb.org/manual/reference/command/aggregate/}
 #' \url{http://docs.mongodb.org/manual/core/aggregation-pipeline/}.
-#' 
-#' 
+#'
 #' @param mongo (\link{mongo}) A mongo connection object.
 #' @param ns (string) The namespace of the collection in which to find distinct
 #' keys.
-#' @param aggr_cmd_list \link{mongo.bson} An list representing aggregation query pipeline.
-#' 
+#' @param pipeline (\link{list} of \link{mongo.bson} objects) representing aggregation query pipeline.
+#' Alternately, \code{pipeline} may be a \link{list} of \link{list} which will be converted to a mongo.bson list object by
+#' \code{\link{mongo.bson.from.list}()}.
+#'
+#' Alternately, \code{pipeline} may be a \link{list} of valid JSON \link{character} strings which will be converted to a
+#' mongo.bson object by \code{\link{mongo.bson.from.JSON}()}.
+#' @param explain (\link{logical}) Optional, MongoDB 2.6+. Specifies to return the information on the processing of the pipeline. References above.
+#' @param allowDiskUse (\link{logical}) Optional, MongoDB 2.6+. Enables writing to temporary files. When set to true, aggregation stages can write data to the _tmp subdirectory in the dbPath directory.
+#' @param cursor (\link{mongo.bson}) Optional, MongoDB 2.6+. Specify a document that contains options that control the creation of the cursor object.
+#' @param ... Arguments to be passed to methods, such as \link{mongo.bson.to.list}, \link{fromJSON}
+#' Unfortunately, current underlying mongo-c-driver can return BSON from aggreagation camand. Cursors are not supported.
+#'
+#' Alternately, \code{cursor} may be a list which will be converted to a
+#' mongo.bson object by \code{\link{mongo.bson.from.list}()}.
+#'
+#' Alternately, \code{cursor} may be a valid JSON character string which will be converted to mongo.bson object by \code{\link{mongo.bson.from.JSON}()}.
+#'
 #' @return NULL if the command failed.  \code{\link{mongo.get.err}()} may be
 #' MONGO_COMMAND_FAILED.
-#' 
+#'
 #' \link{mongo.bson} The result of aggregation.
 #' @seealso \code{\link{mongo.command}},\cr
 #' \code{\link{mongo.simple.command}},\cr \code{\link{mongo.find}},\cr
 #' \link{mongo}.
-#' 
+#'
 #' @examples
 #' # using the zips example data set
 #' mongo <- mongo.create()
@@ -114,30 +113,30 @@ mongo.get.values <- mongo.distinct
 #' mongo.destroy(mongo)
 #'
 #' @export mongo.aggregation
-mongo.aggregation <- function(mongo, ns, aggr_cmd_list)
+mongo.aggregation <- function(mongo, ns, pipeline, explain = NULL, allowDiskUse = NULL, cursor = NULL, ...)
 {
+  if(!inherits(pipeline, what = 'list')) stop("pipeline should be a list!")
   ns_parsed <- mongo.parse.ns(ns)
   db <- ns_parsed$db
   collection <- ns_parsed$collection
   if( is.null(db) || is.null(collection) ){
     stop("Wrong namespace (ns).")
   }
-  
-  buf <- mongo.bson.buffer.create()
-  mongo.bson.buffer.append(buf, "aggregate", collection)
-  mongo.bson.buffer.start.array(buf, "pipeline")
-  for (i in (1:length(aggr_cmd_list)))
-  {
-    mongo.bson.buffer.append(buf, as.character(i-1), aggr_cmd_list[[i]]);
-  }
-  mongo.bson.buffer.finish.object(buf)
-  query <- mongo.bson.from.buffer(buf)
-  
-  res <- mongo.command(mongo, db, query)
-  
+  command <- list()
+  command[['aggregate']] <- collection
+  command[['pipeline']] <- lapply(pipeline, mongo.list.from.argument, ...)
+  # New parameters for MongoDB 2.6+
+  if(is.logical(explain)) command[['explain']] <- explain
+  if(is.logical(allowDiskUse)) command[['allowDiskUse']] <- allowDiskUse
+  if(!is.null(cursor)) command[['cursor']] <- mongo.list.from.argument(cursor)
+  # Make final bson command
+  command <- mongo.bson.from.list(command)
+
+  res <- mongo.command(mongo, db, command)
+
   if( is.null(res) ){
     stop(paste("mongoDB error: ", mongo.get.err(mongo), ". Please check ?mongo.get.err for more details.", sep=""))
   }
-  
+
   return(res)
 }

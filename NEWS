@@ -1,5 +1,25 @@
 rmongodb NEWS
 ========================================================
+October 2014
+* mongo.bson.from.list and mongo.bson.to.list (rewriten from scratch) now correctly handles arrays. This solves many issues from github and stackoverflow. Many thanks to Jeroen Ooms.
+* mongo.cursor.to.list now converts cursor into list without any type coercion. Also it uses environments to avoid copying. Now it is much faster.
+* new function mongo.index.TTLcreate - creating indexes with "time to live" property. Thanks to github user @stanstrup.
+* all R's NA values now converted into MongoDB null values.
+* R's raw values now converted correctly.
+* mongo.aggregation now has arguments to match MongoDB 2.6+ features (explain, allowDiskUse, cursor). Also second argument is renamed to 'pipeline' as it is in MongoDB command.
+* rmongodb catchs "not find" errors.
+* when there is no connection mongo.is.connected return's FALSE instead of raising error.
+* new package maintainer - Dmitriy Selivanov <selivanov.dmitriy@gmail.com>.
+
+September 16, 2014
+* mongo.bson.from.list fix for empty lists
+
+July 29, 2014
+* mongo.bson.from.df added
+* mongo.find.all re-engineerd
+
+March 20, 2014
+* rmongodb now builds new libbson withou error (functionality not yet integrated in code). This is preparation for better JSON2BSON conversion.
 
 March 06, 2014
 * new CRAN submission
@@ -60,7 +80,7 @@ November 4, 2013
 ** mongo.get.keys - to get all keys from a collection
 ** mongo.summary - to get summary statistics all keys in a collection
 * JSON 2 BSON implemented
-** mongo.bson.from.JSON 
+** mongo.bson.from.JSON
 * code to deal with cursors
 ** mongo.cursor.to.list
 ** mongo.cursor.to.data.frame

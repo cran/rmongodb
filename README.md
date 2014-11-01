@@ -5,12 +5,14 @@ This is an R (www.r-project.org) extension supporting access to MongoDB (www.mon
 
 The latest stable version is available on **CRAN**: http://cran.r-project.org/package=rmongodb
 
-Thanks to Gerald Lindsly and MongoDB, Inc. (formerly 10gen) for the initial work. 
-In October 2013, **MongoSoup** (www.mongosoup.de) has overtaken the development and maintenance of the R package. 
+Thanks to [Gerald Lindsly](https://github.com/gerald-lindsly) and **MongoDB**, Inc. (formerly 10gen) for the initial work. 
 
+In October 2013, [MongoSoup](http://www.mongosoup.de) and [Markus Schmidberger](https://github.com/schmidb) have overtaken the development and maintenance of the R package.
+
+Since October 2014 package is maintained by [Dmitriy Selivanov](https://github.com/dselivanov).
 Please feel free to send us issues or pull requests via github: https://github.com/mongosoup/rmongodb
 
-Furthermore, we are happy to get your feedback personally via email: markus@mongosoup.de
+Furthermore, I'm happy to get your feedback personally via email: *selivanov.dmitriy (at) gmail.com*.
 
 
 
@@ -56,6 +58,7 @@ There is also one demo available:
 * Adding, removing, handling files on a "Grid File System" (GridFS) on a 
 MongoDB server
 * High Level functionality as mongo.apply, mongo.summary, mongo.get.keys, ...
+* [Aggregation pipeline](http://docs.mongodb.org/manual/core/aggregation-pipeline/)
 
 
 ### Good ressources to Get Started with rmongodb
@@ -90,6 +93,8 @@ MongoDB server
   * blog post: http://technotip.com/2982/mongodb-getting-started-guide/
   * Video: http://www.youtube.com/watch?v=J2qnq8WI6EU
 
+* [Little MongoDB Book](https://github.com/karlseguin/the-little-mongodb-book)
+
 ### Good ressources for working with JSON-Data in R:
 * There are three R packages on CRAN: RJSONIO, jsonlite (used by rmongodb) and rjson
 * jsonlite vignette for using JSON in R: http://cran.r-project.org/web/packages/jsonlite/vignettes/json-mapping.pdf
@@ -103,7 +108,7 @@ To install the development version of rmongodb, it's easiest to use the devtools
 
     # install.packages("devtools")
     library(devtools)
-    install_github("rmongodb", "mongosoup")
+    install_github("mongosoup/rmongodb")
     
 We advice using RStudio (www.rstudio.org) for the package development. The RStudio .Rproj file is included in the repository.
 
@@ -120,6 +125,8 @@ We use a three step version number system, e.g. v1.2.1:
 * we use roxygen2
 * we write RUnit tests for all new functionality in tests/test_XXX.R
 * for bigger changes we use branches
+* run valgrid to check for memory leaks
+    R -d "valgrind --tool=memcheck --leak-check=full" --vanilla < test_XXX.R > log.txt 2>&1
 * CRAN submission:
  * http://cran.r-project.org/submit.html
  * create Package tar.gz via RStudio "Build Source Package"

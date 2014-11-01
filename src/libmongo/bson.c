@@ -53,11 +53,11 @@ static int ( *oid_inc_func )( void )  = NULL;
    ------------------------------ */
 
 MONGO_EXPORT bson* bson_create( void ) {
-    return (bson*)bson_malloc(sizeof(bson));
+    return (bson*)bson_malloc_old(sizeof(bson));
 }
 
 MONGO_EXPORT void bson_dispose(bson* b) {
-    bson_free(b);
+    bson_free_old(b);
 }
 
 MONGO_EXPORT bson *bson_empty( bson *obj ) {
@@ -70,7 +70,7 @@ MONGO_EXPORT bson *bson_empty( bson *obj ) {
     return obj;
 }
 
-MONGO_EXPORT int bson_copy( bson *out, const bson *in ) {
+MONGO_EXPORT int bson_copy_old( bson *out, const bson *in ) {
     if ( !out || !in ) return BSON_ERROR;
     if ( !in->finished ) return BSON_ERROR;
     bson_init_size( out, bson_size( in ) );
@@ -133,7 +133,7 @@ MONGO_EXPORT void bson_oid_from_string( bson_oid_t *oid, const char *str ) {
     }
 }
 
-MONGO_EXPORT void bson_oid_to_string( const bson_oid_t *oid, char *str ) {
+MONGO_EXPORT void bson_oid_to_string_old( const bson_oid_t *oid, char *str ) {
     static const char hex[16] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
     int i;
     for ( i=0; i<12; i++ ) {
@@ -216,7 +216,7 @@ MONGO_EXPORT void bson_print_raw( const char *data , int depth ) {
             bson_printf( "SYMBOL: %s" , bson_iterator_string( &i ) );
             break;
         case BSON_OID:
-            bson_oid_to_string( bson_iterator_oid( &i ), oidhex );
+            bson_oid_to_string_old( bson_iterator_oid( &i ), oidhex );
             bson_printf( "%s" , oidhex );
             break;
         case BSON_BOOL:
@@ -585,13 +585,13 @@ static void _bson_init_size( bson *b, int size ) {
     if( size == 0 )
         b->data = NULL;
     else
-        b->data = ( char * )bson_malloc( size );
+        b->data = ( char * )bson_malloc_old( size );
     b->dataSize = size;
     b->cur = b->data + 4;
     _bson_reset( b );
 }
 
-MONGO_EXPORT void bson_init( bson *b ) {
+MONGO_EXPORT void bson_init_old( bson *b ) {
     _bson_init_size( b, initialBufferSize );
 }
 
@@ -638,7 +638,7 @@ int bson_ensure_space( bson *b, const int bytesNeeded ) {
         }
     }
 
-    b->data = bson_realloc( b->data, new_size );
+    b->data = bson_realloc_old( b->data, new_size );
     if ( !b->data )
         bson_fatal_msg( !!b->data, "realloc() failed" );
 
@@ -665,9 +665,9 @@ MONGO_EXPORT int bson_finish( bson *b ) {
     return BSON_OK;
 }
 
-MONGO_EXPORT void bson_destroy( bson *b ) {
+MONGO_EXPORT void bson_destroy_old( bson *b ) {
     if (b) {
-        bson_free( b->data );
+        bson_free_old( b->data );
         b->err = 0;
         b->data = 0;
         b->cur = 0;
@@ -715,27 +715,27 @@ MONGO_EXPORT int bson_append_long( bson *b, const char *name, const int64_t i ) 
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_double( bson *b, const char *name, const double d ) {
+MONGO_EXPORT int bson_append_double_old( bson *b, const char *name, const double d ) {
     if ( bson_append_estart( b, BSON_DOUBLE, name, 8 ) == BSON_ERROR )
         return BSON_ERROR;
     bson_append64( b , &d );
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_bool( bson *b, const char *name, const bson_bool_t i ) {
+MONGO_EXPORT int bson_append_bool_old( bson *b, const char *name, const bson_bool_t i ) {
     if ( bson_append_estart( b, BSON_BOOL, name, 1 ) == BSON_ERROR )
         return BSON_ERROR;
     bson_append_byte( b , i != 0 );
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_null( bson *b, const char *name ) {
+MONGO_EXPORT int bson_append_null_old( bson *b, const char *name ) {
     if ( bson_append_estart( b , BSON_NULL, name, 0 ) == BSON_ERROR )
         return BSON_ERROR;
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_undefined( bson *b, const char *name ) {
+MONGO_EXPORT int bson_append_undefined_old( bson *b, const char *name ) {
     if ( bson_append_estart( b, BSON_UNDEFINED, name, 0 ) == BSON_ERROR )
         return BSON_ERROR;
     return BSON_OK;
@@ -760,11 +760,11 @@ MONGO_EXPORT int bson_append_string( bson *b, const char *name, const char *valu
     return bson_append_string_base( b, name, value, strlen ( value ), BSON_STRING );
 }
 
-MONGO_EXPORT int bson_append_symbol( bson *b, const char *name, const char *value ) {
+MONGO_EXPORT int bson_append_symbol_old( bson *b, const char *name, const char *value ) {
     return bson_append_string_base( b, name, value, strlen ( value ), BSON_SYMBOL );
 }
 
-MONGO_EXPORT int bson_append_code( bson *b, const char *name, const char *value ) {
+MONGO_EXPORT int bson_append_code_old( bson *b, const char *name, const char *value ) {
     return bson_append_string_base( b, name, value, strlen ( value ), BSON_CODE );
 }
 
@@ -800,7 +800,7 @@ MONGO_EXPORT int bson_append_code_w_scope( bson *b, const char *name, const char
     return bson_append_code_w_scope_n( b, name, code, strlen ( code ), scope );
 }
 
-MONGO_EXPORT int bson_append_binary( bson *b, const char *name, char type, const char *str, int len ) {
+MONGO_EXPORT int bson_append_binary_old( bson *b, const char *name, char type, const char *str, int len ) {
     if ( type == BSON_BIN_BINARY_OLD ) {
         int subtwolen = len + 4;
         if ( bson_append_estart( b, BSON_BINDATA, name, 4+1+4+len ) == BSON_ERROR )
@@ -820,7 +820,7 @@ MONGO_EXPORT int bson_append_binary( bson *b, const char *name, char type, const
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_oid( bson *b, const char *name, const bson_oid_t *oid ) {
+MONGO_EXPORT int bson_append_oid_old( bson *b, const char *name, const bson_oid_t *oid ) {
     if ( bson_append_estart( b, BSON_OID, name, 12 ) == BSON_ERROR )
         return BSON_ERROR;
     bson_append( b , oid , 12 );
@@ -830,10 +830,10 @@ MONGO_EXPORT int bson_append_oid( bson *b, const char *name, const bson_oid_t *o
 MONGO_EXPORT int bson_append_new_oid( bson *b, const char *name ) {
     bson_oid_t oid;
     bson_oid_gen( &oid );
-    return bson_append_oid( b, name, &oid );
+    return bson_append_oid_old( b, name, &oid );
 }
 
-MONGO_EXPORT int bson_append_regex( bson *b, const char *name, const char *pattern, const char *opts ) {
+MONGO_EXPORT int bson_append_regex_old( bson *b, const char *name, const char *pattern, const char *opts ) {
     const int plen = strlen( pattern )+1;
     const int olen = strlen( opts )+1;
     if ( bson_append_estart( b, BSON_REGEX, name, plen + olen ) == BSON_ERROR )
@@ -874,7 +874,7 @@ MONGO_EXPORT int bson_append_element( bson *b, const char *name_or_null, const b
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_timestamp( bson *b, const char *name, bson_timestamp_t *ts ) {
+MONGO_EXPORT int bson_append_timestamp_old( bson *b, const char *name, bson_timestamp_t *ts ) {
     if ( bson_append_estart( b, BSON_TIMESTAMP, name, 8 ) == BSON_ERROR ) return BSON_ERROR;
 
     bson_append32( b , &( ts->i ) );
@@ -897,7 +897,7 @@ MONGO_EXPORT int bson_append_date( bson *b, const char *name, bson_date_t millis
     return BSON_OK;
 }
 
-MONGO_EXPORT int bson_append_time_t( bson *b, const char *name, time_t secs ) {
+MONGO_EXPORT int bson_append_time_t_old( bson *b, const char *name, time_t secs ) {
     return bson_append_date( b, name, ( bson_date_t )secs * 1000 );
 }
 
@@ -946,18 +946,18 @@ MONGO_EXPORT bson_err_handler set_bson_err_handler( bson_err_handler func ) {
     return old;
 }
 
-MONGO_EXPORT void bson_free( void *ptr ) {
+MONGO_EXPORT void bson_free_old( void *ptr ) {
     bson_free_func( ptr );
 }
 
-MONGO_EXPORT void *bson_malloc( int size ) {
+MONGO_EXPORT void *bson_malloc_old( int size ) {
     void *p;
     p = bson_malloc_func( size );
     bson_fatal_msg( !!p, "malloc() failed" );
     return p;
 }
 
-void *bson_realloc( void *ptr, int size ) {
+void *bson_realloc_old( void *ptr, int size ) {
     void *p;
     p = bson_realloc_func( ptr, size );
     bson_fatal_msg( !!p, "realloc() failed" );
